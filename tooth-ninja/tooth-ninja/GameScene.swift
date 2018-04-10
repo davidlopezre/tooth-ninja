@@ -14,6 +14,8 @@ struct PhysicsCategory {
     static let All         : UInt32 = UInt32.max
     static let Bacteria    : UInt32 = 0b1
     static let Tooth       : UInt32 = 0b10
+    static let Swipe       : UInt32 = 0b11
+    
 }
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
@@ -30,6 +32,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         backgroundColor = SKColor.magenta
         
+        tooth.name = "tooth"
         tooth.fillColor = SKColor.white
         tooth.position = CGPoint(x: size.width * 0.5, y: size.height * 0.9)
         
@@ -64,7 +67,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         // Create sprite
         let bacteria = SKShapeNode(circleOfRadius: 20.0)
-        
+        bacteria.name = "bacteria"
         
         bacteria.fillColor = SKColor.green
         
@@ -94,28 +97,41 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func bacteriaCollidesWithTooth(bacteria: SKShapeNode) {
-        print("Collision")
+        print("Collision: Bacteria-Tooth")
+        bacteria.removeFromParent()
+    }
+    
+    func swipeCollidesWithBacteria(bacteria: SKShapeNode) {
+        print("Collision: Swipe-Bacteria")
         bacteria.removeFromParent()
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
         var bacteriaBody: SKPhysicsBody
+        var otherBody: SKPhysicsBody
         
-        let c = contact
-        print("body a bitmask: \(c.bodyA.categoryBitMask)")
-        print("body b bitmask: \(c.bodyB.categoryBitMask)")
-        if c.bodyA.categoryBitMask > c.bodyB.categoryBitMask {
-            bacteriaBody = c.bodyB
+        print("body a bitmask: \(contact.bodyA.categoryBitMask)")
+        print("body b bitmask: \(contact.bodyB.categoryBitMask)")
+        if contact.bodyA.categoryBitMask > contact.bodyB.categoryBitMask {
+            bacteriaBody = contact.bodyB
+            otherBody = contact.bodyA
         } else {
-            bacteriaBody = c.bodyA
+            bacteriaBody = contact.bodyA
+            otherBody = contact.bodyB
         }
         print("bacteria body is set to: \(bacteriaBody.categoryBitMask)")
+        print("other body is set to: \(otherBody.categoryBitMask)")
         
-        if (bacteriaBody.categoryBitMask & PhysicsCategory.Bacteria != 0) {
-            print("bacteria body confirmed")
+        if ((bacteriaBody.node?.name == "bacteria") && (otherBody.node?.name == "tooth")) {
+            print("bacteria-tooth collision confirmed")
+            print("other body is \(String(describing: otherBody.node?.name))")
             if let bacteria = bacteriaBody.node as? SKShapeNode {
-                print("bacteria is a SKShapeNode")
                 bacteriaCollidesWithTooth(bacteria: bacteria)
+            }
+        } else if ((bacteriaBody.node?.name == "bacteria") && (otherBody.node?.name == "swipe")) {
+            print("bacteria-swipe collision confirmed")
+            if let bacteria = bacteriaBody.node as? SKShapeNode {
+                swipeCollidesWithBacteria(bacteria: bacteria)
             }
         }
     }
@@ -127,6 +143,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         guard let blade = blade else {
             fatalError("Blade could not be created")
         }
+        blade.enablePhysics(categoryBitMask: PhysicsCategory.Swipe, contactTestBitmask: PhysicsCategory.Bacteria, collisionBitmask: PhysicsCategory.None)
         
         addChild(blade)
     }

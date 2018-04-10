@@ -47,7 +47,7 @@ class SwipeNode: SKNode {
     init(position:CGPoint, target:SKNode, color:UIColor) {
         super.init()
         
-        name = "skblade"
+        name = "swipe"
         self.position = position
         
         let tip:SKSpriteNode = SKSpriteNode(color: color, size: CGSize(width: 40, height: 40))
