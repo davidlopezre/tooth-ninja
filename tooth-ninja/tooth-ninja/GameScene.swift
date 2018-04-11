@@ -26,24 +26,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     // Set the initial value to 0
     var delta: CGPoint = .zero
     
-    let tooth = SKShapeNode(circleOfRadius: 20.0)
-    
     override func didMove(to view: SKView) {
         
         backgroundColor = SKColor.magenta
         
-        tooth.name = "tooth"
-        tooth.fillColor = SKColor.white
-        tooth.position = CGPoint(x: size.width * 0.5, y: size.height * 0.9)
-        
-        tooth.physicsBody = SKPhysicsBody(circleOfRadius: 20.0)
-        tooth.physicsBody?.isDynamic = true
-        tooth.physicsBody?.categoryBitMask = PhysicsCategory.Tooth
-        tooth.physicsBody?.contactTestBitMask = PhysicsCategory.Bacteria
-        tooth.physicsBody?.collisionBitMask = PhysicsCategory.None
-        tooth.physicsBody?.usesPreciseCollisionDetection = true
-        
-        addChild(tooth)
+        addTooth(position: CGPoint(x: size.width * 0.5, y: size.height * 0.9))
+        addTooth(position: CGPoint(x: size.width * 0.5, y: size.height * 0.1))
         
         physicsWorld.gravity = CGVector.zero
         physicsWorld.contactDelegate = self
@@ -61,6 +49,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func random(min: CGFloat, max: CGFloat) -> CGFloat {
         return random() * (max - min) + min
+    }
+    
+    func addTooth(position: CGPoint) {
+        
+        let tooth = SKShapeNode(circleOfRadius: 20.0)
+        
+        tooth.name = "tooth"
+        tooth.fillColor = SKColor.white
+        tooth.position = position
+        
+        tooth.physicsBody = SKPhysicsBody(circleOfRadius: 20.0)
+        tooth.physicsBody?.isDynamic = true
+        tooth.physicsBody?.categoryBitMask = PhysicsCategory.Tooth
+        tooth.physicsBody?.contactTestBitMask = PhysicsCategory.Bacteria
+        tooth.physicsBody?.collisionBitMask = PhysicsCategory.None
+        tooth.physicsBody?.usesPreciseCollisionDetection = true
+        
+        addChild(tooth)
     }
     
     func addBacteria() {
@@ -91,7 +97,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let actualDuration = random(min: CGFloat(2.0), max: CGFloat(4.0))
         
         // Create the actions
-        let actionMove = SKAction.move(to: tooth.position, duration: TimeInterval(actualDuration))
+        let teeth = self["tooth"]
+        print("There are \(teeth.count) teeth")
+        
+        let targetToothIndex = random(min: 0, max: CGFloat(teeth.count))
+        let targetTooth = teeth[Int(targetToothIndex)]
+        
+        let actionMove = SKAction.move(to: targetTooth.position, duration: TimeInterval(actualDuration))
 
         bacteria.run(actionMove)
     }
