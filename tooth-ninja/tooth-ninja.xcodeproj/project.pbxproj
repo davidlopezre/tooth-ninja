@@ -14,6 +14,7 @@
 		611788D82078B0B000FC8590 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 611788D72078B0B000FC8590 /* Assets.xcassets */; };
 		611788DB2078B0B000FC8590 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 611788D92078B0B000FC8590 /* LaunchScreen.storyboard */; };
 		613420D8207B2BED00F3C86A /* SwipeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613420D7207B2BED00F3C86A /* SwipeNode.swift */; };
+		61C7EAFE207FA8710061A469 /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C7EAFD207FA8710061A469 /* GameOverScene.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		611788DA2078B0B000FC8590 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		611788DC2078B0B000FC8590 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		613420D7207B2BED00F3C86A /* SwipeNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeNode.swift; sourceTree = "<group>"; };
+		61C7EAFD207FA8710061A469 /* GameOverScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 			children = (
 				611788CA2078B0AF00FC8590 /* AppDelegate.swift */,
 				611788D02078B0B000FC8590 /* GameScene.swift */,
+				61C7EAFD207FA8710061A469 /* GameOverScene.swift */,
 				613420D7207B2BED00F3C86A /* SwipeNode.swift */,
 				611788D22078B0B000FC8590 /* GameViewController.swift */,
 				611788D42078B0B000FC8590 /* Main.storyboard */,
@@ -142,6 +145,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				61C7EAFE207FA8710061A469 /* GameOverScene.swift in Sources */,
 				613420D8207B2BED00F3C86A /* SwipeNode.swift in Sources */,
 				611788D12078B0B000FC8590 /* GameScene.swift in Sources */,
 				611788D32078B0B000FC8590 /* GameViewController.swift in Sources */,
