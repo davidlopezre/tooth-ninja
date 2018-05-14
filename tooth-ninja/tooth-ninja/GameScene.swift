@@ -15,10 +15,24 @@ struct PhysicsCategory {
     static let Bacteria    : UInt32 = 0b1
     static let Tooth       : UInt32 = 0b10
     static let Swipe       : UInt32 = 0b11
-    
 }
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
+    var scoreLabel: SKLabelNode!
+    var healthLabel: SKLabelNode!
+    
+    var score = 0 {
+        didSet {
+            scoreLabel.text = "Score: \(score)"
+        }
+    }
+    
+    var health = 100 {
+        didSet {
+            healthLabel.text = "HP: \(health)%"
+        }
+    }
+    
     // This optional variable will help you to easily access the blade
     var blade: SwipeNode?
     
@@ -29,6 +43,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func didMove(to view: SKView) {
         
         backgroundColor = SKColor.magenta
+        
+        scoreLabel = SKLabelNode(fontNamed: "Chalkduster")
+        scoreLabel.text = "Score: 0"
+//        scoreLabel.horizontalAlignmentMode = .right
+        scoreLabel.fontSize = 25
+        scoreLabel.position = CGPoint(x: size.width * 0.9, y: size.height * 0.9)
+        addChild(scoreLabel)
+        
+        healthLabel = SKLabelNode(fontNamed: "Chalkduster")
+        healthLabel.text = "HP: 100%"
+        healthLabel.fontSize = 25
+        healthLabel.position = CGPoint(x: size.width * 0.1, y: size.height * 0.9)
+        addChild(healthLabel)
         
         addTooth(position: CGPoint(x: size.width * 0.5, y: size.height * 0.9))
         addTooth(position: CGPoint(x: size.width * 0.5, y: size.height * 0.1))
@@ -111,11 +138,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func bacteriaCollidesWithTooth(bacteria: SKShapeNode) {
         print("Collision: Bacteria-Tooth")
         bacteria.removeFromParent()
+        health -= 25
     }
     
     func swipeCollidesWithBacteria(bacteria: SKShapeNode) {
         print("Collision: Swipe-Bacteria")
         bacteria.removeFromParent()
+        score += 1
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
