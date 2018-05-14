@@ -65,7 +65,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         run(SKAction.repeatForever(SKAction.sequence([
             SKAction.run(addBacteria),
-            SKAction.wait(forDuration: 5.0)
+            SKAction.run(addBacteria),
+            SKAction.wait(forDuration: 2.0)
             ])
         ))
     }
@@ -139,6 +140,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         print("Collision: Bacteria-Tooth")
         bacteria.removeFromParent()
         health -= 25
+        if (health <= 0) {
+            let reveal = SKTransition.flipHorizontal(withDuration: 0.5)
+            let gameOverScene = GameOverScene(size: self.size, won: false)
+            self.view?.presentScene(gameOverScene, transition: reveal)
+        }
     }
     
     func swipeCollidesWithBacteria(bacteria: SKShapeNode) {
