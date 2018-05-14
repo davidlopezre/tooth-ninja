@@ -10,11 +10,9 @@ import SpriteKit
 import GameplayKit
 
 struct PhysicsCategory {
-    static let None        : UInt32 = 0
-    static let All         : UInt32 = UInt32.max
-    static let Bacteria    : UInt32 = 0b1
-    static let Tooth       : UInt32 = 0b10
-    static let Swipe       : UInt32 = 0b11
+    static let None         : UInt32 = 0
+    static let External     : UInt32 = 0x1 << 1
+    static let Player       : UInt32 = 0x1 << 2
 }
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
@@ -29,6 +27,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var health = 100 {
         didSet {
+            if health > 100 {
+                health = 100
+            }
             healthLabel.text = "HP: \(health)%"
         }
     }
@@ -42,7 +43,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func didMove(to view: SKView) {
         
-        backgroundColor = SKColor.magenta
+        backgroundColor = SKColor.red
         
         scoreLabel = SKLabelNode(fontNamed: "Chalkduster")
         scoreLabel.text = "Score: 0"
@@ -66,7 +67,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         run(SKAction.repeatForever(SKAction.sequence([
             SKAction.run(addBacteria),
             SKAction.run(addBacteria),
-            SKAction.wait(forDuration: 2.0)
+            SKAction.wait(forDuration: 2.0),
+            SKAction.run(addGoodFood)
             ])
         ))
     }
@@ -89,8 +91,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         tooth.physicsBody = SKPhysicsBody(circleOfRadius: 20.0)
         tooth.physicsBody?.isDynamic = true
-        tooth.physicsBody?.categoryBitMask = PhysicsCategory.Tooth
-        tooth.physicsBody?.contactTestBitMask = PhysicsCategory.Bacteria
+        tooth.physicsBody?.categoryBitMask = PhysicsCategory.Player
+        tooth.physicsBody?.contactTestBitMask = PhysicsCategory.External
         tooth.physicsBody?.collisionBitMask = PhysicsCategory.None
         tooth.physicsBody?.usesPreciseCollisionDetection = true
         
@@ -114,8 +116,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         bacteria.physicsBody = SKPhysicsBody(circleOfRadius: 20.0)
         bacteria.physicsBody?.isDynamic = true
-        bacteria.physicsBody?.categoryBitMask = PhysicsCategory.Bacteria
-        bacteria.physicsBody?.contactTestBitMask = PhysicsCategory.Tooth
+        bacteria.physicsBody?.categoryBitMask = PhysicsCategory.External
+        bacteria.physicsBody?.contactTestBitMask = PhysicsCategory.Player
         bacteria.physicsBody?.collisionBitMask = PhysicsCategory.None
         
         // Add the bacteria to the scene
@@ -136,6 +138,45 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         bacteria.run(actionMove)
     }
     
+    func addGoodFood() {
+        
+        // Create sprite
+        let goodFood = SKShapeNode(circleOfRadius: 20.0)
+        goodFood.name = "goodfood"
+        
+        goodFood.fillColor = SKColor.yellow
+        
+        let actualY = random(min: size.height*0.1, max: size.height*0.9)
+        let actualX = random(min: size.width*0.1, max: size.width*0.9)
+        
+        // Position the food slightly off-screen along the right edge,
+        // and along a random position along the Y axis as calculated above
+        goodFood.position = CGPoint(x: actualX, y: actualY)
+        
+        goodFood.physicsBody = SKPhysicsBody(circleOfRadius: 20.0)
+        goodFood.physicsBody?.isDynamic = true
+        goodFood.physicsBody?.categoryBitMask = PhysicsCategory.External
+        goodFood.physicsBody?.contactTestBitMask = PhysicsCategory.Player
+        goodFood.physicsBody?.collisionBitMask = PhysicsCategory.None
+        
+        // Add the food to the scene
+        addChild(goodFood)
+        
+        // Determine speed of the food
+        let actualDuration = random(min: CGFloat(2.0), max: CGFloat(4.0))
+        
+        // Create the actions
+        let teeth = self["tooth"]
+        print("There are \(teeth.count) teeth")
+        
+        let targetToothIndex = random(min: 0, max: CGFloat(teeth.count))
+        let targetTooth = teeth[Int(targetToothIndex)]
+        
+        let actionMove = SKAction.move(to: targetTooth.position, duration: TimeInterval(actualDuration))
+        
+        goodFood.run(actionMove)
+    }
+    
     func bacteriaCollidesWithTooth(bacteria: SKShapeNode) {
         print("Collision: Bacteria-Tooth")
         bacteria.removeFromParent()
@@ -153,34 +194,55 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         score += 1
     }
     
+    func goodFoodCollidesWithTooth(goodFood: SKShapeNode) {
+        print("Collision: GoodFood-Tooth")
+        goodFood.removeFromParent()
+        health += 10
+    }
+    
+    func swipeCollidesWithGoodFood(goodFood: SKShapeNode) {
+        print("Collision: Swipe-GoodFood")
+        goodFood.removeFromParent()
+    }
+    
     func didBegin(_ contact: SKPhysicsContact) {
-        var bacteriaBody: SKPhysicsBody
-        var otherBody: SKPhysicsBody
+        var playerBody: SKPhysicsBody
+        var externalBody: SKPhysicsBody
         
         print("body a bitmask: \(contact.bodyA.categoryBitMask)")
         print("body b bitmask: \(contact.bodyB.categoryBitMask)")
         if contact.bodyA.categoryBitMask > contact.bodyB.categoryBitMask {
-            bacteriaBody = contact.bodyB
-            otherBody = contact.bodyA
+            playerBody = contact.bodyA
+            externalBody = contact.bodyB
         } else {
-            bacteriaBody = contact.bodyA
-            otherBody = contact.bodyB
+            playerBody = contact.bodyB
+            externalBody = contact.bodyA
         }
-        print("bacteria body is set to: \(bacteriaBody.categoryBitMask)")
-        print("other body is set to: \(otherBody.categoryBitMask)")
+        print("player body is set to: \(playerBody.categoryBitMask)")
+        print("external body is set to: \(externalBody.categoryBitMask)")
         
-        if ((bacteriaBody.node?.name == "bacteria") && (otherBody.node?.name == "tooth")) {
-            print("bacteria-tooth collision confirmed")
-            print("other body is \(String(describing: otherBody.node?.name))")
-            if let bacteria = bacteriaBody.node as? SKShapeNode {
-                bacteriaCollidesWithTooth(bacteria: bacteria)
+        if playerBody.node?.name == "swipe" {
+            if externalBody.node?.name == "bacteria" {
+                if let bacteria = externalBody.node as? SKShapeNode {
+                    swipeCollidesWithBacteria(bacteria: bacteria)
+                }
+            }else if externalBody.node?.name == "goodfood" {
+                if let goodFood = externalBody.node as? SKShapeNode {
+                    swipeCollidesWithGoodFood(goodFood: goodFood)
+                }
             }
-        } else if ((bacteriaBody.node?.name == "bacteria") && (otherBody.node?.name == "swipe")) {
-            print("bacteria-swipe collision confirmed")
-            if let bacteria = bacteriaBody.node as? SKShapeNode {
-                swipeCollidesWithBacteria(bacteria: bacteria)
+        }else {
+            if externalBody.node?.name == "bacteria" {
+                if let bacteria = externalBody.node as? SKShapeNode {
+                    bacteriaCollidesWithTooth(bacteria: bacteria)
+                }
+            }else if externalBody.node?.name == "goodfood" {
+                if let goodFood = externalBody.node as? SKShapeNode {
+                    goodFoodCollidesWithTooth(goodFood: goodFood)
+                }
             }
         }
+    
     }
     
     // This will help you to initialize our blade
@@ -190,7 +252,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         guard let blade = blade else {
             fatalError("Blade could not be created")
         }
-        blade.enablePhysics(categoryBitMask: PhysicsCategory.Swipe, contactTestBitmask: PhysicsCategory.Bacteria, collisionBitmask: PhysicsCategory.None)
+        blade.enablePhysics(categoryBitMask: PhysicsCategory.Player, contactTestBitmask: PhysicsCategory.External, collisionBitmask: PhysicsCategory.None)
         
         addChild(blade)
     }
