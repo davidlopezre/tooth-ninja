@@ -66,9 +66,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         run(SKAction.repeatForever(SKAction.sequence([
             SKAction.run(addBacteria),
-            SKAction.run(addBacteria),
-            SKAction.wait(forDuration: 2.0),
-            SKAction.run(addGoodFood)
+            SKAction.wait(forDuration: 1.0),
+            SKAction.run(addGoodFood),
+            SKAction.run(addBadFood)
             ])
         ))
     }
@@ -100,7 +100,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func addBacteria() {
-        
         // Create sprite
         let bacteria = SKShapeNode(circleOfRadius: 20.0)
         bacteria.name = "bacteria"
@@ -176,6 +175,46 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         goodFood.run(actionMove)
     }
+
+    
+    func addBadFood() {
+        
+        // Create sprite
+        let goodFood = SKShapeNode(circleOfRadius: 20.0)
+        goodFood.name = "badfood"
+        
+        goodFood.fillColor = SKColor.red
+        
+        let actualY = random(min: size.height*0.1, max: size.height*0.9)
+        let actualX = random(min: size.width*0.1, max: size.width*0.9)
+        
+        // Position the food slightly off-screen along the right edge,
+        // and along a random position along the Y axis as calculated above
+        goodFood.position = CGPoint(x: actualX, y: actualY)
+        
+        goodFood.physicsBody = SKPhysicsBody(circleOfRadius: 20.0)
+        goodFood.physicsBody?.isDynamic = true
+        goodFood.physicsBody?.categoryBitMask = PhysicsCategory.External
+        goodFood.physicsBody?.contactTestBitMask = PhysicsCategory.Player
+        goodFood.physicsBody?.collisionBitMask = PhysicsCategory.None
+        
+        // Add the food to the scene
+        addChild(goodFood)
+        
+        // Determine speed of the food
+        let actualDuration = random(min: CGFloat(2.0), max: CGFloat(4.0))
+        
+        // Create the actions
+        let teeth = self["tooth"]
+        print("There are \(teeth.count) teeth")
+        
+        let targetToothIndex = random(min: 0, max: CGFloat(teeth.count))
+        let targetTooth = teeth[Int(targetToothIndex)]
+        
+        let actionMove = SKAction.move(to: targetTooth.position, duration: TimeInterval(actualDuration))
+        
+        goodFood.run(actionMove)
+    }
     
     func bacteriaCollidesWithTooth(bacteria: SKShapeNode) {
         print("Collision: Bacteria-Tooth")
@@ -200,9 +239,29 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         health += 10
     }
     
+    func badFoodCollidesWithTooth(badFood: SKShapeNode) {
+        print("Collision: BadFood-Tooth")
+        badFood.removeFromParent()
+        let influx = SKAction.repeat(SKAction.run(addBacteria), count: 10)
+        let action = SKAction.sequence([
+            influx,
+            SKAction.wait(forDuration: 1),
+            influx,
+            SKAction.wait(forDuration: 1),
+            influx,
+            SKAction.wait(forDuration: 1)
+            ])
+        run(action)
+    }
+    
     func swipeCollidesWithGoodFood(goodFood: SKShapeNode) {
         print("Collision: Swipe-GoodFood")
         goodFood.removeFromParent()
+    }
+    
+    func swipeCollidesWithBadFood(badFood: SKShapeNode) {
+        print("Collision: Swipe-BadFood")
+        badFood.removeFromParent()
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
@@ -230,6 +289,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 if let goodFood = externalBody.node as? SKShapeNode {
                     swipeCollidesWithGoodFood(goodFood: goodFood)
                 }
+            }else if externalBody.node?.name == "badfood" {
+                if let badFood = externalBody.node as? SKShapeNode {
+                    swipeCollidesWithBadFood(badFood: badFood)
+                }
             }
         }else {
             if externalBody.node?.name == "bacteria" {
@@ -239,6 +302,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }else if externalBody.node?.name == "goodfood" {
                 if let goodFood = externalBody.node as? SKShapeNode {
                     goodFoodCollidesWithTooth(goodFood: goodFood)
+                }
+            }else if externalBody.node?.name == "badfood" {
+                if let badFood = externalBody.node as? SKShapeNode {
+                    badFoodCollidesWithTooth(badFood: badFood)
                 }
             }
         }
