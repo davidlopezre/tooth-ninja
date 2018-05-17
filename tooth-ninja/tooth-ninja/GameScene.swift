@@ -51,6 +51,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         scoreLabel.position = CGPoint(x: size.width * 0.9, y: size.height * 0.9)
         addChild(scoreLabel)
         
+        
+        
         healthLabel = SKLabelNode(fontNamed: "Chalkduster")
         healthLabel.text = "HP: 100%"
         healthLabel.fontSize = 25
@@ -137,9 +139,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func bacteriaCollidesWithTooth(bacteria: SKShapeNode) {
+        
+        GameViewController().HealthBar.xScale = CGFloat(200 - health)
         print("Collision: Bacteria-Tooth")
         bacteria.removeFromParent()
         health -= 25
+        
         if (health <= 0) {
             let reveal = SKTransition.flipHorizontal(withDuration: 0.5)
             let gameOverScene = GameOverScene(size: self.size, won: false)
@@ -172,7 +177,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if ((bacteriaBody.node?.name == "bacteria") && (otherBody.node?.name == "tooth")) {
             print("bacteria-tooth collision confirmed")
             print("other body is \(String(describing: otherBody.node?.name))")
-            if let bacteria = bacteriaBody.node as? SKShapeNode {
+            if let bacteria = bacteriaBody.node as? SKShapeNode
+            {
+                
                 bacteriaCollidesWithTooth(bacteria: bacteria)
             }
         } else if ((bacteriaBody.node?.name == "bacteria") && (otherBody.node?.name == "swipe")) {

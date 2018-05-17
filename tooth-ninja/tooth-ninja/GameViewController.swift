@@ -9,9 +9,13 @@
 import UIKit
 import SpriteKit
 
-class GameViewController: UIViewController {
+class GameViewController: UIViewController
+{
+    var HealthBar = SKSpriteNode()
     
-    override func viewDidLoad() {
+    //var health_bar = SKShapeNode(rectOf: CGSize(width: 300, height: 100))
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
         let scene = GameScene(size: view.bounds.size)
         let skView = view as! SKView
@@ -21,11 +25,27 @@ class GameViewController: UIViewController {
         skView.isMultipleTouchEnabled = false
         scene.scaleMode = .resizeFill
         skView.presentScene(scene)
+       
+        
+        
+         //CGPointMake(scene.frame.size.width / 3, scene.frame.size.height / 1.05)
+       HealthBar = SKSpriteNode(color:SKColor.yellow, size: CGSize(width: 200, height: 30))
+        HealthBar.position = CGPoint(x: scene.frame.size.width / 6, y: scene.frame.size.height / 1.05)
+        HealthBar.anchorPoint = CGPoint(x: 0, y: 0.5)
+        //HealthBar.zPosition = 4
+        scene.addChild(HealthBar)
+        
+//        if #available(iOS 10.0, *) {
+//            GameViewController().HealthBar.scale(to: CGSize(width: GameScene().health, height: 30))
+//        } else {
+//            // Fallback on earlier versions
+//        }
+        //add it to the screem
+        //scene.addChild(HealthBar)
     }
-    
-    override var prefersStatusBarHidden: Bool {
+    override var prefersStatusBarHidden: Bool
+    {
         return true
     }
-    
 }
 
