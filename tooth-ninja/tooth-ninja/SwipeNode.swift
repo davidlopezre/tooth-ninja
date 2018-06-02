@@ -33,7 +33,7 @@ class SwipeNode: SKNode {
         emitterNode.particleColorBlendFactorSpeed = 0
         
         emitterNode.particleBlendMode = .add
-        emitterNode.zPosition = 0
+        emitterNode.zPosition = 2
         
         return emitterNode
     }

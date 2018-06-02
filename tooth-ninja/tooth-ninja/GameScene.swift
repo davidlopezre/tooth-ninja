@@ -43,27 +43,37 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func didMove(to view: SKView) {
         
-        backgroundColor = SKColor.red
+        let background = SKSpriteNode(imageNamed: "background2")
+        background.zPosition = 1
+        background.position = CGPoint(x: frame.size.width / 2, y: frame.size.height / 2)
+        print("background, scene size is \(self.size.width) and \(self.size.height)")
+        background.size = size
+        addChild(background)
+        
+        
         
         scoreLabel = SKLabelNode(fontNamed: "Chalkduster")
         scoreLabel.text = "Score: 0"
 //        scoreLabel.horizontalAlignmentMode = .right
+        scoreLabel.zPosition = 2
         scoreLabel.fontSize = 25
         scoreLabel.position = CGPoint(x: size.width * 0.9, y: size.height * 0.9)
         addChild(scoreLabel)
-        
+
         healthLabel = SKLabelNode(fontNamed: "Chalkduster")
         healthLabel.text = "HP: 100%"
         healthLabel.fontSize = 25
+        healthLabel.zPosition = 2
         healthLabel.position = CGPoint(x: size.width * 0.1, y: size.height * 0.9)
         addChild(healthLabel)
+
         
-        addTooth(position: CGPoint(x: size.width * 0.5, y: size.height * 0.9))
-        addTooth(position: CGPoint(x: size.width * 0.5, y: size.height * 0.1))
-        
+        addTooth(position: CGPoint(x: size.width * 0.572, y: size.height * 0.32))
+        addTooth(position: CGPoint(x: size.width * 0.422, y: size.height * 0.32))
+
         physicsWorld.gravity = CGVector.zero
         physicsWorld.contactDelegate = self
-        
+
         run(SKAction.repeatForever(SKAction.sequence([
             SKAction.run(addBacteria),
             SKAction.wait(forDuration: 1.0),
@@ -83,13 +93,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func addTooth(position: CGPoint) {
         
-        let tooth = SKShapeNode(circleOfRadius: 20.0)
+        let tooth = SKSpriteNode(imageNamed: "tooth_1.png")
         
         tooth.name = "tooth"
-        tooth.fillColor = SKColor.white
+//        tooth.fillColor = SKColor.white
+        tooth.size.width = CGFloat(90.0)
+        tooth.size.height = CGFloat(90.0)
+        tooth.zPosition = 2
         tooth.position = position
         
-        tooth.physicsBody = SKPhysicsBody(circleOfRadius: 20.0)
+        tooth.physicsBody = SKPhysicsBody(rectangleOf: tooth.size)
         tooth.physicsBody?.isDynamic = true
         tooth.physicsBody?.categoryBitMask = PhysicsCategory.Player
         tooth.physicsBody?.contactTestBitMask = PhysicsCategory.External
@@ -112,6 +125,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // Position the monster slightly off-screen along the right edge,
         // and along a random position along the Y axis as calculated above
         bacteria.position = CGPoint(x: actualX, y: actualY)
+        bacteria.zPosition = 2
         
         bacteria.physicsBody = SKPhysicsBody(circleOfRadius: 20.0)
         bacteria.physicsBody?.isDynamic = true
@@ -151,6 +165,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // Position the food slightly off-screen along the right edge,
         // and along a random position along the Y axis as calculated above
         goodFood.position = CGPoint(x: actualX, y: actualY)
+        goodFood.zPosition = 2
         
         goodFood.physicsBody = SKPhysicsBody(circleOfRadius: 20.0)
         goodFood.physicsBody?.isDynamic = true
@@ -191,6 +206,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // Position the food slightly off-screen along the right edge,
         // and along a random position along the Y axis as calculated above
         goodFood.position = CGPoint(x: actualX, y: actualY)
+        goodFood.zPosition = 2
         
         goodFood.physicsBody = SKPhysicsBody(circleOfRadius: 20.0)
         goodFood.physicsBody?.isDynamic = true
