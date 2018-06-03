@@ -18,6 +18,7 @@ class GameViewController: UIViewController {
         print("Scene size is: \(view.bounds.size)")
         let skView = view as! SKView
         skView.showsFPS = true
+        skView.showsPhysics = true
         skView.showsNodeCount = true
         skView.ignoresSiblingOrder = true
         skView.isMultipleTouchEnabled = false

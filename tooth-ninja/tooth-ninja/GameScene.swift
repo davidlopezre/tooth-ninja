@@ -76,9 +76,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         run(SKAction.repeatForever(SKAction.sequence([
             SKAction.run(addBacteria),
-            SKAction.wait(forDuration: 1.0),
-            SKAction.run(addGoodFood),
-            SKAction.run(addBadFood)
+            SKAction.wait(forDuration: 1.0)
+//            SKAction.run(addGoodFood),
+//            SKAction.run(addBadFood)
             ])
         ))
     }
@@ -114,10 +114,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func addBacteria() {
         // Create sprite
-        let bacteria = SKShapeNode(circleOfRadius: 20.0)
+        let bacteria = SKSpriteNode(imageNamed: "bacteria_blue")
         bacteria.name = "bacteria"
         
-        bacteria.fillColor = SKColor.green
+        bacteria.size.width = CGFloat(80)
+        bacteria.size.height = CGFloat(80)
+        
         
         let actualY = random(min: size.height*0.1, max: size.height*0.9)
         let actualX = random(min: size.width*0.1, max: size.width*0.9)
@@ -127,7 +129,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         bacteria.position = CGPoint(x: actualX, y: actualY)
         bacteria.zPosition = 2
         
-        bacteria.physicsBody = SKPhysicsBody(circleOfRadius: 20.0)
+        bacteria.physicsBody = SKPhysicsBody(circleOfRadius: max(bacteria.size.width/2, bacteria.size.height/2))
         bacteria.physicsBody?.isDynamic = true
         bacteria.physicsBody?.categoryBitMask = PhysicsCategory.External
         bacteria.physicsBody?.contactTestBitMask = PhysicsCategory.Player
@@ -232,7 +234,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         goodFood.run(actionMove)
     }
     
-    func bacteriaCollidesWithTooth(bacteria: SKShapeNode) {
+    func bacteriaCollidesWithTooth(bacteria: SKSpriteNode) {
         print("Collision: Bacteria-Tooth")
         bacteria.removeFromParent()
         health -= 25
@@ -243,7 +245,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
-    func swipeCollidesWithBacteria(bacteria: SKShapeNode) {
+    func swipeCollidesWithBacteria(bacteria: SKSpriteNode) {
         print("Collision: Swipe-Bacteria")
         bacteria.removeFromParent()
         score += 1
@@ -298,7 +300,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         if playerBody.node?.name == "swipe" {
             if externalBody.node?.name == "bacteria" {
-                if let bacteria = externalBody.node as? SKShapeNode {
+                if let bacteria = externalBody.node as? SKSpriteNode {
                     swipeCollidesWithBacteria(bacteria: bacteria)
                 }
             }else if externalBody.node?.name == "goodfood" {
@@ -312,7 +314,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         }else {
             if externalBody.node?.name == "bacteria" {
-                if let bacteria = externalBody.node as? SKShapeNode {
+                if let bacteria = externalBody.node as? SKSpriteNode {
                     bacteriaCollidesWithTooth(bacteria: bacteria)
                 }
             }else if externalBody.node?.name == "goodfood" {
