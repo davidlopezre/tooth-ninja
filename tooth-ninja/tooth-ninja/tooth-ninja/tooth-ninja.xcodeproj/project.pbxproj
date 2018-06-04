@@ -15,6 +15,7 @@
 		611788DB2078B0B000FC8590 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 611788D92078B0B000FC8590 /* LaunchScreen.storyboard */; };
 		613420D8207B2BED00F3C86A /* SwipeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613420D7207B2BED00F3C86A /* SwipeNode.swift */; };
 		61C7EAFE207FA8710061A469 /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C7EAFD207FA8710061A469 /* GameOverScene.swift */; };
+		FDC8404A20BB9AD5003522C6 /* extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC8404920BB9AD4003522C6 /* extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		611788DC2078B0B000FC8590 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		613420D7207B2BED00F3C86A /* SwipeNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeNode.swift; sourceTree = "<group>"; };
 		61C7EAFD207FA8710061A469 /* GameOverScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
+		FDC8404920BB9AD4003522C6 /* extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = extension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 				611788D02078B0B000FC8590 /* GameScene.swift */,
 				61C7EAFD207FA8710061A469 /* GameOverScene.swift */,
 				613420D7207B2BED00F3C86A /* SwipeNode.swift */,
+				FDC8404920BB9AD4003522C6 /* extension.swift */,
 				611788D22078B0B000FC8590 /* GameViewController.swift */,
 				611788D42078B0B000FC8590 /* Main.storyboard */,
 				611788D72078B0B000FC8590 /* Assets.xcassets */,
@@ -148,6 +151,7 @@
 				61C7EAFE207FA8710061A469 /* GameOverScene.swift in Sources */,
 				613420D8207B2BED00F3C86A /* SwipeNode.swift in Sources */,
 				611788D12078B0B000FC8590 /* GameScene.swift in Sources */,
+				FDC8404A20BB9AD5003522C6 /* extension.swift in Sources */,
 				611788D32078B0B000FC8590 /* GameViewController.swift in Sources */,
 				611788CB2078B0AF00FC8590 /* AppDelegate.swift in Sources */,
 			);
@@ -291,7 +295,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = B4L8G3T47Z;
 				INFOPLIST_FILE = "tooth-ninja/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -307,7 +311,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = B4L8G3T47Z;
 				INFOPLIST_FILE = "tooth-ninja/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

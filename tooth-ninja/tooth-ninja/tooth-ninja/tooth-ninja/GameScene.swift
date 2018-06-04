@@ -18,8 +18,12 @@ struct PhysicsCategory {
 }
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
+    
+    
     var scoreLabel: SKLabelNode!
-    var healthLabel: SKLabelNode!
+    //var healthLabel: SKLabelNode!
+    var transMiller = CGAffineTransform()
+    var count = 0
     
     var score = 0 {
         didSet {
@@ -27,11 +31,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
-    var health = 100 {
-        didSet {
-            healthLabel.text = "HP: \(health)%"
-        }
-    }
+    var health = 100
+//        didSet {
+//            healthLabel.text = "HP: \(health)%"
+//        }
     
     // This optional variable will help you to easily access the blade
     var blade: SwipeNode?
@@ -53,11 +56,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         
         
-        healthLabel = SKLabelNode(fontNamed: "Chalkduster")
-        healthLabel.text = "HP: 100%"
-        healthLabel.fontSize = 25
-        healthLabel.position = CGPoint(x: size.width * 0.1, y: size.height * 0.9)
-        addChild(healthLabel)
+//        healthLabel = SKLabelNode(fontNamed: "Chalkduster")
+//        healthLabel.text = "HP: 100%"
+//        healthLabel.fontSize = 25
+//        healthLabel.position = CGPoint(x: size.width * 0.1, y: size.height * 0.9)
+//        addChild(healthLabel)
         
         addTooth(position: CGPoint(x: size.width * 0.5, y: size.height * 0.9))
         addTooth(position: CGPoint(x: size.width * 0.5, y: size.height * 0.1))
@@ -138,17 +141,28 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         bacteria.run(actionMove)
     }
     
-    func bacteriaCollidesWithTooth(bacteria: SKShapeNode) {
-        
-        GameViewController().HealthBar.xScale = CGFloat(200 - health)
-        print("Collision: Bacteria-Tooth")
-        bacteria.removeFromParent()
-        health -= 25
-        
-        if (health <= 0) {
+    func bacteriaCollidesWithTooth(bacteria: SKShapeNode)
+    {
+        print(health)
+       if(health > 0)
+       {
+            health -= 25
+        (self.view!.window!.rootViewController as! GameViewController).health_bar.frame.origin.x -= CGFloat(health)
+            print("Collision: Bacteria-Tooth")
+            bacteria.removeFromParent()
+            count += 1
+        }
+        else
+        {
+//            count = 0
+//            health = 100
+//            (self.view!.window!.rootViewController as! GameViewController).health_bar.isHidden = true
             let reveal = SKTransition.flipHorizontal(withDuration: 0.5)
+//            (self.view!.window!.rootViewController as! GameViewController).health_bar.frame.origin.x = 0
             let gameOverScene = GameOverScene(size: self.size, won: false)
             self.view?.presentScene(gameOverScene, transition: reveal)
+//            (self.view!.window!.rootViewController as! GameViewController).health_bar.isHidden = false
+            exit(1)
         }
     }
     
