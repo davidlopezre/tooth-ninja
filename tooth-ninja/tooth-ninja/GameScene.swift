@@ -34,12 +34,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
+    var shield = 0
+    
     // This optional variable will help you to easily access the blade
     var blade: SwipeNode?
     
     // This will help you to update the position of the blade
     // Set the initial value to 0
     var delta: CGPoint = .zero
+    
     
     override func didMove(to view: SKView) {
         
@@ -49,8 +52,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         print("background, scene size is \(self.size.width) and \(self.size.height)")
         background.size = size
         addChild(background)
-        
-        
         
         scoreLabel = SKLabelNode(fontNamed: "Chalkduster")
         scoreLabel.text = "Score: 0"
@@ -68,176 +69,189 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(healthLabel)
 
         
-        addTooth(position: CGPoint(x: size.width * 0.572, y: size.height * 0.32))
-        addTooth(position: CGPoint(x: size.width * 0.422, y: size.height * 0.32))
+        Tooth.addTooth(position: CGPoint(x: size.width * 0.572, y: size.height * 0.32), scene: self)
+        Tooth.addTooth(position: CGPoint(x: size.width * 0.422, y: size.height * 0.32), scene: self)
 
         physicsWorld.gravity = CGVector.zero
         physicsWorld.contactDelegate = self
 
+        let s1 = SKAction.run {
+            addBacteria(scene: self, completion: {
+                print("add bacteria")
+            })
+        }
+        
+        let s2 = SKAction.run {
+            addBacteria2(scene: self, completion: {
+                print("add bacteria")
+            })
+        }
         run(SKAction.repeatForever(SKAction.sequence([
-            SKAction.run(addBacteria),
+            SKAction.run(addGoodBacteria),
+            s1,
+            s1,
+            s1,
+            s1,
+            SKAction.wait(forDuration: 1.0),
+            SKAction.run(addGoodFood),
+            SKAction.wait(forDuration: 1.0),
+            SKAction.run(addBadFood),
+            SKAction.wait(forDuration: 1.0),
+            s1,
+            SKAction.wait(forDuration: 1.0),
+            s2,
             SKAction.wait(forDuration: 1.0)
-//            SKAction.run(addGoodFood),
-//            SKAction.run(addBadFood)
             ])
         ))
     }
     
-    func random() -> CGFloat {
-        return CGFloat(Float(arc4random()) / 0xFFFFFFFF)
-    }
-    
-    func random(min: CGFloat, max: CGFloat) -> CGFloat {
-        return random() * (max - min) + min
-    }
-    
-    func addTooth(position: CGPoint) {
-        
-        let tooth = SKSpriteNode(imageNamed: "tooth_1.png")
-        
-        tooth.name = "tooth"
-//        tooth.fillColor = SKColor.white
-        tooth.size.width = CGFloat(90.0)
-        tooth.size.height = CGFloat(90.0)
-        tooth.zPosition = 2
-        tooth.position = position
-        
-        tooth.physicsBody = SKPhysicsBody(rectangleOf: tooth.size)
-        tooth.physicsBody?.isDynamic = true
-        tooth.physicsBody?.categoryBitMask = PhysicsCategory.Player
-        tooth.physicsBody?.contactTestBitMask = PhysicsCategory.External
-        tooth.physicsBody?.collisionBitMask = PhysicsCategory.None
-        tooth.physicsBody?.usesPreciseCollisionDetection = true
-        
-        addChild(tooth)
-    }
-    
-    func addBacteria() {
-        // Create sprite
-        let bacteria = SKSpriteNode(imageNamed: "bacteria_blue")
-        bacteria.name = "bacteria"
-        
-        bacteria.size.width = CGFloat(80)
-        bacteria.size.height = CGFloat(80)
-        
-        
-        let actualY = random(min: size.height*0.1, max: size.height*0.9)
-        let actualX = random(min: size.width*0.1, max: size.width*0.9)
-        
-        // Position the monster slightly off-screen along the right edge,
-        // and along a random position along the Y axis as calculated above
-        bacteria.position = CGPoint(x: actualX, y: actualY)
-        bacteria.zPosition = 2
-        
-        bacteria.physicsBody = SKPhysicsBody(circleOfRadius: max(bacteria.size.width/2, bacteria.size.height/2))
-        bacteria.physicsBody?.isDynamic = true
-        bacteria.physicsBody?.categoryBitMask = PhysicsCategory.External
-        bacteria.physicsBody?.contactTestBitMask = PhysicsCategory.Player
-        bacteria.physicsBody?.collisionBitMask = PhysicsCategory.None
-        
-        // Add the bacteria to the scene
-        addChild(bacteria)
-        
-        // Determine speed of the monster
-        let actualDuration = random(min: CGFloat(2.0), max: CGFloat(4.0))
-        
-        // Create the actions
-        let teeth = self["tooth"]
-        print("There are \(teeth.count) teeth")
-        
-        let targetToothIndex = random(min: 0, max: CGFloat(teeth.count))
-        let targetTooth = teeth[Int(targetToothIndex)]
-        
-        let actionMove = SKAction.move(to: targetTooth.position, duration: TimeInterval(actualDuration))
-
-        bacteria.run(actionMove)
-    }
-    
+//
     func addGoodFood() {
-        
+
         // Create sprite
-        let goodFood = SKShapeNode(circleOfRadius: 20.0)
+        let goodFood = SKSpriteNode(imageNamed: "cheese")
         goodFood.name = "goodfood"
-        
-        goodFood.fillColor = SKColor.yellow
-        
-        let actualY = random(min: size.height*0.1, max: size.height*0.9)
-        let actualX = random(min: size.width*0.1, max: size.width*0.9)
-        
+
+        goodFood.size.width = CGFloat(50)
+        goodFood.size.height = CGFloat(50)
+
+        let actualY = SpriteCreation.random(min: size.height*0.1, max: size.height*0.9)
+        let actualX = SpriteCreation.random(min: size.width*0.1, max: size.width*0.9)
+
         // Position the food slightly off-screen along the right edge,
         // and along a random position along the Y axis as calculated above
         goodFood.position = CGPoint(x: actualX, y: actualY)
         goodFood.zPosition = 2
-        
-        goodFood.physicsBody = SKPhysicsBody(circleOfRadius: 20.0)
+
+        goodFood.physicsBody = SKPhysicsBody(circleOfRadius: max(goodFood.size.width/2, goodFood.size.height/2))
         goodFood.physicsBody?.isDynamic = true
         goodFood.physicsBody?.categoryBitMask = PhysicsCategory.External
         goodFood.physicsBody?.contactTestBitMask = PhysicsCategory.Player
         goodFood.physicsBody?.collisionBitMask = PhysicsCategory.None
-        
+
         // Add the food to the scene
         addChild(goodFood)
-        
+
         // Determine speed of the food
-        let actualDuration = random(min: CGFloat(2.0), max: CGFloat(4.0))
-        
+        let actualDuration = SpriteCreation.random(min: CGFloat(2.0), max: CGFloat(4.0))
+
         // Create the actions
         let teeth = self["tooth"]
         print("There are \(teeth.count) teeth")
-        
-        let targetToothIndex = random(min: 0, max: CGFloat(teeth.count))
+
+        let targetToothIndex = SpriteCreation.random(min: 0, max: CGFloat(teeth.count))
         let targetTooth = teeth[Int(targetToothIndex)]
-        
+
         let actionMove = SKAction.move(to: targetTooth.position, duration: TimeInterval(actualDuration))
-        
+
         goodFood.run(actionMove)
     }
 
-    
+//
     func addBadFood() {
-        
+
         // Create sprite
-        let goodFood = SKShapeNode(circleOfRadius: 20.0)
+        let goodFood = SKSpriteNode(imageNamed: "chocolate")
         goodFood.name = "badfood"
-        
-        goodFood.fillColor = SKColor.red
-        
-        let actualY = random(min: size.height*0.1, max: size.height*0.9)
-        let actualX = random(min: size.width*0.1, max: size.width*0.9)
-        
+
+        goodFood.size.width = CGFloat(30)
+        goodFood.size.height = CGFloat(50)
+
+        let actualY = SpriteCreation.random(min: size.height*0.1, max: size.height*0.9)
+        let actualX = SpriteCreation.random(min: size.width*0.1, max: size.width*0.9)
+
         // Position the food slightly off-screen along the right edge,
         // and along a random position along the Y axis as calculated above
         goodFood.position = CGPoint(x: actualX, y: actualY)
         goodFood.zPosition = 2
-        
-        goodFood.physicsBody = SKPhysicsBody(circleOfRadius: 20.0)
+
+        goodFood.physicsBody = SKPhysicsBody(rectangleOf: goodFood.size)
         goodFood.physicsBody?.isDynamic = true
         goodFood.physicsBody?.categoryBitMask = PhysicsCategory.External
         goodFood.physicsBody?.contactTestBitMask = PhysicsCategory.Player
         goodFood.physicsBody?.collisionBitMask = PhysicsCategory.None
-        
+
         // Add the food to the scene
         addChild(goodFood)
-        
+
         // Determine speed of the food
-        let actualDuration = random(min: CGFloat(2.0), max: CGFloat(4.0))
-        
+        let actualDuration = SpriteCreation.random(min: CGFloat(2.0), max: CGFloat(4.0))
+
         // Create the actions
         let teeth = self["tooth"]
         print("There are \(teeth.count) teeth")
-        
-        let targetToothIndex = random(min: 0, max: CGFloat(teeth.count))
+
+        let targetToothIndex = SpriteCreation.random(min: 0, max: CGFloat(teeth.count))
         let targetTooth = teeth[Int(targetToothIndex)]
-        
+
         let actionMove = SKAction.move(to: targetTooth.position, duration: TimeInterval(actualDuration))
-        
+
         goodFood.run(actionMove)
     }
-    
+
+    func addGoodBacteria() {
+
+        // Create sprite
+        let goodFood = SKSpriteNode(imageNamed: "good_bac")
+        goodFood.name = "goodbacteria"
+
+        goodFood.size.width = CGFloat(50)
+        goodFood.size.height = CGFloat(60)
+
+        let actualY = SpriteCreation.random(min: size.height*0.1, max: size.height*0.9)
+        let actualX = SpriteCreation.random(min: size.width*0.1, max: size.width*0.9)
+
+        // Position the food slightly off-screen along the right edge,
+        // and along a random position along the Y axis as calculated above
+        goodFood.position = CGPoint(x: actualX, y: actualY)
+        goodFood.zPosition = 2
+
+        goodFood.physicsBody = SKPhysicsBody(rectangleOf: goodFood.size)
+        goodFood.physicsBody?.isDynamic = true
+        goodFood.physicsBody?.categoryBitMask = PhysicsCategory.External
+        goodFood.physicsBody?.contactTestBitMask = PhysicsCategory.Player
+        goodFood.physicsBody?.collisionBitMask = PhysicsCategory.None
+
+        // Add the food to the scene
+        addChild(goodFood)
+
+        // Determine speed of the food
+        let actualDuration = SpriteCreation.random(min: CGFloat(2.0), max: CGFloat(4.0))
+
+        // Create the actions
+        let teeth = self["tooth"]
+        print("There are \(teeth.count) teeth")
+
+        let targetToothIndex = SpriteCreation.random(min: 0, max: CGFloat(teeth.count))
+        let targetTooth = teeth[Int(targetToothIndex)]
+
+        let actionMove = SKAction.move(to: targetTooth.position, duration: TimeInterval(actualDuration))
+
+        goodFood.run(actionMove)
+    }
+
     func bacteriaCollidesWithTooth(bacteria: SKSpriteNode) {
         print("Collision: Bacteria-Tooth")
         bacteria.removeFromParent()
-        health -= 25
+        if (shield <= 0) {
+            health -= 5
+        } else {
+            shield -= 1
+        }
+        if (health <= 0) {
+            let reveal = SKTransition.flipHorizontal(withDuration: 0.5)
+            let gameOverScene = GameOverScene(size: self.size, won: false)
+            self.view?.presentScene(gameOverScene, transition: reveal)
+        }
+    }
+
+    func bacteria2CollidesWithTooth(bacteria: SKSpriteNode) {
+        print("Collision: Bacteria-Tooth")
+        if (shield <= 0) {
+            health -= 5
+        } else {
+            shield -= 1
+        }
         if (health <= 0) {
             let reveal = SKTransition.flipHorizontal(withDuration: 0.5)
             let gameOverScene = GameOverScene(size: self.size, won: false)
@@ -245,22 +259,34 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
+    func goodBacteriaCollidesWithTooth(bacteria: SKSpriteNode) {
+        print("Collision: GoodBacteria-Tooth")
+        bacteria.removeFromParent()
+        shield = 10
+    }
+
+    
     func swipeCollidesWithBacteria(bacteria: SKSpriteNode) {
         print("Collision: Swipe-Bacteria")
         bacteria.removeFromParent()
         score += 1
     }
-    
-    func goodFoodCollidesWithTooth(goodFood: SKShapeNode) {
+
+    func goodFoodCollidesWithTooth(goodFood: SKSpriteNode) {
         print("Collision: GoodFood-Tooth")
         goodFood.removeFromParent()
         health += 10
     }
-    
-    func badFoodCollidesWithTooth(badFood: SKShapeNode) {
+
+    func badFoodCollidesWithTooth(badFood: SKSpriteNode) {
         print("Collision: BadFood-Tooth")
         badFood.removeFromParent()
-        let influx = SKAction.repeat(SKAction.run(addBacteria), count: 10)
+        let s1 = SKAction.run {
+            addBacteria(scene: self, completion: {
+                print("add bacteria")
+            })
+        }
+        let influx = SKAction.repeat(s1, count: 5)
         let action = SKAction.sequence([
             influx,
             SKAction.wait(forDuration: 1),
@@ -271,21 +297,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             ])
         run(action)
     }
-    
-    func swipeCollidesWithGoodFood(goodFood: SKShapeNode) {
+
+    func swipeCollidesWithGoodFood(goodFood: SKSpriteNode) {
         print("Collision: Swipe-GoodFood")
         goodFood.removeFromParent()
     }
-    
-    func swipeCollidesWithBadFood(badFood: SKShapeNode) {
+
+    func swipeCollidesWithBadFood(badFood: SKSpriteNode) {
         print("Collision: Swipe-BadFood")
         badFood.removeFromParent()
+    }
+
+    func swipeCollidesWithGoodBacteria(bacteria: SKSpriteNode) {
+        print("Collision: Swipe-GoodBacteria")
+        bacteria.removeFromParent()
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
         var playerBody: SKPhysicsBody
         var externalBody: SKPhysicsBody
-        
+
         print("body a bitmask: \(contact.bodyA.categoryBitMask)")
         print("body b bitmask: \(contact.bodyB.categoryBitMask)")
         if contact.bodyA.categoryBitMask > contact.bodyB.categoryBitMask {
@@ -297,63 +328,66 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         print("player body is set to: \(playerBody.categoryBitMask)")
         print("external body is set to: \(externalBody.categoryBitMask)")
-        
+
         if playerBody.node?.name == "swipe" {
-            if externalBody.node?.name == "bacteria" {
+            if externalBody.node?.name == "bacteria" || externalBody.node?.name == "bacteria2" || externalBody.node?.name == "goodbacteria"  {
                 if let bacteria = externalBody.node as? SKSpriteNode {
                     swipeCollidesWithBacteria(bacteria: bacteria)
                 }
             }else if externalBody.node?.name == "goodfood" {
-                if let goodFood = externalBody.node as? SKShapeNode {
+                if let goodFood = externalBody.node as? SKSpriteNode {
                     swipeCollidesWithGoodFood(goodFood: goodFood)
                 }
             }else if externalBody.node?.name == "badfood" {
-                if let badFood = externalBody.node as? SKShapeNode {
+                if let badFood = externalBody.node as? SKSpriteNode {
                     swipeCollidesWithBadFood(badFood: badFood)
                 }
             }
         }else {
-            if externalBody.node?.name == "bacteria" {
+            if externalBody.node?.name == "bacteria" || externalBody.node?.name == "bacteria2" {
                 if let bacteria = externalBody.node as? SKSpriteNode {
-                    bacteriaCollidesWithTooth(bacteria: bacteria)
+                    bacteria2CollidesWithTooth(bacteria: bacteria)
+                }
+            }else if externalBody.node?.name == "goodbacteria" {
+                if let goodbacteria = externalBody.node as? SKSpriteNode {
+                   goodBacteriaCollidesWithTooth(bacteria: goodbacteria)
                 }
             }else if externalBody.node?.name == "goodfood" {
-                if let goodFood = externalBody.node as? SKShapeNode {
+                if let goodFood = externalBody.node as? SKSpriteNode {
                     goodFoodCollidesWithTooth(goodFood: goodFood)
                 }
             }else if externalBody.node?.name == "badfood" {
-                if let badFood = externalBody.node as? SKShapeNode {
+                if let badFood = externalBody.node as? SKSpriteNode {
                     badFoodCollidesWithTooth(badFood: badFood)
                 }
             }
         }
-    
     }
-    
+
     // This will help you to initialize our blade
     func presentBladeAtPosition(_ position:CGPoint) {
         blade = SwipeNode(position: position, target: self, color: .white)
-        
+
         guard let blade = blade else {
             fatalError("Blade could not be created")
         }
         blade.enablePhysics(categoryBitMask: PhysicsCategory.Player, contactTestBitmask: PhysicsCategory.External, collisionBitmask: PhysicsCategory.None)
-        
+
         addChild(blade)
     }
-    
+
     // This will help you to remove the blade and reset the delta value
     func removeBlade() {
         guard let blade = blade else {
             return
         }
-        
+
         blade.removeFromParent()
         delta = .zero
     }
-    
+
     // MARK: - Touch Events
-    
+
     // initialize the blade at touch location
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else {
@@ -362,7 +396,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let touchLocation = touch.location(in: self)
         presentBladeAtPosition(touchLocation)
     }
-    
+
     // delta value will help you later to properly update the blade position,
     // Calculate the difference between currentPoint and previousPosition and store that value in delta
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -373,24 +407,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let previousPoint = touch.previousLocation(in: self)
         delta = CGPoint(x: currentPoint.x - previousPoint.x, y: currentPoint.y - previousPoint.y)
     }
-    
+
     // Remove the Blade if the touches have been cancelled or ended
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         removeBlade()
     }
-    
+
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         removeBlade()
     }
-    
+
     // MARK: - FPS
-    
+
     override func update(_ currentTime: TimeInterval) {
         // if the blade is not available return
         guard let blade = blade else {
             return
         }
-        
+
         // Here you add the delta value to the blade position
         let newPosition = CGPoint(x: blade.position.x + delta.x, y: blade.position.y + delta.y)
         // Set the new position
@@ -399,5 +433,5 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // You are telling the blade to only update his position when touchesMoved is called
         delta = .zero
     }
-    
+
 }
