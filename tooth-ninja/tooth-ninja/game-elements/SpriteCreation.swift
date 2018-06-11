@@ -44,12 +44,5 @@ class SpriteCreation {
     }
     
     static func doAction(sprite: SKSpriteNode, action: SKAction){}
-    
-    static func random() -> CGFloat {
-        return CGFloat(Float(arc4random()) / 0xFFFFFFFF)
-    }
-    
-    static func random(min: CGFloat, max: CGFloat) -> CGFloat {
-        return random() * (max - min) + min
-    }
+
 }

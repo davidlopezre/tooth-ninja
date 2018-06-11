@@ -54,7 +54,7 @@ public class Level: SKScene, SKPhysicsContactDelegate, BaseLevel {
 //    // Set the initial value to 0
 //    var delta: CGPoint = .zero
 
-    init(size: CGSize, bgFile: String, lvlElements: [GameElement], c: Controller) {
+    init(size: CGSize, bgFile: String, lvlElements: [GameObject], c: Controller) {
         self.levelElements = lvlElements
         self.controller = c
         self.backgroundFile = bgFile

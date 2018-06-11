@@ -32,10 +32,19 @@ class JSONLevelParser {
         return nil
     }
 
+    func getTeeth() -> [GameObject] {
+
+        return []
+    }
+
     func getProperty() {
         if let str = jsonDict["level"] as? Int {
             print(str)
         }
+    }
+
+    func getArrayDict() {
+        // TODO (1) Transform JSON array object into array of dict
     }
 
 }

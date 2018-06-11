@@ -23,7 +23,6 @@ class GameViewController: UIViewController, Controller {
 
         do {
             jsonLvlParser = try JSONLevelParser(fileName: "level_json_sample")
-            jsonLvlParser?.getProperty()
 
         }catch {
             print("Level cannot be loaded!")
@@ -31,6 +30,8 @@ class GameViewController: UIViewController, Controller {
 
         let skView = initialiseSKView()
 
+        let teethArray = jsonLvlParser?.getTeeth()
+        // let otherArray = jsonLvlParser?.getOther()
         // Use the JSON file to open level 1
         currentLevel = Level(size: skView.bounds.size, bgFile: "background2.png",
                 lvlElements: [], c: self)
