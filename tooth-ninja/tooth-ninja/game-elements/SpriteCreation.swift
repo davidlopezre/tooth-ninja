@@ -17,7 +17,7 @@ class SpriteCreation {
         ge.zPosition = zPosition
         return ge
     }
-    //dhdhhdhdhd
+
     
     static func addRectPhysicsBody(target: SKSpriteNode, rectSize: CGSize, categoryBitMask: UInt32, contactTestBitMask: UInt32, collisionBitMask: UInt32){
         

@@ -1,0 +1,40 @@
+{
+  "level": 1,
+  "teeth": [{
+      "tag": "tooth",
+      "position_x": 0.5,
+      "position_y": 0.5,
+      "size_width": 50,
+      "size_height": 50,
+      "image": "tooth_1"
+    },
+    {
+      "prototype": "tooth",
+      "position_x": 0.7,
+      "position_y": 0.7
+    }
+  ],
+  "bacteria": [{
+      "tag": "bad_bacteria_blue",
+      "size_width": 50,
+      "size_height": 50,
+      "image": "bacteria_blue.png"
+    },
+    {
+      "tag": "bad_bacteria_yellow",
+      "prototype": "bad_bacteria_blue",
+      "image": "bacteria_yellow.png"
+    },
+    {
+      "tag": "good_bacteria_green",
+      "prototype": "bad_bacteria_blue",
+      "image": "bacteria_green.png"
+    }
+  ],
+  "food": [{
+    "tag": "chocolate",
+    "size_width": 50,
+    "size_height": 50,
+    "image": "chocolate.png"
+  }]
+}

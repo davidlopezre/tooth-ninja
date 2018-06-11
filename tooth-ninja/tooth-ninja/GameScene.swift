@@ -42,8 +42,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     // This will help you to update the position of the blade
     // Set the initial value to 0
     var delta: CGPoint = .zero
-    
-    
+
     override func didMove(to view: SKView) {
         
         let background = SKSpriteNode(imageNamed: "background2")
