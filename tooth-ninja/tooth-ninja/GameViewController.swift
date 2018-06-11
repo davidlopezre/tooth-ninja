@@ -20,9 +20,13 @@ class GameViewController: UIViewController, Controller {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        var go: GameObject? = nil
+        let dictionary = [Properties.IMAGE_NAME: "tooth_1", Properties.NAME: "tooth", Properties.SIZE_HEIGHT: 50,
+                          Properties.SIZE_WIDTH: 50, Properties.POSITION_X: 100, Properties.POSITION_Y: 100, Properties.POSITION_Z: 2] as [String : AnyObject]
 
         do {
             jsonLvlParser = try JSONLevelParser(fileName: "level_json_sample")
+            go = try GameObject(type: GameObjectType.Tooth, properties: dictionary)
 
         }catch {
             print("Level cannot be loaded!")
@@ -30,11 +34,14 @@ class GameViewController: UIViewController, Controller {
 
         let skView = initialiseSKView()
 
-        let teethArray = jsonLvlParser?.getTeeth()
+//        let teethArray = jsonLvlParser?.getTeeth()
+
+
+
         // let otherArray = jsonLvlParser?.getOther()
         // Use the JSON file to open level 1
         currentLevel = Level(size: skView.bounds.size, bgFile: "background2.png",
-                lvlElements: [], c: self)
+                teethArray: [go!], c: self)
 
         currentLevel?.scaleMode = SKSceneScaleMode.resizeFill
 

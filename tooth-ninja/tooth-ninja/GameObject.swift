@@ -12,18 +12,19 @@ import SpriteKit
 enum GameObjectType {
     case Tooth
     case Other
+    case None
 }
 
 enum GameObjectError: Error {
     case PropertyDoesNotExist
 }
-
-class GameObjectFactory {
-
-    func dictionaryToGameObject () -> GameObject {
-
-    }
-}
+//
+//class GameObjectFactory {
+//
+//    func dictionaryToGameObject () -> GameObject {
+//
+//    }
+//}
 
 struct Properties {
     static let IMAGE_NAME = "image"
@@ -50,12 +51,14 @@ class GameObject: SKSpriteNode {
            let y         = p[Properties.POSITION_Y] as? CGFloat,
            let z         = p[Properties.POSITION_Z] as? CGFloat
         {
+            self.type = type
             let texture = SKTexture(imageNamed: imageName)
-            super.init(texture: texture, color: UIColor.clear, size: <#T##CGSize##CoreGraphics.CGSize#>(width, height))
+            super.init(texture: texture, color: UIColor.clear, size: CGSize(width: width, height: height))
             name = newName
             position.x = x
             position.y = y
             zPosition = z
+
 
         }else {
             throw GameObjectError.PropertyDoesNotExist
@@ -63,6 +66,7 @@ class GameObject: SKSpriteNode {
     }
 
     required init?(coder aDecoder: NSCoder) {
+        self.type = GameObjectType.None
         super.init(coder: aDecoder)
     }
 }

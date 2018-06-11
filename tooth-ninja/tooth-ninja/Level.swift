@@ -17,8 +17,8 @@ private protocol BaseLevel {
     var backgroundFile: String? {get}
     var score: Int {get set}
     var health: Int {get set}
-    var levelElements: [GameElement] {get set}   // array of possible objects in a level
-    func runLevel(levelElements: [GameElement])
+    var teethArray: [GameObject] {get set}   // array of possible objects in a level
+    func runLevel(levelElements: [GameObject])
 }
 
 /* This extension provides functionality to make callbacks to the Controller */
@@ -44,7 +44,8 @@ public class Level: SKScene, SKPhysicsContactDelegate, BaseLevel {
     fileprivate var healthLabel: SKLabelNode?
     fileprivate var score = 0
     fileprivate var health = 100
-    fileprivate var levelElements: [GameElement]
+    fileprivate var teethArray: [GameObject]
+    fileprivate var otherObjectArray: [GameObject]
     fileprivate let backgroundFile: String?
 
 //    // This optional variable will help you to easily access the blade
@@ -54,22 +55,27 @@ public class Level: SKScene, SKPhysicsContactDelegate, BaseLevel {
 //    // Set the initial value to 0
 //    var delta: CGPoint = .zero
 
-    init(size: CGSize, bgFile: String, lvlElements: [GameObject], c: Controller) {
-        self.levelElements = lvlElements
+    init(size: CGSize, bgFile: String, teethArray: [GameObject], c: Controller) {
+        self.teethArray = teethArray
         self.controller = c
         self.backgroundFile = bgFile
+        self.otherObjectArray = []
         super.init(size: size)
         // use the JSON thing to give the level the game elements
     }
 
     required public init?(coder aDecoder: NSCoder) {
-        levelElements = []
+        teethArray = []
         backgroundFile = nil
+        otherObjectArray = []
         super.init(coder: aDecoder)
     }
 
     public override func didMove(to view: SKView) {
         addBackground()
+        for tooth in teethArray{
+            addChild(tooth)
+        }
     }
 
     func addBackground() {
@@ -84,7 +90,7 @@ public class Level: SKScene, SKPhysicsContactDelegate, BaseLevel {
     }
 
     /* Sequences the events in the level */
-    func runLevel(levelElements: [GameElement]){
+    func runLevel(levelElements: [GameObject]){
 
     }
 
