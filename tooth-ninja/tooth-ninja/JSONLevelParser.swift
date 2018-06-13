@@ -5,29 +5,49 @@
 
 import Foundation
 
-enum JSONParsingError: Error {
-    case invalidFile
+struct GameInfo: Decodable {
+    var speed: Double
+    var size: Double
+    var levels: [LevelInfo]
+
+   struct LevelInfo: Decodable {
+       var id: Int
+       var teeth: [GameObjectInfo]
+
+       struct GameObjectInfo: Decodable {
+           var name: String
+           var position_x: Double
+           var position_y: Double
+           var size_width: Double
+           var size_height: Double
+           var image: String
+       }
+   }
 }
 
 /* JSONLevelParser class provides methods to parse JSON files and creating a GameElementFactory for */
 class JSONLevelParser {
 
-    let jsonDict: Dictionary<String, AnyObject>
+    let parsed: GameInfo
 
-    init(fileName: String) throws {
-        jsonDict = try JSONLevelParser.readJSON(fileName: fileName)!
+    init(file: String) throws {
+        let data = try JSONLevelParser.readJSON(fileName: file)
+        let decoder = JSONDecoder()
+        parsed = try decoder.decode(GameInfo.self, from: data!)
 
+        print(parsed.speed)
+        print(parsed.size)
+        for level in parsed.levels {
+            for tooth in level.teeth {
+                print(tooth.image)
+            }
+        }
     }
 
-    static func readJSON (fileName: String) throws -> Dictionary<String, AnyObject>? {
-
+    static func readJSON (fileName: String) throws -> Data? {
         if let path = Bundle.main.path(forResource: fileName, ofType: "json") {
-
                 let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
-                let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
-                if let jsonResult = jsonResult as? Dictionary<String, AnyObject> {
-                    return jsonResult
-                }
+                return data
         }
         return nil
     }
@@ -36,15 +56,4 @@ class JSONLevelParser {
 
         return []
     }
-
-    func getProperty() {
-        if let str = jsonDict["level"] as? Int {
-            print(str)
-        }
-    }
-
-    func getArrayDict() {
-        // TODO (1) Transform JSON array object into array of dict
-    }
-
 }
