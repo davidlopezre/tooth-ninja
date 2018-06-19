@@ -21,15 +21,16 @@ class GameViewController: UIViewController, Controller {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        let skView = initialiseSKView()
         do {
-            config = try GameConfiguration(file: "level_json_sample")
+            config = try GameConfiguration(file: "level_json_sample", size: skView.bounds.size)
 
         }catch let error{
             print("Level cannot be loaded!")
             print(error)
         }
 
-        let skView = initialiseSKView()
+
 
         // Use the JSON file to open level 1
         currentLevel = Level(size: skView.bounds.size, bgFile: "background2.png",

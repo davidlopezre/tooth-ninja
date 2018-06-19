@@ -4,9 +4,10 @@
 //
 
 import Foundation
+import SpriteKit
 
 /* Decodable struct to be able to use JSONDecoder to parse */
-struct GameConfig: Decodable {
+struct GameConfigurationDecodable: Decodable {
     var speed: Double
     var size: Double
     var levels: [LevelConfig]
@@ -31,13 +32,15 @@ struct GameConfig: Decodable {
 
 /* JSONLevelParser class provides methods to parse JSON files and creating a GameElementFactory for */
 class GameConfiguration {
+    static var screenSize: CGSize?
 
-    let parsed: GameConfig
+    let parsed: GameConfigurationDecodable
 
-    init(file: String) throws {
+    init(file: String, size: CGSize) throws {
+        GameConfiguration.screenSize = size
         let data = try GameConfiguration.readJSON(fileName: file)
         let decoder = JSONDecoder()
-        parsed = try decoder.decode(GameConfig.self, from: data!)
+        parsed = try decoder.decode(GameConfigurationDecodable.self, from: data!)
     }
 
     static func readJSON (fileName: String) throws -> Data? {
@@ -47,6 +50,7 @@ class GameConfiguration {
         }
         return nil
     }
+
 
     func getTeethByLevel(id: Int) -> [GameObject] {
         var array: [GameObject] = []

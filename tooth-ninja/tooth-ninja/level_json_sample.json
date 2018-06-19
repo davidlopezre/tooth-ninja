@@ -5,20 +5,20 @@
     "id": 1,
     "teeth": [{
         "name": "tooth",
-        "position_x": 100,
-        "position_y": 100,
+        "position_x": 0.572,
+        "position_y": 0.32,
         "position_z": 2,
-        "size_width": 50,
-        "size_height": 50,
+        "size_width": 90,
+        "size_height": 90,
         "image": "tooth_1"
       },
       {
         "name": "tooth",
-        "position_x": 200,
-        "position_y": 200,
+        "position_x": 0.422,
+        "position_y": 0.32,
         "position_z": 2,
-        "size_width": 50,
-        "size_height": 50,
+        "size_width": 90,
+        "size_height": 90,
         "image": "tooth_1"
       }
     ],
