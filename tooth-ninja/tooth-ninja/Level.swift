@@ -73,9 +73,9 @@ public class Level: SKScene, SKPhysicsContactDelegate, BaseLevel {
 
     public override func didMove(to view: SKView) {
         addBackground()
-//        for tooth in teethArray{
-//            addChild(tooth)
-//        }
+        for tooth in teethArray{
+            addChild(tooth)
+        }
     }
 
     func addBackground() {

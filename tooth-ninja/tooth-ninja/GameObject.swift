@@ -15,54 +15,21 @@ enum GameObjectType {
     case None
 }
 
-enum GameObjectError: Error {
-    case PropertyDoesNotExist
-}
-//
-//class GameObjectFactory {
-//
-//    func dictionaryToGameObject () -> GameObject {
-//
-//    }
-//}
-
-struct Properties {
-    static let IMAGE_NAME = "image"
-    static let NAME = "tag"
-    static let SIZE_HEIGHT = "size_height"
-    static let SIZE_WIDTH = "size_width"
-    static let POSITION_X = "position_x"
-    static let POSITION_Y = "position_y"
-    static let POSITION_Z = "position_z"
-}
-
 /* GameObject encapsulates an SKSpriteNode to make it easier to work with */
 class GameObject: SKSpriteNode {
     let type: GameObjectType
 
     /* Initialises the sprite with the properties specified in the dictionary */
-    init (type: GameObjectType, properties p: Dictionary<String, AnyObject>) throws {
-
-        if let imageName = p[Properties.IMAGE_NAME] as? String,
-           let newName   = p[Properties.NAME] as? String,
-           let height    = p[Properties.SIZE_HEIGHT] as? CGFloat,
-           let width     = p[Properties.SIZE_WIDTH] as? CGFloat,
-           let x         = p[Properties.POSITION_X] as? CGFloat,
-           let y         = p[Properties.POSITION_Y] as? CGFloat,
-           let z         = p[Properties.POSITION_Z] as? CGFloat
-        {
-            self.type = type
-            let texture = SKTexture(imageNamed: imageName)
-            super.init(texture: texture, color: UIColor.clear, size: CGSize(width: width, height: height))
-            name = newName
-            position.x = x
-            position.y = y
-            zPosition = z
-
-
-        }else {
-            throw GameObjectError.PropertyDoesNotExist
+    init (type: GameObjectType, properties p: GameConfig.LevelConfig.GameObjectConfig) {
+        self.type = type
+        let texture = SKTexture(imageNamed: p.image)
+        super.init(texture: texture, color: UIColor.clear, size: CGSize(width: p.size_width, height: p.size_height))
+        name = p.name
+        if let x = p.position_x, let y = p.position_y {
+            position.x = CGFloat(x)
+            position.y = CGFloat(y)
         }
+        zPosition = CGFloat(p.position_z)
     }
 
     required init?(coder aDecoder: NSCoder) {

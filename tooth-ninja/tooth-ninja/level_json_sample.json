@@ -5,16 +5,18 @@
     "id": 1,
     "teeth": [{
         "name": "tooth",
-        "position_x": 0.5,
-        "position_y": 0.5,
+        "position_x": 100,
+        "position_y": 100,
+        "position_z": 2,
         "size_width": 50,
         "size_height": 50,
         "image": "tooth_1"
       },
       {
         "name": "tooth",
-        "position_x": 0.5,
-        "position_y": 0.5,
+        "position_x": 200,
+        "position_y": 200,
+        "position_z": 2,
         "size_width": 50,
         "size_height": 50,
         "image": "tooth_1"
@@ -24,23 +26,29 @@
         "name": "bad_bacteria_blue",
         "size_width": 50,
         "size_height": 50,
+        "position_z": 2,
         "image": "bacteria_blue.png"
       },
       {
         "name": "bad_bacteria_yellow",
-        "prototype": "bad_bacteria_blue",
-        "image": "bacteria_yellow.png"
+        "size_width": 50,
+        "size_height": 50,
+        "position_z": 2,
+        "image": "bacteria_blue.png"
       },
       {
         "name": "good_bacteria_green",
-        "prototype": "bad_bacteria_blue",
-        "image": "bacteria_green.png"
+        "size_width": 50,
+        "size_height": 50,
+        "position_z": 2,
+        "image": "bacteria_blue.png"
       }
     ],
     "food": [{
       "name": "chocolate",
       "size_width": 50,
       "size_height": 50,
+      "position_z": 2,
       "image": "chocolate.png"
     }]
   }]
