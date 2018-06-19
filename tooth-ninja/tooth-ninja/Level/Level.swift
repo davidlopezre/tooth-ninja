@@ -132,6 +132,7 @@ class Level: SKScene, SKPhysicsContactDelegate, BaseLevel {
             addChild(background)
         }
 
+        // Not worth abstracting the part below as we will not be using labels forever anyways
         scoreLabel = SKLabelNode(fontNamed: "Chalkduster")
         scoreLabel!.text = "Score: 0"
         scoreLabel!.zPosition = 2
