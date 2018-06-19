@@ -12,8 +12,8 @@ import SpriteKit
 /* BaseLevel protocol includes the required fields and functions for a level */
 private protocol BaseLevel {
     var controller: Controller? {get}
-    var scoreLabel: SKLabelNode? {get set}
-    var healthLabel: SKLabelNode? {get set}
+    var scoreLabel: SKLabelNode? {get}
+    var healthLabel: SKLabelNode? {get}
     var backgroundFile: String? {get}
     var score: Int {get set}
     var health: Int {get set}
@@ -43,11 +43,24 @@ class Level: SKScene, SKPhysicsContactDelegate, BaseLevel {
     fileprivate var controller: Controller?
     fileprivate var scoreLabel: SKLabelNode?
     fileprivate var healthLabel: SKLabelNode?
-    fileprivate var score = 0
-    fileprivate var health = 100
     fileprivate var teethArray: [GameObject]
     fileprivate var otherArray: [GameObject]
     fileprivate let backgroundFile: String?
+
+    var score = 0 {
+        didSet {
+            scoreLabel?.text = "Score: \(score)"
+        }
+    }
+
+    var health = 100 {
+        didSet {
+            if health > 100 {
+                health = 100
+            }
+            healthLabel?.text = "HP: \(health)%"
+        }
+    }
 
     // This optional variable will help you to easily access the blade
     var blade: SwipeNode?
@@ -73,24 +86,13 @@ class Level: SKScene, SKPhysicsContactDelegate, BaseLevel {
     }
 
     public override func didMove(to view: SKView) {
-        addBackground()
+        addBackgroundAndWidgets()
         physicsWorld.gravity = CGVector.zero
         physicsWorld.contactDelegate = self
         for tooth in teethArray{
             addChild(tooth)
         }
         run(SKAction.run(runLevel))
-    }
-
-    func addBackground() {
-        if let bgFile = backgroundFile {
-            let background = SKSpriteNode(imageNamed: bgFile)
-            background.zPosition = 1
-            background.position = CGPoint(x: frame.size.width / 2, y: frame.size.height / 2)
-//            print("background, scene size is \(self.size.width) and \(self.size.height)")
-            background.size = size
-            addChild(background)
-        }
     }
 
     /* Sequences the events in the level */
@@ -119,6 +121,33 @@ class Level: SKScene, SKPhysicsContactDelegate, BaseLevel {
     public func didBegin(_ contact: SKPhysicsContact) {
 
     }
+
+    /* Sets the background of the level and initialises the health and score bars */
+    func addBackgroundAndWidgets() {
+        if let bgFile = backgroundFile {
+            let background = SKSpriteNode(imageNamed: bgFile)
+            background.zPosition = 1
+            background.position = CGPoint(x: frame.size.width / 2, y: frame.size.height / 2)
+            background.size = size
+            addChild(background)
+        }
+
+        scoreLabel = SKLabelNode(fontNamed: "Chalkduster")
+        scoreLabel!.text = "Score: 0"
+        scoreLabel!.zPosition = 2
+        scoreLabel!.fontSize = 25
+        scoreLabel!.position = CGPoint(x: size.width * 0.9, y: size.height * 0.9)
+        addChild(scoreLabel!)
+
+        healthLabel = SKLabelNode(fontNamed: "Chalkduster")
+        healthLabel!.text = "HP: 100%"
+        healthLabel!.fontSize = 25
+        healthLabel!.zPosition = 2
+        healthLabel!.position = CGPoint(x: size.width * 0.1, y: size.height * 0.9)
+        addChild(healthLabel!)
+
+    }
+
 
     /* ----------------------- BLADE RELATED METHODS ------------------------ */
 
