@@ -51,6 +51,8 @@ class GameConfiguration {
         return nil
     }
 
+    /* Shameful redundancy happening below */
+    /* TODO (2): Abstract these functions */
 
     func getTeethByLevel(id: Int) -> [GameObject] {
         var array: [GameObject] = []
@@ -59,4 +61,18 @@ class GameConfiguration {
         }
         return array
     }
+
+    func getObjectsByLevel(id: Int) -> [GameObject] {
+        var array: [GameObject] = []
+        for bacteria in parsed.levels[id - 1].bacteria {
+            print(bacteria)
+            array.append(GameObject(type: GameObjectType.Other, properties: bacteria))
+        }
+        for food in parsed.levels[id - 1].food {
+            print(food)
+            array.append(GameObject(type: GameObjectType.Other, properties: food))
+        }
+        return array
+    }
+
 }

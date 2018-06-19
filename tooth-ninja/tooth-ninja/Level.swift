@@ -17,8 +17,9 @@ private protocol BaseLevel {
     var backgroundFile: String? {get}
     var score: Int {get set}
     var health: Int {get set}
-    var teethArray: [GameObject] {get set}   // array of possible objects in a level
-    func runLevel(levelElements: [GameObject])
+    var teethArray: [GameObject] {get set}   // array of teeth in a level
+    var otherArray: [GameObject] {get set}   // array of possible objects in a level
+    func runLevel()
 }
 
 /* This extension provides functionality to make callbacks to the Controller */
@@ -45,7 +46,7 @@ class Level: SKScene, SKPhysicsContactDelegate, BaseLevel {
     fileprivate var score = 0
     fileprivate var health = 100
     fileprivate var teethArray: [GameObject]
-    fileprivate var otherObjectArray: [GameObject]
+    fileprivate var otherArray: [GameObject]
     fileprivate let backgroundFile: String?
 
     // This optional variable will help you to easily access the blade
@@ -55,11 +56,11 @@ class Level: SKScene, SKPhysicsContactDelegate, BaseLevel {
     // Set the initial value to 0
     var delta: CGPoint = .zero
 
-    init(size: CGSize, bgFile: String, teethArray: [GameObject], c: Controller) {
+    init(size: CGSize, bgFile: String, teethArray: [GameObject], otherArray: [GameObject], c: Controller) {
         self.teethArray = teethArray
         self.controller = c
         self.backgroundFile = bgFile
-        self.otherObjectArray = []
+        self.otherArray = otherArray
         super.init(size: size)
         // use the JSON thing to give the level the game elements
     }
@@ -67,7 +68,7 @@ class Level: SKScene, SKPhysicsContactDelegate, BaseLevel {
     required public init?(coder aDecoder: NSCoder) {
         teethArray = []
         backgroundFile = nil
-        otherObjectArray = []
+        otherArray = []
         super.init(coder: aDecoder)
     }
 
@@ -78,6 +79,7 @@ class Level: SKScene, SKPhysicsContactDelegate, BaseLevel {
         for tooth in teethArray{
             addChild(tooth)
         }
+        run(SKAction.run(runLevel))
     }
 
     func addBackground() {
@@ -92,8 +94,26 @@ class Level: SKScene, SKPhysicsContactDelegate, BaseLevel {
     }
 
     /* Sequences the events in the level */
-    func runLevel(levelElements: [GameObject]){
+    func runLevel(){
+        print("hello")
+        // Add the food to the scene
+        let object = otherArray[0]
+        addChild(object)
+        print("helloagain")
 
+        // Determine speed of the food
+        let actualDuration = random(min: CGFloat(2.0), max: CGFloat(4.0))
+
+        // Create the actions
+        let teeth = self["tooth"]
+        print("There are \(teeth.count) teeth")
+
+        let targetToothIndex = random(min: 0, max: CGFloat(teeth.count))
+        let targetTooth = teeth[Int(targetToothIndex)]
+
+        let actionMove = SKAction.move(to: targetTooth.position, duration: TimeInterval(actualDuration))
+
+        object.run(actionMove)
     }
 
     public func didBegin(_ contact: SKPhysicsContact) {
@@ -172,5 +192,4 @@ class Level: SKScene, SKPhysicsContactDelegate, BaseLevel {
         // You are telling the blade to only update his position when touchesMoved is called
         delta = .zero
     }
-
 }

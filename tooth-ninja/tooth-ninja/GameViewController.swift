@@ -30,11 +30,12 @@ class GameViewController: UIViewController, Controller {
             print(error)
         }
 
-
-
+        let teethArray = config!.getTeethByLevel(id: 1)
+        let objectArray = config!.getObjectsByLevel(id: 1)
+        print(objectArray[0])
         // Use the JSON file to open level 1
         currentLevel = Level(size: skView.bounds.size, bgFile: "background2.png",
-                teethArray: config!.getTeethByLevel(id: 1), c: self)
+                teethArray: teethArray, otherArray: objectArray, c: self)
 
         currentLevel?.scaleMode = SKSceneScaleMode.resizeFill
 
