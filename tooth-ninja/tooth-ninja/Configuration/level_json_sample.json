@@ -34,14 +34,7 @@
         "size_width": 50,
         "size_height": 50,
         "position_z": 2,
-        "image": "bacteria_blue.png"
-      },
-      {
-        "name": "good_bacteria_green",
-        "size_width": 50,
-        "size_height": 50,
-        "position_z": 2,
-        "image": "bacteria_blue.png"
+        "image": "bacteria_yellow.png"
       }
     ],
     "food": [{

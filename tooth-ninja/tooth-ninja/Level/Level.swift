@@ -19,7 +19,7 @@ private protocol BaseLevel {
     var health: Int {get set}
     var teethArray: [GameObject] {get set}   // array of teeth in a level
     var otherArray: [GameObject] {get set}   // array of possible objects in a level
-    func runLevel()
+    var levelExecution: LevelExecution? {get}
 }
 
 /* This extension provides functionality to make callbacks to the Controller */
@@ -46,6 +46,7 @@ class Level: SKScene, SKPhysicsContactDelegate, BaseLevel {
     fileprivate var teethArray: [GameObject]
     fileprivate var otherArray: [GameObject]
     fileprivate let backgroundFile: String?
+    fileprivate var levelExecution: LevelExecution?
 
     var score = 0 {
         didSet {
@@ -86,40 +87,21 @@ class Level: SKScene, SKPhysicsContactDelegate, BaseLevel {
     }
 
     public override func didMove(to view: SKView) {
+        levelExecution = LevelExecution(level: self, array: otherArray)
         addBackgroundAndWidgets()
         physicsWorld.gravity = CGVector.zero
         physicsWorld.contactDelegate = self
         for tooth in teethArray{
             addChild(tooth)
         }
-        run(SKAction.run(runLevel))
-    }
 
-    /* Sequences the events in the level */
-    func runLevel(){
-        print("hello")
-        // Add the food to the scene
-        let object = otherArray[0]
-        addChild(object)
-        print("helloagain")
+        run(SKAction.repeatForever(SKAction.sequence([
+            SKAction.run(levelExecution!.runLevel),SKAction.wait(forDuration: 2.0)])))
 
-        // Determine speed of the food
-        let actualDuration = random(min: CGFloat(2.0), max: CGFloat(4.0))
-
-        // Create the actions
-        let teeth = self["tooth"]
-        print("There are \(teeth.count) teeth")
-
-        let targetToothIndex = random(min: 0, max: CGFloat(teeth.count))
-        let targetTooth = teeth[Int(targetToothIndex)]
-
-        let actionMove = SKAction.move(to: targetTooth.position, duration: TimeInterval(actualDuration))
-
-        object.run(actionMove)
     }
 
     public func didBegin(_ contact: SKPhysicsContact) {
-
+        
     }
 
     /* Sets the background of the level and initialises the health and score bars */

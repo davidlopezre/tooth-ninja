@@ -25,11 +25,11 @@ struct PhysicsCategory {
  * Also assigns actions to game objects
  */
 class GameObject: SKSpriteNode {
-    let type: GameObjectType
+    let gameObjectType: GameObjectType
 
     /* Initialises the sprite with the properties specified in the dictionary */
     init (type: GameObjectType, properties p: GameConfigurationDecodable.LevelConfig.GameObjectConfig) {
-        self.type = type
+        self.gameObjectType = type
         let texture = SKTexture(imageNamed: p.image)
         super.init(texture: texture, color: UIColor.clear, size: CGSize(width: p.size_width, height: p.size_height))
         name = p.name
@@ -41,9 +41,14 @@ class GameObject: SKSpriteNode {
         setUpPhysics()
     }
 
+    init (type: GameObjectType, texture: SKTexture, size: CGSize) {
+        self.gameObjectType = type
+        super.init(texture: texture, color: UIColor.clear, size: size)
+    }
+
     // TODO (1): This should be done by name and not by type.
     func setUpPhysics(){
-        switch type{
+        switch gameObjectType {
             case .Tooth:
                 addRectPhysicsBody(
                     categoryBitMask: PhysicsCategory.Player,
@@ -83,7 +88,18 @@ class GameObject: SKSpriteNode {
     }
 
     required init?(coder aDecoder: NSCoder) {
-        self.type = GameObjectType.None
+        self.gameObjectType = GameObjectType.None
         super.init(coder: aDecoder)
+    }
+
+    /* Creates a new object with same details */
+    override func copy(with zone: NSZone?) -> Any {
+        let copy = GameObject(type: gameObjectType, texture: texture!, size: size)
+        copy.name = name
+        copy.position = position
+        copy.zPosition = zPosition
+        setUpPhysics()
+
+        return copy
     }
 }
