@@ -13,3 +13,8 @@ func random() -> CGFloat {
 func random(min: CGFloat, max: CGFloat) -> CGFloat {
     return random() * (max - min) + min
 }
+
+/* Used to get a random index from an array */
+func randomIndex(_ count: Int) -> Int {
+    return Int(arc4random_uniform(UInt32(count)))
+}

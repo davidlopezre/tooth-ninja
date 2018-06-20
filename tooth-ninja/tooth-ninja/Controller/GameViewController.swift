@@ -17,6 +17,7 @@ protocol Controller {
 class GameViewController: UIViewController, Controller {
     var currentLevel: Level? = nil
     var config: GameConfiguration?
+    var skView: SKView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,11 +62,17 @@ class GameViewController: UIViewController, Controller {
     func levelCompleted() {
         // check if there exists a higher level than currentLevel.id
         // change to next level or present winning screen
+        let reveal = SKTransition.flipHorizontal(withDuration: 0.5)
+        let gameOverScene = GameOverScene(size: skView!.bounds.size, won: false)
+        skView?.presentScene(gameOverScene, transition: reveal)
     }
 
     /* This method is called by the currentLevel when it is failed */
     func levelFailed() {
         // present losing screen
+        let reveal = SKTransition.flipHorizontal(withDuration: 0.5)
+        let gameOverScene = GameOverScene(size: skView!.bounds.size, won: false)
+        skView?.presentScene(gameOverScene, transition: reveal)
     }
     
 }

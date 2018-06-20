@@ -23,14 +23,14 @@
       }
     ],
     "bacteria": [{
-        "name": "bacteria_blue",
+        "name": "bacteria",
         "size_width": 50,
         "size_height": 50,
         "position_z": 2,
         "image": "bacteria_blue.png"
       },
       {
-        "name": "bad_bacteria_yellow",
+        "name": "sticky_bacteria",
         "size_width": 50,
         "size_height": 50,
         "position_z": 2,
@@ -38,7 +38,7 @@
       }
     ],
     "food": [{
-      "name": "chocolate",
+      "name": "bad_food",
       "size_width": 50,
       "size_height": 50,
       "position_z": 2,

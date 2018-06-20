@@ -96,9 +96,10 @@ class GameObject: SKSpriteNode {
     override func copy(with zone: NSZone?) -> Any {
         let copy = GameObject(type: gameObjectType, texture: texture!, size: size)
         copy.name = name
+        print("original object position is \(position)")
         copy.position = position
         copy.zPosition = zPosition
-        setUpPhysics()
+        copy.physicsBody = physicsBody?.copy() as? SKPhysicsBody
 
         return copy
     }

@@ -10,16 +10,20 @@ import Foundation
 import SpriteKit
 
 /* BaseLevel protocol includes the required fields and functions for a level */
-private protocol BaseLevel {
+protocol BaseLevel {
     var controller: Controller? {get}
     var scoreLabel: SKLabelNode? {get}
     var healthLabel: SKLabelNode? {get}
     var backgroundFile: String? {get}
-    var score: Int {get set}
-    var health: Int {get set}
     var teethArray: [GameObject] {get set}   // array of teeth in a level
     var otherArray: [GameObject] {get set}   // array of possible objects in a level
-    var levelExecution: LevelExecution? {get}
+    var levelExecution: LevelExecution! {get}
+    var levelPhysics: LevelPhysics! {get}
+}
+
+protocol LevelController {
+    var score: Int {get set}
+    var health: Int {get set}
 }
 
 /* This extension provides functionality to make callbacks to the Controller */
@@ -38,15 +42,16 @@ extension BaseLevel {
 /* Level class is in charge of initialising, running the level and notifying the
  * controller of level completion or failure.
  */
-class Level: SKScene, SKPhysicsContactDelegate, BaseLevel {
+class Level: SKScene, SKPhysicsContactDelegate, BaseLevel, LevelController {
 
-    fileprivate var controller: Controller?
-    fileprivate var scoreLabel: SKLabelNode?
-    fileprivate var healthLabel: SKLabelNode?
-    fileprivate var teethArray: [GameObject]
-    fileprivate var otherArray: [GameObject]
-    fileprivate let backgroundFile: String?
-    fileprivate var levelExecution: LevelExecution?
+    var controller: Controller?
+    var scoreLabel: SKLabelNode?
+    var healthLabel: SKLabelNode?
+    var teethArray: [GameObject]
+    var otherArray: [GameObject]
+    let backgroundFile: String?
+    var levelExecution: LevelExecution!
+    var levelPhysics: LevelPhysics!
 
     var score = 0 {
         didSet {
@@ -88,6 +93,7 @@ class Level: SKScene, SKPhysicsContactDelegate, BaseLevel {
 
     public override func didMove(to view: SKView) {
         levelExecution = LevelExecution(level: self, array: otherArray)
+        levelPhysics = LevelPhysics(level: self)
         addBackgroundAndWidgets()
         physicsWorld.gravity = CGVector.zero
         physicsWorld.contactDelegate = self
@@ -95,13 +101,11 @@ class Level: SKScene, SKPhysicsContactDelegate, BaseLevel {
             addChild(tooth)
         }
 
-        run(SKAction.repeatForever(SKAction.sequence([
-            SKAction.run(levelExecution!.runLevel),SKAction.wait(forDuration: 2.0)])))
-
+        levelExecution.runLevel()
     }
 
     public func didBegin(_ contact: SKPhysicsContact) {
-        
+        levelPhysics.didBegin(contact)
     }
 
     /* Sets the background of the level and initialises the health and score bars */
