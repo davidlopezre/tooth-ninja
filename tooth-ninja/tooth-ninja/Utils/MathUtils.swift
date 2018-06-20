@@ -6,6 +6,8 @@
 import Foundation
 import SpriteKit
 
+/* This file contains some random utility functions */
+
 func random() -> CGFloat {
     return CGFloat(Float(arc4random()) / 0xFFFFFFFF)
 }

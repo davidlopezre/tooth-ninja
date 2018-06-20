@@ -6,6 +6,9 @@
 import Foundation
 import SpriteKit
 
+/* This class is in charge of managing game object physics. For example,
+ * what happens if bacteria touches tooth.
+ */
 class LevelPhysics {
     var level: Level
 
@@ -120,6 +123,10 @@ class LevelPhysics {
 
 }
 
+/* This class is in charge of executing actions that will be a result of game
+ * object interaction. For example, creating a shield when good bacteria touches
+ * tooth.
+ */
 class LevelExecution {
     let objectArray: [GameObject]
     var level: Level

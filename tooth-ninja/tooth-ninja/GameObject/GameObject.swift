@@ -27,7 +27,7 @@ struct PhysicsCategory {
 class GameObject: SKSpriteNode {
     let gameObjectType: GameObjectType
 
-    /* Initialises the sprite with the properties specified in the dictionary */
+    /* Initialises the sprite with the properties specified in the properties */
     init (type: GameObjectType, properties p: GameConfigurationDecodable.LevelConfig.GameObjectConfig) {
         self.gameObjectType = type
         let texture = SKTexture(imageNamed: p.image)

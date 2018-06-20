@@ -14,6 +14,9 @@ protocol Controller {
     func levelFailed()
 }
 
+/* GameViewController is in charge of managing the game. This includes creating and
+ * changing levels, access to main menu, etc.
+ */
 class GameViewController: UIViewController, Controller {
     var currentLevel: Level? = nil
     var config: GameConfiguration?
