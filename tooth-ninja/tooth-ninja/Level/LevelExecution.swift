@@ -60,7 +60,7 @@ class LevelPhysics {
         bacteria.removeFromParent()
         level.health -= 10
         if (level.health <= 0) {
-            level.levelFailed()
+            level.levelEnd(won: false)
         }
     }
 
@@ -69,7 +69,7 @@ class LevelPhysics {
         bacteria.removeFromParent()
         level.score += 5
         if (level.score >= 25) {
-            level.levelCompleted()
+            level.levelEnd(won: true)
         }
     }
 //

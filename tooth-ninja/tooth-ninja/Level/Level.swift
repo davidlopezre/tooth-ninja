@@ -29,14 +29,9 @@ protocol LevelController {
 /* This extension provides functionality to make callbacks to the Controller */
 extension BaseLevel {
 
-    func levelCompleted() {
-        controller?.levelCompleted()
+    func levelEnd(won: Bool) {
+        controller?.levelEnd(won: won)
     }
-    
-    func levelFailed() {
-        controller?.levelFailed()
-    }
-    
 }
 
 /* Level class is in charge of initialising, running the level and notifying the
