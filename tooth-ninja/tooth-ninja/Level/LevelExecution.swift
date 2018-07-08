@@ -102,13 +102,15 @@ class LevelExecution {
      */
     func spawnObjects () {
         let index = randomIndex(objectArray.count)
+        print("SIZE OF LEVEL IS \(level.size)")
         let objectToAdd = objectArray[index].copy() as! GameObject
+        objectToAdd.position = generateRandomPosition(width: level.size.width, height: level.size.height)
         level.addChild(objectToAdd)
 
         // TODO (3) Fix that every object's initial position is (0,0)
         print("initial position of \(objectToAdd.name ?? "no name") is \(objectToAdd.position)")
         // Determine speed of the object
-        let actualDuration = random(min: CGFloat(2.0), max: CGFloat(4.0))
+        let actualDuration = 4.0 //random(min: CGFloat(2.0), max: CGFloat(4.0))
 
         // Create the actions
         let teeth = level["tooth"]
