@@ -20,8 +20,8 @@ class LevelPhysics {
         var playerBody: SKPhysicsBody
         var externalBody: SKPhysicsBody
 
-        print("body a bitmask: \(contact.bodyA.categoryBitMask)")
-        print("body b bitmask: \(contact.bodyB.categoryBitMask)")
+//        print("body a bitmask: \(contact.bodyA.categoryBitMask)")
+//        print("body b bitmask: \(contact.bodyB.categoryBitMask)")
         if contact.bodyA.categoryBitMask > contact.bodyB.categoryBitMask {
             playerBody = contact.bodyA
             externalBody = contact.bodyB
@@ -29,8 +29,8 @@ class LevelPhysics {
             playerBody = contact.bodyB
             externalBody = contact.bodyA
         }
-        print("player body is set to: \(playerBody.categoryBitMask)")
-        print("external body is set to: \(externalBody.categoryBitMask)")
+//        print("player body is set to: \(playerBody.categoryBitMask)")
+//        print("external body is set to: \(externalBody.categoryBitMask)")
 
         if playerBody.node?.name == "swipe" {
             if externalBody.node?.name == "bacteria" {
@@ -58,23 +58,19 @@ class LevelPhysics {
     func bacteriaCollidesWithTooth(bacteria: SKSpriteNode) {
         print("Collision: Bacteria-Tooth")
         bacteria.removeFromParent()
-        level.health -= 90
+        level.health -= 10
         if (level.health <= 0) {
-            level.levelCompleted()
+            level.levelFailed()
         }
     }
 
-//    func goodBacteriaCollidesWithTooth(bacteria: SKSpriteNode) {
-//        print("Collision: GoodBacteria-Tooth")
-//        bacteria.removeFromParent()
-//        shield = 10
-//    }
-//
-//
     func swipeCollidesWithBacteria(bacteria: SKSpriteNode) {
         print("Collision: Swipe-Bacteria")
         bacteria.removeFromParent()
-        level.score += 1
+        level.score += 5
+        if (level.score >= 25) {
+            level.levelCompleted()
+        }
     }
 //
     func foodCollidesWithTooth(food: SKSpriteNode) {
@@ -82,44 +78,10 @@ class LevelPhysics {
         food.removeFromParent()
 //        health += 10
     }
-//
-//    func badFoodCollidesWithTooth(badFood: SKSpriteNode) {
-//        print("Collision: BadFood-Tooth")
-//        badFood.removeFromParent()
-//        let s1 = SKAction.run {
-//            addBacteria(scene: self, completion: {
-//                print("add bacteria")
-//            })
-//        }
-//        let influx = SKAction.repeat(s1, count: 5)
-//        let action = SKAction.sequence([
-//            influx,
-//            SKAction.wait(forDuration: 1),
-//            influx,
-//            SKAction.wait(forDuration: 1),
-//            influx,
-//            SKAction.wait(forDuration: 1)
-//            ])
-//        run(action)
-//    }
-//
     func swipeCollidesWithFood(food: SKSpriteNode) {
         print("Collision: Swipe-GoodFood")
         food.removeFromParent()
     }
-//
-//    func swipeCollidesWithBadFood(badFood: SKSpriteNode) {
-//        print("Collision: Swipe-BadFood")
-//        badFood.removeFromParent()
-//    }
-//
-//    func swipeCollidesWithGoodBacteria(bacteria: SKSpriteNode) {
-//        print("Collision: Swipe-GoodBacteria")
-//        bacteria.removeFromParent()
-//    }
-//
-
-
 }
 
 /* This class is in charge of executing actions that will be a result of game

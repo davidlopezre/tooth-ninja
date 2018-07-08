@@ -64,9 +64,19 @@ class GameViewController: UIViewController, Controller {
 
     /* This method is called by the currentLevel when it is completed */
     func levelCompleted() {
-        // check if there exists a higher level than currentLevel.id
-        // change to next level or present winning screen
-        print(skView == nil)
+        currentLevel!.removeAllChildren()
+        let newTeethArray = copyArray(array: currentLevel!.teethArray) as! [GameObject]
+        let newOtherArray = copyArray(array: currentLevel!.otherArray) as! [GameObject]
+        let nextLevel = Level(size: currentLevel!.size, bgFile: currentLevel!.backgroundFile!, teethArray: newTeethArray,
+                otherArray: newOtherArray, c: self)
+        let reveal = SKTransition.flipHorizontal(withDuration: 0.5)
+        let gameOverScene = GameOverScene(size: currentLevel!.size, won: true, nextScene: nextLevel)
+        skView?.presentScene(gameOverScene, transition: reveal)
+
+    }
+
+    /* This method is called by the currentLevel when it is failed */
+    func levelFailed() {
         currentLevel!.removeAllChildren()
         let newTeethArray = copyArray(array: currentLevel!.teethArray) as! [GameObject]
         let newOtherArray = copyArray(array: currentLevel!.otherArray) as! [GameObject]
@@ -75,15 +85,6 @@ class GameViewController: UIViewController, Controller {
         let reveal = SKTransition.flipHorizontal(withDuration: 0.5)
         let gameOverScene = GameOverScene(size: currentLevel!.size, won: false, nextScene: nextLevel)
         skView?.presentScene(gameOverScene, transition: reveal)
-
-    }
-
-    /* This method is called by the currentLevel when it is failed */
-    func levelFailed() {
-        // present losing screen
-//        let reveal = SKTransition.flipHorizontal(withDuration: 0.5)
-//        let gameOverScene = GameOverScene(size: skView!.bounds.size, won: false, scene: (currentLevel! as SKScene))
-//        skView?.presentScene(gameOverScene, transition: reveal)
     }
     
 }

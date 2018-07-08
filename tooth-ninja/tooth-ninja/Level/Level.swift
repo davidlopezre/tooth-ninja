@@ -33,7 +33,7 @@ extension BaseLevel {
         controller?.levelCompleted()
     }
     
-    func LevelFailed() {
+    func levelFailed() {
         controller?.levelFailed()
     }
     
