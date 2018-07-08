@@ -11,7 +11,7 @@ import SpriteKit
 
 class GameOverScene: SKScene {
 
-    init(size: CGSize, won:Bool) {
+    init(size: CGSize, won:Bool, nextScene: SKScene) {
 
         super.init(size: size)
 
@@ -35,8 +35,7 @@ class GameOverScene: SKScene {
             SKAction.run() {
                 // 5
                 let reveal = SKTransition.flipHorizontal(withDuration: 0.5)
-//                let scene = GameScene(size: size)
-//                self.view?.presentScene(scene, transition:reveal)
+                self.view?.presentScene(nextScene, transition:reveal)
             }
             ]))
 

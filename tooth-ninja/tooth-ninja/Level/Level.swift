@@ -63,6 +63,8 @@ class Level: SKScene, SKPhysicsContactDelegate, BaseLevel, LevelController {
         didSet {
             if health > 100 {
                 health = 100
+            }else if (health < 0) {
+                health = 0
             }
             healthLabel?.text = "HP: \(health)%"
         }
@@ -90,6 +92,8 @@ class Level: SKScene, SKPhysicsContactDelegate, BaseLevel, LevelController {
         otherArray = []
         super.init(coder: aDecoder)
     }
+
+    deinit{print("GameScene deinited")}
 
     public override func didMove(to view: SKView) {
         levelExecution = LevelExecution(level: self, array: otherArray)

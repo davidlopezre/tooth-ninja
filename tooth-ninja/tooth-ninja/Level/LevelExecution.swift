@@ -61,7 +61,13 @@ class LevelPhysics {
         bacteria.removeFromParent()
         level.health -= 90
         if (level.health <= 0) {
-//          level.levelCompleted()
+            level.levelCompleted()
+//            level.removeAllChildren()
+//            let nextLevel = Level(size: level.size, bgFile: level.backgroundFile!, teethArray: level.teethArray,
+//                    otherArray: level.otherArray, c: level.controller!)
+//            let reveal = SKTransition.flipHorizontal(withDuration: 0.5)
+//            let gameOverScene = GameOverScene(size: level.size, won: false, nextScene: nextLevel)
+//            level.view?.presentScene(gameOverScene, transition: reveal)
         }
     }
 
