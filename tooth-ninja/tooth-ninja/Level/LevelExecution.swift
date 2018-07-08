@@ -33,24 +33,23 @@ class LevelPhysics {
         print("external body is set to: \(externalBody.categoryBitMask)")
 
         if playerBody.node?.name == "swipe" {
-            if externalBody.node?.name == "bacteria" || externalBody.node?.name == "sticky_bacteria" || externalBody.node?.name == "good_bacteria" {
+            if externalBody.node?.name == "bacteria" {
                 if let bacteria = externalBody.node as? SKSpriteNode {
                     swipeCollidesWithBacteria(bacteria: bacteria)
                 }
+            }else if externalBody.node?.name == "food" {
+                if let food = externalBody.node as? SKSpriteNode {
+                    swipeCollidesWithFood(food: food)
+                }
             }
-//            }else if externalBody.node?.name == "goodfood" {
-//                if let goodFood = externalBody.node as? SKSpriteNode {
-//                    swipeCollidesWithGoodFood(goodFood: goodFood)
-//                }
-//            }else if externalBody.node?.name == "badfood" {
-//                if let badFood = externalBody.node as? SKSpriteNode {
-//                    swipeCollidesWithBadFood(badFood: badFood)
-//                }
-//            }
         }else {
-            if externalBody.node?.name == "bacteria" || externalBody.node?.name == "bacteria2" {
+            if externalBody.node?.name == "bacteria" {
                 if let bacteria = externalBody.node as? SKSpriteNode {
                     bacteriaCollidesWithTooth(bacteria: bacteria)
+                }
+            } else if externalBody.node?.name == "food" {
+                if let food = externalBody.node as? SKSpriteNode {
+                    foodCollidesWithTooth(food: food)
                 }
             }
         }
@@ -62,12 +61,6 @@ class LevelPhysics {
         level.health -= 90
         if (level.health <= 0) {
             level.levelCompleted()
-//            level.removeAllChildren()
-//            let nextLevel = Level(size: level.size, bgFile: level.backgroundFile!, teethArray: level.teethArray,
-//                    otherArray: level.otherArray, c: level.controller!)
-//            let reveal = SKTransition.flipHorizontal(withDuration: 0.5)
-//            let gameOverScene = GameOverScene(size: level.size, won: false, nextScene: nextLevel)
-//            level.view?.presentScene(gameOverScene, transition: reveal)
         }
     }
 
@@ -84,11 +77,11 @@ class LevelPhysics {
         level.score += 1
     }
 //
-//    func goodFoodCollidesWithTooth(goodFood: SKSpriteNode) {
-//        print("Collision: GoodFood-Tooth")
-//        goodFood.removeFromParent()
+    func foodCollidesWithTooth(food: SKSpriteNode) {
+        print("Collision: GoodFood-Tooth")
+        food.removeFromParent()
 //        health += 10
-//    }
+    }
 //
 //    func badFoodCollidesWithTooth(badFood: SKSpriteNode) {
 //        print("Collision: BadFood-Tooth")
@@ -110,10 +103,10 @@ class LevelPhysics {
 //        run(action)
 //    }
 //
-//    func swipeCollidesWithGoodFood(goodFood: SKSpriteNode) {
-//        print("Collision: Swipe-GoodFood")
-//        goodFood.removeFromParent()
-//    }
+    func swipeCollidesWithFood(food: SKSpriteNode) {
+        print("Collision: Swipe-GoodFood")
+        food.removeFromParent()
+    }
 //
 //    func swipeCollidesWithBadFood(badFood: SKSpriteNode) {
 //        print("Collision: Swipe-BadFood")
