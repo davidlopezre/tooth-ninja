@@ -10,8 +10,7 @@ import UIKit
 import SpriteKit
 
 protocol Controller {
-    func levelCompleted()
-    func levelFailed()
+    func levelEnd(won: Bool)
 }
 
 /* GameViewController is in charge of managing the game. This includes creating and
@@ -25,9 +24,10 @@ class GameViewController: UIViewController, Controller {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let skView = initialiseSKView()
+        skView = initialiseSKView()
+        
         do {
-            config = try GameConfiguration(file: "level_json_sample", size: skView.bounds.size)
+            config = try GameConfiguration(file: "level_json_sample", size: skView!.bounds.size)
 
         }catch let error{
             print("Level cannot be loaded!")
@@ -38,12 +38,12 @@ class GameViewController: UIViewController, Controller {
         let objectArray = config!.getObjectsByLevel(id: 1)
         print(objectArray[0])
         // Use the JSON file to open level 1
-        currentLevel = Level(size: skView.bounds.size, bgFile: "background2.png",
+        currentLevel = Level(size: skView!.bounds.size, bgFile: "background2.png",
                 teethArray: teethArray, otherArray: objectArray, c: self)
 
         currentLevel?.scaleMode = SKSceneScaleMode.resizeFill
 
-        skView.presentScene(currentLevel)
+        skView!.presentScene(currentLevel)
     }
     
     override var prefersStatusBarHidden: Bool {
@@ -62,20 +62,16 @@ class GameViewController: UIViewController, Controller {
     }
 
     /* This method is called by the currentLevel when it is completed */
-    func levelCompleted() {
-        // check if there exists a higher level than currentLevel.id
-        // change to next level or present winning screen
+    func levelEnd(won: Bool) {
+        currentLevel!.removeAllChildren()
+        let newTeethArray = copyArray(array: currentLevel!.teethArray) as! [GameObject]
+        let newOtherArray = copyArray(array: currentLevel!.otherArray) as! [GameObject]
+        let nextLevel = Level(size: currentLevel!.size, bgFile: currentLevel!.backgroundFile!, teethArray: newTeethArray,
+                otherArray: newOtherArray, c: self)
         let reveal = SKTransition.flipHorizontal(withDuration: 0.5)
-        let gameOverScene = GameOverScene(size: skView!.bounds.size, won: false)
+        let gameOverScene = GameOverScene(size: currentLevel!.size, won: won, nextScene: nextLevel)
         skView?.presentScene(gameOverScene, transition: reveal)
-    }
 
-    /* This method is called by the currentLevel when it is failed */
-    func levelFailed() {
-        // present losing screen
-        let reveal = SKTransition.flipHorizontal(withDuration: 0.5)
-        let gameOverScene = GameOverScene(size: skView!.bounds.size, won: false)
-        skView?.presentScene(gameOverScene, transition: reveal)
     }
     
 }

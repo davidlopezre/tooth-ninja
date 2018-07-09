@@ -20,6 +20,7 @@ struct GameConfigurationDecodable: Decodable {
 
        struct GameObjectConfig: Decodable {
            var name: String
+           var kind: String?
            var position_x: Double?
            var position_y: Double?
            var position_z: Int

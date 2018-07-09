@@ -26,10 +26,12 @@ struct PhysicsCategory {
  */
 class GameObject: SKSpriteNode {
     let gameObjectType: GameObjectType
+    let kind: String?
 
     /* Initialises the sprite with the properties specified in the properties */
     init (type: GameObjectType, properties p: GameConfigurationDecodable.LevelConfig.GameObjectConfig) {
         self.gameObjectType = type
+        self.kind = p.kind
         let texture = SKTexture(imageNamed: p.image)
         super.init(texture: texture, color: UIColor.clear, size: CGSize(width: p.size_width, height: p.size_height))
         name = p.name
@@ -41,8 +43,9 @@ class GameObject: SKSpriteNode {
         setUpPhysics()
     }
 
-    init (type: GameObjectType, texture: SKTexture, size: CGSize) {
+    init (type: GameObjectType, kind: String?, texture: SKTexture, size: CGSize) {
         self.gameObjectType = type
+        self.kind = kind
         super.init(texture: texture, color: UIColor.clear, size: size)
     }
 
@@ -89,12 +92,13 @@ class GameObject: SKSpriteNode {
 
     required init?(coder aDecoder: NSCoder) {
         self.gameObjectType = GameObjectType.None
+        self.kind = nil
         super.init(coder: aDecoder)
     }
 
     /* Creates a new object with same details */
     override func copy(with zone: NSZone?) -> Any {
-        let copy = GameObject(type: gameObjectType, texture: texture!, size: size)
+        let copy = GameObject(type: gameObjectType, kind: self.kind, texture: texture!, size: size)
         copy.name = name
         print("original object position is \(position)")
         copy.position = position

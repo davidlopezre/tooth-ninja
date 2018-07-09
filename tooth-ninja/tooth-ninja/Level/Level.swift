@@ -29,14 +29,9 @@ protocol LevelController {
 /* This extension provides functionality to make callbacks to the Controller */
 extension BaseLevel {
 
-    func levelCompleted() {
-        controller?.levelCompleted()
+    func levelEnd(won: Bool) {
+        controller?.levelEnd(won: won)
     }
-    
-    func LevelFailed() {
-        controller?.levelFailed()
-    }
-    
 }
 
 /* Level class is in charge of initialising, running the level and notifying the
@@ -63,6 +58,8 @@ class Level: SKScene, SKPhysicsContactDelegate, BaseLevel, LevelController {
         didSet {
             if health > 100 {
                 health = 100
+            }else if (health < 0) {
+                health = 0
             }
             healthLabel?.text = "HP: \(health)%"
         }
@@ -90,6 +87,8 @@ class Level: SKScene, SKPhysicsContactDelegate, BaseLevel, LevelController {
         otherArray = []
         super.init(coder: aDecoder)
     }
+
+    deinit{print("GameScene deinited")}
 
     public override func didMove(to view: SKView) {
         levelExecution = LevelExecution(level: self, array: otherArray)
