@@ -13,8 +13,6 @@ import SpriteKit
 class LevelExecution
 {
     
-    @IBOutlet var healthBarFinal: UIView!
-    
     let objectArray: [GameObject]
     var level: Level
     
@@ -48,7 +46,6 @@ class LevelExecution
         let actionMove = SKAction.move(to: targetTooth.position, duration: TimeInterval(actualDuration))
         
         objectToAdd.run(actionMove)
-        
     }
     
     func runLevel() {
@@ -64,6 +61,11 @@ class LevelExecution
 
 
 class LevelPhysics {
+    struct GlobalVariable
+    {
+        static var viewController: GameViewController!
+    }
+    var controller = GlobalVariable.viewController
     var level: Level
     
     init(level: Level) {
@@ -109,11 +111,14 @@ class LevelPhysics {
         }
     }
 
-    func bacteriaCollidesWithTooth(bacteria: SKSpriteNode) {
+    func bacteriaCollidesWithTooth(bacteria: SKSpriteNode)
+    {
         print("Collision: Bacteria-Tooth")
         bacteria.removeFromParent()
         level.health -= 10
+        //GameViewController().healthBarAccess.healthBar.frame.origin.x-=10
         //GameViewController().healthBar.frame.origin.x -= 10
+        self.controller?.healthBar.frame.origin.x-=10
         //healthBar.frame.origin.x -= 10
         if (level.health <= 0) {
             level.levelEnd(won: false)
@@ -138,6 +143,7 @@ class LevelPhysics {
         print("Collision: Swipe-GoodFood")
         food.removeFromParent()
     }
+    
 }
 
 

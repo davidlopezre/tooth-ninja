@@ -14,11 +14,13 @@ protocol Controller {
 /* GameViewController is in charge of managing the game. This includes creating and
  * changing levels, access to main menu, etc.
  */
-class GameViewController: UIViewController, Controller {
+class GameViewController: UIViewController, Controller
+{
     
     
     @IBOutlet var healthBar: UIView!
     //health bar for the game
+    
     
     var currentLevel: Level? = nil
     var config: GameConfiguration?
@@ -27,8 +29,8 @@ class GameViewController: UIViewController, Controller {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        skView = initialiseSKView()
         
+        skView = initialiseSKView()
         do {
             config = try GameConfiguration(file: "level_json_sample", size: skView!.bounds.size)
 
@@ -36,6 +38,7 @@ class GameViewController: UIViewController, Controller {
             print("Level cannot be loaded!")
             print(error)
         }
+        LevelPhysics.GlobalVariable.viewController = self
 
         let teethArray = config!.getTeethByLevel(id: 1)
         let objectArray = config!.getObjectsByLevel(id: 1)

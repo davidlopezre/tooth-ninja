@@ -28,7 +28,7 @@
                         <viewLayoutGuide key="safeArea" id="4qk-I5-YsI"/>
                     </view>
                     <connections>
-                        <outlet property="healthBar" destination="vRs-B9-XOR" id="nGP-kb-mvK"/>
+                        <outlet property="healthBar" destination="vRs-B9-XOR" id="tfX-LD-Pt9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
