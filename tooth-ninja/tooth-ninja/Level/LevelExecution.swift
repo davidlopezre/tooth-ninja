@@ -6,12 +6,66 @@
 import Foundation
 import SpriteKit
 
+/* This class is in charge of executing actions that will be a result of game
+ * object interaction. For example, creating a shield when good bacteria touches
+ * tooth.
+ */
+class LevelExecution
+{
+    
+    @IBOutlet var healthBarFinal: UIView!
+    
+    let objectArray: [GameObject]
+    var level: Level
+    
+    init(level: Level, array: [GameObject]) {
+        self.level = level
+        objectArray = array
+    }
+    
+    /* This function is in charge of spawning food and bacteria and giving them the action to
+     * approach the teeth in the level.
+     */
+    func spawnObjects () {
+        let index = randomIndex(objectArray.count)
+        print("SIZE OF LEVEL IS \(level.size)")
+        let objectToAdd = objectArray[index].copy() as! GameObject
+        objectToAdd.position = generateRandomPosition(width: level.size.width, height: level.size.height)
+        level.addChild(objectToAdd)
+        
+        // TODO (3) Fix that every object's initial position is (0,0)
+        print("initial position of \(objectToAdd.name ?? "no name") is \(objectToAdd.position)")
+        // Determine speed of the object
+        let actualDuration = 4.0 //random(min: CGFloat(2.0), max: CGFloat(4.0))
+        
+        // Create the actions
+        let teeth = level["tooth"]
+        //        print("There are \(teeth.count) teeth")
+        
+        let targetToothIndex = random(min: 0, max: CGFloat(teeth.count))
+        let targetTooth = teeth[Int(targetToothIndex)]
+        
+        let actionMove = SKAction.move(to: targetTooth.position, duration: TimeInterval(actualDuration))
+        
+        objectToAdd.run(actionMove)
+        
+    }
+    
+    func runLevel() {
+        level.run(SKAction.repeatForever(SKAction.sequence([
+            SKAction.run(spawnObjects),SKAction.wait(forDuration: 2.0)])))
+    }
+    
+}
+
 /* This class is in charge of managing game object physics. For example,
  * what happens if bacteria touches tooth.
  */
+
+
 class LevelPhysics {
     var level: Level
-
+    
     init(level: Level) {
         self.level = level
     }
@@ -59,6 +113,7 @@ class LevelPhysics {
         print("Collision: Bacteria-Tooth")
         bacteria.removeFromParent()
         level.health -= 10
+        //healthBar.frame.origin.x -= 10
         if (level.health <= 0) {
             level.levelEnd(won: false)
         }
@@ -84,50 +139,4 @@ class LevelPhysics {
     }
 }
 
-/* This class is in charge of executing actions that will be a result of game
- * object interaction. For example, creating a shield when good bacteria touches
- * tooth.
- */
-class LevelExecution {
-    let objectArray: [GameObject]
-    var level: Level
 
-    init(level: Level, array: [GameObject]) {
-        self.level = level
-        objectArray = array
-    }
-
-    /* This function is in charge of spawning food and bacteria and giving them the action to
-     * approach the teeth in the level.
-     */
-    func spawnObjects () {
-        let index = randomIndex(objectArray.count)
-        print("SIZE OF LEVEL IS \(level.size)")
-        let objectToAdd = objectArray[index].copy() as! GameObject
-        objectToAdd.position = generateRandomPosition(width: level.size.width, height: level.size.height)
-        level.addChild(objectToAdd)
-
-        // TODO (3) Fix that every object's initial position is (0,0)
-        print("initial position of \(objectToAdd.name ?? "no name") is \(objectToAdd.position)")
-        // Determine speed of the object
-        let actualDuration = 4.0 //random(min: CGFloat(2.0), max: CGFloat(4.0))
-
-        // Create the actions
-        let teeth = level["tooth"]
-//        print("There are \(teeth.count) teeth")
-
-        let targetToothIndex = random(min: 0, max: CGFloat(teeth.count))
-        let targetTooth = teeth[Int(targetToothIndex)]
-
-        let actionMove = SKAction.move(to: targetTooth.position, duration: TimeInterval(actualDuration))
-
-        objectToAdd.run(actionMove)
-
-    }
-
-    func runLevel() {
-        level.run(SKAction.repeatForever(SKAction.sequence([
-            SKAction.run(spawnObjects),SKAction.wait(forDuration: 2.0)])))
-    }
-
-}
