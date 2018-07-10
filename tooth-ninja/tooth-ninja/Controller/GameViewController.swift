@@ -16,6 +16,8 @@ protocol Controller {
  */
 class GameViewController: UIViewController, Controller {
     
+    
+    @IBOutlet var healthBar: UIView!
     //health bar for the game
     
     var currentLevel: Level? = nil

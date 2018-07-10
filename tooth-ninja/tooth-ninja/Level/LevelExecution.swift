@@ -113,6 +113,7 @@ class LevelPhysics {
         print("Collision: Bacteria-Tooth")
         bacteria.removeFromParent()
         level.health -= 10
+        //GameViewController().healthBar.frame.origin.x -= 10
         //healthBar.frame.origin.x -= 10
         if (level.health <= 0) {
             level.levelEnd(won: false)
