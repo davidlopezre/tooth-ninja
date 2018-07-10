@@ -138,6 +138,7 @@ class LevelPhysics {
         print("Collision: GoodFood-Tooth")
         food.removeFromParent()
 //        health += 10
+        self.controller?.happinessBar.frame.origin.x+=10
     }
     func swipeCollidesWithFood(food: SKSpriteNode) {
         print("Collision: Swipe-GoodFood")

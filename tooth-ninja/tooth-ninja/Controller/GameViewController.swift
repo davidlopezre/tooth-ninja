@@ -19,6 +19,8 @@ class GameViewController: UIViewController, Controller
     
     
     @IBOutlet var healthBar: UIView!
+    @IBOutlet var happinessBar: UIView!
+    
     //health bar for the game
     
     
