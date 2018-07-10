@@ -2,9 +2,7 @@
 //  GameViewController.swift
 //  tooth-ninja
 //
-//  Created by David Lopez on 7/4/18.
-//  Copyright © 2018 David Lopez. All rights reserved.
-//
+//  Created by David Lopez and Kushagra Vashisht on 7/10/18.
 
 import UIKit
 import SpriteKit
