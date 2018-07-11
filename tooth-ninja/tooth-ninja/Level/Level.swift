@@ -11,6 +11,7 @@ import SpriteKit
 
 /* BaseLevel protocol includes the required fields and functions for a level */
 protocol BaseLevel {
+    var number: Int {get}
     var controller: Controller? {get}
     var scoreLabel: SKLabelNode? {get}
     var healthLabel: SKLabelNode? {get}
@@ -39,6 +40,7 @@ extension BaseLevel {
  */
 class Level: SKScene, SKPhysicsContactDelegate, BaseLevel, LevelController {
 
+    let number: Int
     var controller: Controller?
     var scoreLabel: SKLabelNode?
     var healthLabel: SKLabelNode?
@@ -72,7 +74,8 @@ class Level: SKScene, SKPhysicsContactDelegate, BaseLevel, LevelController {
     // Set the initial value to 0
     var delta: CGPoint = .zero
 
-    init(size: CGSize, bgFile: String, teethArray: [GameObject], otherArray: [GameObject], c: Controller) {
+    init(number: Int, size: CGSize, bgFile: String, teethArray: [GameObject], otherArray: [GameObject], c: Controller) {
+        self.number = number
         self.teethArray = teethArray
         self.controller = c
         self.backgroundFile = bgFile
@@ -82,6 +85,7 @@ class Level: SKScene, SKPhysicsContactDelegate, BaseLevel, LevelController {
     }
 
     required public init?(coder aDecoder: NSCoder) {
+        number = 1
         teethArray = []
         backgroundFile = nil
         otherArray = []

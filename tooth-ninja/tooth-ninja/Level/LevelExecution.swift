@@ -12,6 +12,16 @@ import SpriteKit
 class LevelPhysics {
     var level: Level
 
+    /* Constants */
+
+    let BACTERIA = "bacteria"
+    let FOOD     = "food"
+    let SWIPE    = "swipe"
+    let GOOD     = "good"
+    let BAD      = "bad"
+    let STICKY   = "sticky"
+    let NORMAL   = "normal"
+
     init(level: Level) {
         self.level = level
     }
@@ -32,30 +42,30 @@ class LevelPhysics {
 //        print("player body is set to: \(playerBody.categoryBitMask)")
 //        print("external body is set to: \(externalBody.categoryBitMask)")
 
-        if playerBody.node?.name == "swipe" {
-            if externalBody.node?.name == "bacteria" {
-                if let bacteria = externalBody.node as? SKSpriteNode {
+        if playerBody.node?.name == SWIPE {
+            if externalBody.node?.name == BACTERIA {
+                if let bacteria = externalBody.node as? GameObject {
                     swipeCollidesWithBacteria(bacteria: bacteria)
                 }
-            }else if externalBody.node?.name == "food" {
-                if let food = externalBody.node as? SKSpriteNode {
+            }else if externalBody.node?.name == FOOD {
+                if let food = externalBody.node as? GameObject {
                     swipeCollidesWithFood(food: food)
                 }
             }
         }else {
-            if externalBody.node?.name == "bacteria" {
-                if let bacteria = externalBody.node as? SKSpriteNode {
+            if externalBody.node?.name == BACTERIA {
+                if let bacteria = externalBody.node as? GameObject {
                     bacteriaCollidesWithTooth(bacteria: bacteria)
                 }
-            } else if externalBody.node?.name == "food" {
-                if let food = externalBody.node as? SKSpriteNode {
+            } else if externalBody.node?.name == FOOD {
+                if let food = externalBody.node as? GameObject {
                     foodCollidesWithTooth(food: food)
                 }
             }
         }
     }
 
-    func bacteriaCollidesWithTooth(bacteria: SKSpriteNode) {
+    func bacteriaCollidesWithTooth(bacteria: GameObject) {
         print("Collision: Bacteria-Tooth")
         bacteria.removeFromParent()
         level.health -= 10
@@ -64,7 +74,7 @@ class LevelPhysics {
         }
     }
 
-    func swipeCollidesWithBacteria(bacteria: SKSpriteNode) {
+    func swipeCollidesWithBacteria(bacteria: GameObject) {
         print("Collision: Swipe-Bacteria")
         bacteria.removeFromParent()
         level.score += 5
@@ -73,14 +83,19 @@ class LevelPhysics {
         }
     }
 //
-    func foodCollidesWithTooth(food: SKSpriteNode) {
+    func foodCollidesWithTooth(food: GameObject) {
         print("Collision: GoodFood-Tooth")
         food.removeFromParent()
-//        health += 10
+        if (food.kind == GOOD) {
+            level.health += 10
+        }
     }
-    func swipeCollidesWithFood(food: SKSpriteNode) {
-        print("Collision: Swipe-GoodFood")
+    func swipeCollidesWithFood(food: GameObject) {
+        print("Collision: Swipe-Food")
         food.removeFromParent()
+        if (food.kind == BAD) {
+
+        }
     }
 }
 
@@ -129,5 +144,4 @@ class LevelExecution {
         level.run(SKAction.repeatForever(SKAction.sequence([
             SKAction.run(spawnObjects),SKAction.wait(forDuration: 2.0)])))
     }
-
 }

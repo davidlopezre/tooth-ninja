@@ -23,6 +23,7 @@ struct GameConfigurationDecodable: Decodable {
            var kind: String?
            var position_x: Double?
            var position_y: Double?
+           var rotation: Double?
            var position_z: Int
            var size_width: Double
            var size_height: Double

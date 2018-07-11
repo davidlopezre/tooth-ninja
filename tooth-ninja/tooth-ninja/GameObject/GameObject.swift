@@ -39,6 +39,9 @@ class GameObject: SKSpriteNode {
             position.x = screenSize.width * CGFloat(x)
             position.y = screenSize.height * CGFloat(y)
         }
+        if let rotation = p.rotation {
+            zRotation = CGFloat(Double(rotation).degreesToRadians)
+        }
         zPosition = CGFloat(p.position_z)
         setUpPhysics()
     }

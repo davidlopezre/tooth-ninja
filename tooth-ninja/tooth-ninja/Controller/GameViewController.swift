@@ -38,7 +38,7 @@ class GameViewController: UIViewController, Controller {
         let objectArray = config!.getObjectsByLevel(id: 1)
         print(objectArray[0])
         // Use the JSON file to open level 1
-        currentLevel = Level(size: skView!.bounds.size, bgFile: "background2.png",
+        currentLevel = Level(number: 1, size: skView!.bounds.size, bgFile: "background2.png",
                 teethArray: teethArray, otherArray: objectArray, c: self)
 
         currentLevel?.scaleMode = SKSceneScaleMode.resizeFill
@@ -63,13 +63,19 @@ class GameViewController: UIViewController, Controller {
 
     /* This method is called by the currentLevel when it is completed */
     func levelEnd(won: Bool) {
+        let nextLevelId = won ? currentLevel!.number + 1 : currentLevel!.number
+        print(nextLevelId)
         currentLevel!.removeAllChildren()
-        let newTeethArray = copyArray(array: currentLevel!.teethArray) as! [GameObject]
-        let newOtherArray = copyArray(array: currentLevel!.otherArray) as! [GameObject]
-        let nextLevel = Level(size: currentLevel!.size, bgFile: currentLevel!.backgroundFile!, teethArray: newTeethArray,
+
+//        let teethArray = config!.getTeethByLevel(id: 1)
+//        let objectArray = config!.getObjectsByLevel(id: 1)
+
+        let newTeethArray = config!.getTeethByLevel(id: nextLevelId)
+        let newOtherArray = config!.getObjectsByLevel(id: nextLevelId)
+        currentLevel = Level(number: nextLevelId, size: currentLevel!.size, bgFile: currentLevel!.backgroundFile!, teethArray: newTeethArray,
                 otherArray: newOtherArray, c: self)
         let reveal = SKTransition.flipHorizontal(withDuration: 0.5)
-        let gameOverScene = GameOverScene(size: currentLevel!.size, won: won, nextScene: nextLevel)
+        let gameOverScene = GameOverScene(size: currentLevel!.size, won: won, nextScene: currentLevel!)
         skView?.presentScene(gameOverScene, transition: reveal)
 
     }
