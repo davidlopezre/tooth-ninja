@@ -69,7 +69,7 @@ class LevelPhysics {
 
     func bacteriaCollidesWithTooth(bacteria: GameObject) {
         print("Collision: Bacteria-Tooth")
-
+        level.levelExecution.takeHit()
         if (hasShield) {
             hasShield = false
             bacteria.removeFromParent()
@@ -169,5 +169,13 @@ class LevelExecution {
     func runLevel() {
         level.run(SKAction.repeatForever(SKAction.sequence([
             SKAction.run(spawnObjects),SKAction.wait(forDuration: 2.0)])))
+    }
+
+    func takeHit() {
+        let original = level.alpha
+        level.run(SKAction.sequence(
+                [SKAction.fadeAlpha(to: 0, duration: 0.2),
+                 SKAction.fadeAlpha(to: original, duration: 0.2)
+                ]))
     }
 }
