@@ -1,117 +1,263 @@
 {
   "speed": 1,
   "size": 1,
-  "levels": [{
-    "id": 1,
-    "teeth": [{
-        "name": "tooth",
-        "position_x": 0.572,
-        "position_y": 0.32,
-        "position_z": 2,
-        "size_width": 90,
-        "size_height": 90,
-        "image": "tooth_1"
-      },
-      {
-        "name": "tooth",
-        "position_x": 0.422,
-        "position_y": 0.32,
-        "position_z": 2,
-        "size_width": 90,
-        "size_height": 90,
-        "image": "tooth_1"
-      }
-    ],
-    "bacteria": [{
+  "levels": [
+    {
+      "id": 1,
+      "teeth":
+      [
+        {
+          "name": "tooth",
+          "position_x": 0.572,
+          "position_y": 0.32,
+          "position_z": 2,
+          "size_width": 90,
+          "size_height": 90,
+          "image": "tooth_1"
+        },
+        {
+          "name": "tooth",
+          "position_x": 0.422,
+          "position_y": 0.32,
+          "position_z": 2,
+          "size_width": 90,
+          "size_height": 90,
+          "image": "tooth_1"
+        }
+      ],
+      "bacteria":
+      [
+        {
+          "name": "bacteria",
+          "kind": "normal",
+          "size_width": 50,
+          "size_height": 50,
+          "position_z": 2,
+          "image": "bacteria_blue.png"
+        }
+      ],
+      "food":
+      [
+      ]
+    },
+    {
+      "id": 2,
+      "teeth":
+      [
+        {
+          "name": "tooth",
+          "position_x": 0.572,
+          "position_y": 0.32,
+          "position_z": 2,
+          "size_width": 90,
+          "size_height": 90,
+          "image": "tooth_1"
+        },
+        {
+          "name": "tooth",
+          "position_x": 0.422,
+          "position_y": 0.32,
+          "position_z": 2,
+          "size_width": 90,
+          "size_height": 90,
+          "image": "tooth_1"
+        },
+        {
+          "name": "tooth",
+          "position_x": 0.572,
+          "position_y": 0.7,
+          "position_z": 2,
+          "rotation": 180,
+          "size_width": 90,
+          "size_height": 90,
+          "image": "tooth_1"
+        },
+        {
+          "name": "tooth",
+          "position_x": 0.422,
+          "position_y": 0.7,
+          "position_z": 2,
+          "rotation": 180,
+          "size_width": 90,
+          "size_height": 90,
+          "image": "tooth_1"
+        }
+      ],
+      "bacteria":
+      [
+        {
         "name": "bacteria",
         "kind": "normal",
         "size_width": 50,
         "size_height": 50,
         "position_z": 2,
         "image": "bacteria_blue.png"
-      },
-      {
-        "name": "bacteria",
-        "kind": "sticky",
-        "size_width": 50,
-        "size_height": 50,
-        "position_z": 2,
-        "image": "bacteria_yellow.png"
-      }
-    ],
-    "food": [{
-      "name": "food",
-      "kind": "bad",
-      "size_width": 50,
-      "size_height": 50,
-      "position_z": 2,
-      "image": "chocolate.png"
-    }]},
-    {
-    "id": 2,
-    "teeth": [{
-      "name": "tooth",
-      "position_x": 0.572,
-      "position_y": 0.32,
-      "position_z": 2,
-      "size_width": 90,
-      "size_height": 90,
-      "image": "tooth_1"
+        },
+        {
+          "name": "bacteria",
+          "kind": "sticky",
+          "size_width": 50,
+          "size_height": 50,
+          "position_z": 3,
+          "image": "bacteria_yellow.png"
+        },
+        {
+          "name": "bacteria",
+          "kind": "good",
+          "size_width": 50,
+          "size_height": 50,
+          "position_z": 3,
+          "image": "bac_4.png"
+        }
+      ],
+      "food":
+        [
+          {
+          "name": "food",
+          "kind": "bad",
+          "size_width": 40,
+          "size_height": 50,
+          "position_z": 2,
+          "image": "chocolate.png"
+          },
+          {
+            "name": "food",
+            "kind": "bad",
+            "size_width": 50,
+            "size_height": 50,
+            "position_z": 2,
+            "image": "food_lolly.png"
+          },
+          {
+            "name": "food",
+            "kind": "good",
+            "size_width": 50,
+            "size_height": 50,
+            "position_z": 2,
+            "image": "food_cheese2.png"
+          },{
+            "name": "food",
+            "kind": "good",
+            "size_width": 40,
+            "size_height": 50,
+            "position_z": 2,
+            "image": "food_milk.png"
+          }
+        ]
     },
-      {
+    {
+      "id": 3,
+      "teeth":
+      [
+        {
         "name": "tooth",
-        "position_x": 0.422,
+        "position_x": 0.572,
         "position_y": 0.32,
         "position_z": 2,
         "size_width": 90,
         "size_height": 90,
         "image": "tooth_1"
-      },
-      {
-        "name": "tooth",
-        "position_x": 0.572,
-        "position_y": 0.7,
-        "position_z": 2,
-        "rotation": 180,
-        "size_width": 90,
-        "size_height": 90,
-        "image": "tooth_1"
-      },
-      {
-        "name": "tooth",
-        "position_x": 0.422,
-        "position_y": 0.7,
-        "position_z": 2,
-        "rotation": 180,
-        "size_width": 90,
-        "size_height": 90,
-        "image": "tooth_1"
-      }
-    ],
-    "bacteria": [{
-      "name": "bacteria",
-      "kind": "normal",
-      "size_width": 50,
-      "size_height": 50,
-      "position_z": 2,
-      "image": "bacteria_blue.png"
-    },
-      {
+        },
+        {
+          "name": "tooth",
+          "position_x": 0.422,
+          "position_y": 0.32,
+          "position_z": 2,
+          "size_width": 90,
+          "size_height": 90,
+          "image": "tooth_1"
+        },
+        {
+          "name": "tooth",
+          "position_x": 0.572,
+          "position_y": 0.7,
+          "position_z": 2,
+          "rotation": 180,
+          "size_width": 90,
+          "size_height": 90,
+          "image": "tooth_1"
+        },
+        {
+          "name": "tooth",
+          "position_x": 0.422,
+          "position_y": 0.7,
+          "position_z": 2,
+          "rotation": 180,
+          "size_width": 90,
+          "size_height": 90,
+          "image": "tooth_1"
+        }
+      ],
+      "bacteria":
+      [
+        {
         "name": "bacteria",
-        "kind": "sticky",
+        "kind": "normal",
         "size_width": 50,
         "size_height": 50,
         "position_z": 2,
-        "image": "bacteria_yellow.png"
-      }
-    ],
-    "food": [{
-      "name": "food",
-      "kind": "bad",
-      "size_width": 50,
-      "size_height": 50,
-      "position_z": 2,
-      "image": "chocolate.png"
-    }]
-  }]
+        "image": "bacteria_blue.png"
+        },
+        {
+          "name": "bacteria",
+          "kind": "sticky",
+          "size_width": 50,
+          "size_height": 50,
+          "position_z": 3,
+          "image": "bacteria_yellow.png"
+        }
+      ],
+      "food":
+      [
+        {
+          "name": "food",
+          "kind": "bad",
+          "size_width": 40,
+          "size_height": 50,
+          "position_z": 2,
+          "image": "chocolate.png"
+        },
+        {
+          "name": "food",
+          "kind": "bad",
+          "size_width": 50,
+          "size_height": 50,
+          "position_z": 2,
+          "image": "food_lolly.png"
+        },
+        {
+          "name": "food",
+          "kind": "neutral",
+          "size_width": 30,
+          "size_height": 50,
+          "position_z": 2,
+          "image": "food_water.png"
+        },
+        {
+          "name": "food",
+          "kind": "good",
+          "size_width": 50,
+          "size_height": 50,
+          "position_z": 2,
+          "image": "food_cheese2.png"
+        },
+        {
+          "name": "food",
+          "kind": "good",
+          "size_width": 40,
+          "size_height": 50,
+          "position_z": 2,
+          "image": "food_milk.png"
+        },
+        {
+          "name": "food",
+          "kind": "good",
+          "size_width": 50,
+          "size_height": 50,
+          "position_z": 2,
+          "image": "food_tap.png"
+        }
+      ]
+    }
+  ]
 }

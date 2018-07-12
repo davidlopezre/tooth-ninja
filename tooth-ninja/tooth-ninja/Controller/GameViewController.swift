@@ -54,7 +54,7 @@ class GameViewController: UIViewController, Controller {
     private func initialiseSKView() -> SKView {
         let skView = view as! SKView
         skView.showsFPS = true
-        skView.showsPhysics = true
+        skView.showsPhysics = false
         skView.showsNodeCount = true
         skView.ignoresSiblingOrder = true
         skView.isMultipleTouchEnabled = false

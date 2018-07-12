@@ -198,6 +198,12 @@ class Level: SKScene, SKPhysicsContactDelegate, BaseLevel, LevelController {
     // MARK: - FPS
 
     override func update(_ currentTime: TimeInterval) {
+        if (health <= 0) {
+            levelEnd(won: false)
+        }
+        if (levelPhysics.hasSticky > 0) {
+            levelPhysics.stickyEffect()
+        }
         // if the blade is not available return
         guard let blade = blade else {
             return
@@ -210,5 +216,7 @@ class Level: SKScene, SKPhysicsContactDelegate, BaseLevel, LevelController {
         // it's important to reset delta at this point,
         // You are telling the blade to only update his position when touchesMoved is called
         delta = .zero
+
+
     }
 }

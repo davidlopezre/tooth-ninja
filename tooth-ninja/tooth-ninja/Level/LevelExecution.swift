@@ -11,6 +11,8 @@ import SpriteKit
  */
 class LevelPhysics {
     var level: Level
+    var hasShield = false
+    var hasSticky: Int = 0
 
     /* Constants */
 
@@ -67,18 +69,38 @@ class LevelPhysics {
 
     func bacteriaCollidesWithTooth(bacteria: GameObject) {
         print("Collision: Bacteria-Tooth")
-        bacteria.removeFromParent()
-        level.health -= 10
+
+        if (hasShield) {
+            hasShield = false
+            bacteria.removeFromParent()
+            return
+        }
+
+        if (bacteria.kind == STICKY) {
+            hasSticky += 1
+            return
+        } else{
+            bacteria.removeFromParent()
+            if (bacteria.kind == GOOD ) {
+                hasShield = true
+            }else {
+                level.health -= 25
+            }
+        }
+
         if (level.health <= 0) {
             level.levelEnd(won: false)
         }
     }
 
     func swipeCollidesWithBacteria(bacteria: GameObject) {
+        if (bacteria.kind == STICKY){
+            hasSticky -= 1
+        }
         print("Collision: Swipe-Bacteria")
         bacteria.removeFromParent()
-        level.score += 5
-        if (level.score >= 25) {
+        level.score += 50
+        if (level.score >= 100) {
             level.levelEnd(won: true)
         }
     }
@@ -96,6 +118,10 @@ class LevelPhysics {
         if (food.kind == BAD) {
 
         }
+    }
+
+    func stickyEffect() {
+        level.health -= hasSticky
     }
 }
 
@@ -125,7 +151,7 @@ class LevelExecution {
         // TODO (3) Fix that every object's initial position is (0,0)
         print("initial position of \(objectToAdd.name ?? "no name") is \(objectToAdd.position)")
         // Determine speed of the object
-        let actualDuration = 4.0 //random(min: CGFloat(2.0), max: CGFloat(4.0))
+        let actualDuration = random(min: CGFloat(1.0), max: CGFloat(3.0))
 
         // Create the actions
         let teeth = level["tooth"]
