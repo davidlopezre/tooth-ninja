@@ -64,15 +64,18 @@ class LevelPhysics {
     struct GlobalVariable
     {
         static var viewController: GameViewController!
+        
     }
     var controller = GlobalVariable.viewController
     var level: Level
+    var count: Int = 0
     
     init(level: Level) {
         self.level = level
     }
 
-    func didBegin(_ contact: SKPhysicsContact) {
+    func didBegin(_ contact: SKPhysicsContact)
+    {
         var playerBody: SKPhysicsBody
         var externalBody: SKPhysicsBody
 
@@ -120,8 +123,16 @@ class LevelPhysics {
         //GameViewController().healthBar.frame.origin.x -= 10
         self.controller?.healthBar.frame.origin.x-=10
         //healthBar.frame.origin.x -= 10
-        if (level.health <= 0) {
-            level.levelEnd(won: false)
+        if (level.health <= 0 )
+        {
+            count += 1
+            if(count == 1)
+            {
+                level.levelEnd(won: false)
+                self.controller?.healthBar.isHidden = true
+                self.controller?.happinessBar.isHidden = true
+            }
+            count = 0
         }
     }
 

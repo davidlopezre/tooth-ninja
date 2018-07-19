@@ -109,6 +109,7 @@ class Level: SKScene, SKPhysicsContactDelegate, BaseLevel, LevelController {
 
     /* Sets the background of the level and initialises the health and score bars */
     func addBackgroundAndWidgets() {
+        
         if let bgFile = backgroundFile {
             let background = SKSpriteNode(imageNamed: bgFile)
             background.zPosition = 1
@@ -126,6 +127,8 @@ class Level: SKScene, SKPhysicsContactDelegate, BaseLevel, LevelController {
         addChild(scoreLabel!)
 
         healthLabel = SKLabelNode(fontNamed: "Chalkduster")
+        levelPhysics.controller?.healthBar.isHidden = false
+        levelPhysics.controller?.happinessBar.isHidden = false
         healthLabel!.text = "HP: 100%"
         healthLabel!.fontSize = 25
         healthLabel!.zPosition = 2
