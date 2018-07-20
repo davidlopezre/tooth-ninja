@@ -121,7 +121,7 @@ class LevelPhysics {
         level.health -= 10
         //GameViewController().healthBarAccess.healthBar.frame.origin.x-=10
         //GameViewController().healthBar.frame.origin.x -= 10
-        self.controller?.healthBar.frame.origin.x-=10
+        self.controller?.healthBar.frame.origin.x-=20
         //healthBar.frame.origin.x -= 10
         if (level.health <= 0 )
         {
