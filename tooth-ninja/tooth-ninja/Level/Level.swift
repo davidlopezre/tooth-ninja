@@ -13,7 +13,6 @@ import SpriteKit
 protocol BaseLevel {
     var controller: Controller? {get}
     var scoreLabel: SKLabelNode? {get}
-    var healthLabel: SKLabelNode? {get}
     var backgroundFile: String? {get}
     var teethArray: [GameObject] {get set}   // array of teeth in a level
     var otherArray: [GameObject] {get set}   // array of possible objects in a level
@@ -38,30 +37,35 @@ extension BaseLevel {
  * controller of level completion or failure.
  */
 class Level: SKScene, SKPhysicsContactDelegate, BaseLevel, LevelController {
-
+    
     var controller: Controller?
     var scoreLabel: SKLabelNode?
-    var healthLabel: SKLabelNode?
     var teethArray: [GameObject]
     var otherArray: [GameObject]
     let backgroundFile: String?
     var levelExecution: LevelExecution!
     var levelPhysics: LevelPhysics!
 
-    var score = 0 {
-        didSet {
+    var score = 0
+    {
+        didSet
+        {
             scoreLabel?.text = "Score: \(score)"
         }
     }
 
-    var health = 100 {
-        didSet {
-            if health > 100 {
+    var health = 100
+    {
+        didSet
+        {
+            if health > 100
+            {
                 health = 100
-            }else if (health < 0) {
+            }
+            else if (health < 0)
+            {
                 health = 0
             }
-            healthLabel?.text = "HP: \(health)%"
         }
     }
 
@@ -123,17 +127,17 @@ class Level: SKScene, SKPhysicsContactDelegate, BaseLevel, LevelController {
         scoreLabel!.text = "Score: 0"
         scoreLabel!.zPosition = 2
         scoreLabel!.fontSize = 25
-        scoreLabel!.position = CGPoint(x: size.width * 0.9, y: size.height * 0.9)
+        scoreLabel!.position = CGPoint(x: size.width * 0.9, y: size.height * 0.86)
         addChild(scoreLabel!)
 
-        healthLabel = SKLabelNode(fontNamed: "Chalkduster")
+        //healthLabel = SKLabelNode(fontNamed: "Chalkduster")
         levelPhysics.controller?.healthBar.isHidden = false
         levelPhysics.controller?.happinessBar.isHidden = false
-        healthLabel!.text = "HP: 100%"
-        healthLabel!.fontSize = 25
-        healthLabel!.zPosition = 2
-        healthLabel!.position = CGPoint(x: size.width * 0.1, y: size.height * 0.9)
-        addChild(healthLabel!)
+        //healthLabel!.text = "HP: 100%"
+        //healthLabel!.fontSize = 25
+        //healthLabel!.zPosition = 2
+        //healthLabel!.position = CGPoint(x: size.width * 0.1, y: size.height * 0.9)
+        //addChild(healthLabel!)
 
     }
 

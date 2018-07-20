@@ -119,10 +119,7 @@ class LevelPhysics {
         print("Collision: Bacteria-Tooth")
         bacteria.removeFromParent()
         level.health -= 10
-        //GameViewController().healthBarAccess.healthBar.frame.origin.x-=10
-        //GameViewController().healthBar.frame.origin.x -= 10
         self.controller?.healthBar.frame.origin.x-=20
-        //healthBar.frame.origin.x -= 10
         if (level.health <= 0 )
         {
             count += 1
@@ -144,7 +141,7 @@ class LevelPhysics {
             level.levelEnd(won: true)
         }
     }
-//
+
     func foodCollidesWithTooth(food: SKSpriteNode) {
         print("Collision: GoodFood-Tooth")
         food.removeFromParent()
