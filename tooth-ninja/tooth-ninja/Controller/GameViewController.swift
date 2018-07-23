@@ -63,12 +63,15 @@ class GameViewController: UIViewController, Controller {
 
     /* This method is called by the currentLevel when it is completed */
     func levelEnd(won: Bool) {
-        let nextLevelId = won ? currentLevel!.number + 1 : currentLevel!.number
-        print(nextLevelId)
-        currentLevel!.removeAllChildren()
+        let nextLevelId : Int
+        // TODO (4) : This just loops on level 3 forever
+        if (won && currentLevel!.number < 3) {
+            nextLevelId = currentLevel!.number + 1
+        }else{
+            nextLevelId = currentLevel!.number
+        }
 
-//        let teethArray = config!.getTeethByLevel(id: 1)
-//        let objectArray = config!.getObjectsByLevel(id: 1)
+        currentLevel!.removeAllChildren()
 
         let newTeethArray = config!.getTeethByLevel(id: nextLevelId)
         let newOtherArray = config!.getObjectsByLevel(id: nextLevelId)

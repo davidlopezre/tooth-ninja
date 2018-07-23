@@ -72,6 +72,7 @@ class LevelPhysics {
         level.levelExecution.takeHit()
         if (hasShield) {
             hasShield = false
+            level.shieldLabel?.text = ""
             bacteria.removeFromParent()
             return
         }
@@ -83,6 +84,7 @@ class LevelPhysics {
             bacteria.removeFromParent()
             if (bacteria.kind == GOOD ) {
                 hasShield = true
+                level.shieldLabel?.text = "Shield"
             }else {
                 level.health -= 25
             }
@@ -99,7 +101,7 @@ class LevelPhysics {
         }
         print("Collision: Swipe-Bacteria")
         bacteria.removeFromParent()
-        level.score += 50
+        level.score += 25
         if (level.score >= 100) {
             level.levelEnd(won: true)
         }
@@ -110,14 +112,26 @@ class LevelPhysics {
         food.removeFromParent()
         if (food.kind == GOOD) {
             level.health += 10
+            level.happiness -= 25
+        }else if (food.kind == BAD) {
+            level.happiness += 25
         }
     }
     func swipeCollidesWithFood(food: GameObject) {
         print("Collision: Swipe-Food")
         food.removeFromParent()
-        if (food.kind == BAD) {
-
-        }
+//        if (food.kind == BAD) {
+//            let influx = SKAction.repeat(s1, count: 5)
+//        let action = SKAction.sequence([
+//            influx,
+//            SKAction.wait(forDuration: 1),
+//            influx,
+//            SKAction.wait(forDuration: 1),
+//            influx,
+//            SKAction.wait(forDuration: 1)
+//            ])
+//        level.run(action)
+//        }
     }
 
     func stickyEffect() {
@@ -132,6 +146,7 @@ class LevelPhysics {
 class LevelExecution {
     let objectArray: [GameObject]
     var level: Level
+    var bacteria: [GameObject] = []
 
     init(level: Level, array: [GameObject]) {
         self.level = level

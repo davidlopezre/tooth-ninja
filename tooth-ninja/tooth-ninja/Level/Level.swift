@@ -15,6 +15,7 @@ protocol BaseLevel {
     var controller: Controller? {get}
     var scoreLabel: SKLabelNode? {get}
     var healthLabel: SKLabelNode? {get}
+    var happinessLabel: SKLabelNode? {get}
     var backgroundFile: String? {get}
     var teethArray: [GameObject] {get set}   // array of teeth in a level
     var otherArray: [GameObject] {get set}   // array of possible objects in a level
@@ -44,6 +45,8 @@ class Level: SKScene, SKPhysicsContactDelegate, BaseLevel, LevelController {
     var controller: Controller?
     var scoreLabel: SKLabelNode?
     var healthLabel: SKLabelNode?
+    var happinessLabel: SKLabelNode?
+    var shieldLabel: SKLabelNode?
     var teethArray: [GameObject]
     var otherArray: [GameObject]
     let backgroundFile: String?
@@ -63,7 +66,19 @@ class Level: SKScene, SKPhysicsContactDelegate, BaseLevel, LevelController {
             }else if (health < 0) {
                 health = 0
             }
-            healthLabel?.text = "HP: \(health)%"
+            healthLabel?.text = "HP " +
+                    ": \(health)%"
+        }
+    }
+
+    var happiness = 100 {
+        didSet {
+            if happiness > 100 {
+                happiness = 100
+            }else if (happiness < 0) {
+                happiness = 0
+            }
+            happinessLabel?.text = ":) : \(happiness)%"
         }
     }
 
@@ -130,11 +145,26 @@ class Level: SKScene, SKPhysicsContactDelegate, BaseLevel, LevelController {
         addChild(scoreLabel!)
 
         healthLabel = SKLabelNode(fontNamed: "Chalkduster")
-        healthLabel!.text = "HP: 100%"
+        healthLabel!.text = "HP : 100%"
         healthLabel!.fontSize = 25
         healthLabel!.zPosition = 2
         healthLabel!.position = CGPoint(x: size.width * 0.1, y: size.height * 0.9)
         addChild(healthLabel!)
+
+        happinessLabel = SKLabelNode(fontNamed: "Chalkduster")
+        happinessLabel!.text = ":) : 100%"
+        happinessLabel!.fontSize = 25
+        happinessLabel!.zPosition = 2
+        happinessLabel!.position = CGPoint(x: size.width * 0.1, y: size.height * 0.8)
+        addChild(happinessLabel!)
+
+        shieldLabel = SKLabelNode(fontNamed: "Chalkduster")
+        shieldLabel!.text = ""
+        shieldLabel!.fontColor = UIColor.green
+        shieldLabel!.fontSize = 25
+        shieldLabel!.zPosition = 2
+        shieldLabel!.position = CGPoint(x: size.width * 0.1, y: size.height * 0.1)
+        addChild(shieldLabel!)
 
     }
 
