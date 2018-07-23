@@ -23,6 +23,8 @@ class LevelPhysics {
     let BAD      = "bad"
     let STICKY   = "sticky"
     let NORMAL   = "normal"
+    let SHIELD   = "shield"
+    let NEUTRAL  = "neutral"
 
     init(level: Level) {
         self.level = level
@@ -115,6 +117,9 @@ class LevelPhysics {
             level.happiness -= 25
         }else if (food.kind == BAD) {
             level.happiness += 25
+        } else if (food.kind == SHIELD) {
+            hasShield = true
+            level.shieldLabel?.text = "Shield"
         }
     }
     func swipeCollidesWithFood(food: GameObject) {

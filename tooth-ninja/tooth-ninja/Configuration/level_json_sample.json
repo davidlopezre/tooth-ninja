@@ -38,6 +38,14 @@
       ],
       "food":
       [
+        {
+          "name": "food",
+          "kind": "shield",
+          "size_width": 50,
+          "size_height": 50,
+          "position_z": 2,
+          "image": "food_tap.png"
+        }
       ]
     },
     {
@@ -100,14 +108,6 @@
           "size_height": 50,
           "position_z": 3,
           "image": "bacteria_yellow.png"
-        },
-        {
-          "name": "bacteria",
-          "kind": "good",
-          "size_width": 50,
-          "size_height": 50,
-          "position_z": 3,
-          "image": "bac_4.png"
         }
       ],
       "food":
@@ -142,6 +142,14 @@
             "size_height": 50,
             "position_z": 2,
             "image": "food_milk.png"
+          },
+          {
+            "name": "food",
+            "kind": "shield",
+            "size_width": 50,
+            "size_height": 50,
+            "position_z": 2,
+            "image": "food_tap.png"
           }
         ]
     },
@@ -243,14 +251,6 @@
           "size_height": 50,
           "position_z": 3,
           "image": "bacteria_yellow.png"
-        },
-        {
-          "name": "bacteria",
-          "kind": "good",
-          "size_width": 50,
-          "size_height": 50,
-          "position_z": 3,
-          "image": "bac_4.png"
         }
       ],
       "food":
@@ -297,7 +297,7 @@
         },
         {
           "name": "food",
-          "kind": "good",
+          "kind": "shield",
           "size_width": 50,
           "size_height": 50,
           "position_z": 2,
