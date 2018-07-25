@@ -14,17 +14,24 @@ class LevelPhysics {
     var hasShield = false
     var hasSticky: Int = 0
 
-    /* Constants */
+    /* String Constants */
+    private let BACTERIA = "bacteria"
+    private let FOOD     = "food"
+    private let SWIPE    = "swipe"
+    private let GOOD     = "good"
+    private let BAD      = "bad"
+    private let STICKY   = "sticky"
+    private let NORMAL   = "normal"
+    private let SHIELD   = "shield"
+    private let NEUTRAL  = "neutral"
 
-    let BACTERIA = "bacteria"
-    let FOOD     = "food"
-    let SWIPE    = "swipe"
-    let GOOD     = "good"
-    let BAD      = "bad"
-    let STICKY   = "sticky"
-    let NORMAL   = "normal"
-    let SHIELD   = "shield"
-    let NEUTRAL  = "neutral"
+    /* Numeric Constants */
+    private let PLUS_HEALTH     =  25
+    private let MINUS_HEALTH    =  10
+    private let PLUS_HAPPINESS  =  10
+    private let MINUS_HAPPINESS =  25
+    private let PLUS_SCORE      =  10
+    private let WINNING_SCORE   = 100
 
     init(level: Level) {
         self.level = level
@@ -71,25 +78,18 @@ class LevelPhysics {
 
     func bacteriaCollidesWithTooth(bacteria: GameObject) {
         print("Collision: Bacteria-Tooth")
-        level.levelExecution.takeHit()
+        level.levelExecution.takeHitAnimation()
         if (hasShield) {
-            hasShield = false
-            level.shieldLabel?.text = ""
+            removeShield()
             bacteria.removeFromParent()
             return
         }
-
         if (bacteria.kind == STICKY) {
             hasSticky += 1
             return
-        } else{
+        } else {
             bacteria.removeFromParent()
-            if (bacteria.kind == GOOD ) {
-                hasShield = true
-                level.shieldLabel?.text = "Shield"
-            }else {
-                level.health -= 25
-            }
+            level.health -= MINUS_HEALTH
         }
 
         if (level.health <= 0) {
@@ -103,8 +103,8 @@ class LevelPhysics {
         }
         print("Collision: Swipe-Bacteria")
         bacteria.removeFromParent()
-        level.score += 25
-        if (level.score >= 100) {
+        level.score += PLUS_SCORE
+        if (level.score >= WINNING_SCORE) {
             level.levelEnd(won: true)
         }
     }
@@ -113,13 +113,12 @@ class LevelPhysics {
         print("Collision: GoodFood-Tooth")
         food.removeFromParent()
         if (food.kind == GOOD) {
-            level.health += 10
-            level.happiness -= 25
+            level.health += PLUS_HEALTH
+            level.happiness -= MINUS_HAPPINESS
         }else if (food.kind == BAD) {
-            level.happiness += 25
+            level.happiness += PLUS_HAPPINESS
         } else if (food.kind == SHIELD) {
-            hasShield = true
-            level.shieldLabel?.text = "Shield"
+            giveShield()
         }
     }
     func swipeCollidesWithFood(food: GameObject) {
@@ -142,6 +141,33 @@ class LevelPhysics {
     func stickyEffect() {
         level.health -= hasSticky
     }
+
+    private func giveShield() {
+        if (!hasShield) {
+            hasShield = true
+            level.shieldLabel?.text = "Shield"
+
+            for teeth in level["tooth"] {
+                let t = (teeth as! SKSpriteNode)
+                let radius = max(t.size.width / 2, t.size.height / 2) * 1.5
+                var shield = SKShapeNode(circleOfRadius: radius)
+                shield.alpha = 0.08
+                shield.fillColor = UIColor.white
+                shield.zPosition = 4
+                teeth.addChild(shield)
+
+            }
+        }
+    }
+
+    private func removeShield() {
+        hasShield = false
+        level.shieldLabel?.text = ""
+        for teeth in level["tooth"] {
+            teeth.removeAllChildren()
+        }
+    }
+
 }
 
 /* This class is in charge of executing actions that will be a result of game
@@ -191,7 +217,7 @@ class LevelExecution {
             SKAction.run(spawnObjects),SKAction.wait(forDuration: 2.0)])))
     }
 
-    func takeHit() {
+    func takeHitAnimation() {
         let original = level.alpha
         level.run(SKAction.sequence(
                 [SKAction.fadeAlpha(to: 0, duration: 0.2),
