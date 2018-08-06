@@ -175,7 +175,8 @@ class LevelPhysics {
  * tooth.
  */
 class LevelExecution {
-    let objectArray: [GameObject]
+    let bacteriaArray: [GameObject]
+    let foodArray: [GameObject]
     var level: Level
     var bacteria: [GameObject] = []
 
@@ -183,9 +184,10 @@ class LevelExecution {
     private var defaultSize = 1.0
 
 
-    init(level: Level, array: [GameObject]) {
+    init(level: Level, bacteria: [GameObject], food: [GameObject]) {
         self.level = level
-        objectArray = array
+        bacteriaArray = bacteria
+        foodArray = food
 
         defaultSpeed += queryDefaults(type: DefaultTypes.Speed)
         defaultSize += queryDefaults(type: DefaultTypes.BacteriaSize)
@@ -195,12 +197,24 @@ class LevelExecution {
      * approach the teeth in the level.
      */
     func spawnObjects () {
-        let index = randomIndex(objectArray.count)
-        print("SIZE OF LEVEL IS \(level.size)")
-        let objectToAdd = objectArray[index].copy() as! GameObject
-        objectToAdd.position = generateRandomPosition(width: level.size.width, height: level.size.height)
-        level.addChild(objectToAdd)
+        let proba = random(min: 0, max: 100)    // probability, if > 90 it's food else bacteria
+        print(proba)
+        
+        let objectToAdd : GameObject
+        
+        if (proba < 80) {
+            let index = randomIndex(bacteriaArray.count)
+            objectToAdd = bacteriaArray[index].copy() as! GameObject
+            objectToAdd.position = generateRandomPosition(width: level.size.width, height: level.size.height)
+            level.addChild(objectToAdd)
+        } else {
+            let index = randomIndex(foodArray.count)
+            objectToAdd = foodArray[index].copy() as! GameObject
+            objectToAdd.position = generateRandomPosition(width: level.size.width, height: level.size.height)
+            level.addChild(objectToAdd)
+        }
 
+       
         // TODO (3) Fix that every object's initial position is (0,0)
         print("initial position of \(objectToAdd.name ?? "no name") is \(objectToAdd.position)")
         // Determine speed of the object

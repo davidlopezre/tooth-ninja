@@ -35,11 +35,12 @@ class GameViewController: UIViewController, Controller {
         }
 
         let teethArray = config!.getTeethByLevel(id: 1)
-        let objectArray = config!.getObjectsByLevel(id: 1)
-        print(objectArray[0])
+        let bacteriaArray = config!.getObjectsByLevel(id: 1, name: "bacteria")
+        let foodArray = config!.getObjectsByLevel(id: 1, name: "food")
+        print(bacteriaArray[0])
         // Use the JSON file to open level 1
         currentLevel = Level(number: 1, size: skView!.bounds.size, bgFile: "background2.png",
-                teethArray: teethArray, otherArray: objectArray, c: self)
+                             teethArray: teethArray, bacteriaArray: bacteriaArray, foodArray: foodArray,  c: self)
 
         currentLevel?.scaleMode = SKSceneScaleMode.resizeFill
 
@@ -74,9 +75,10 @@ class GameViewController: UIViewController, Controller {
         currentLevel!.removeAllChildren()
 
         let newTeethArray = config!.getTeethByLevel(id: nextLevelId)
-        let newOtherArray = config!.getObjectsByLevel(id: nextLevelId)
+        let newBacteriaArray = config!.getObjectsByLevel(id: nextLevelId, name: "bacteria")
+        let newFoodArray = config!.getObjectsByLevel(id: nextLevelId, name: "food")
         currentLevel = Level(number: nextLevelId, size: currentLevel!.size, bgFile: currentLevel!.backgroundFile!, teethArray: newTeethArray,
-                otherArray: newOtherArray, c: self)
+                             bacteriaArray: newBacteriaArray, foodArray: newFoodArray, c: self)
         let reveal = SKTransition.flipHorizontal(withDuration: 0.5)
         let gameOverScene = GameOverScene(size: currentLevel!.size, won: won, nextScene: currentLevel!)
         skView?.presentScene(gameOverScene, transition: reveal)

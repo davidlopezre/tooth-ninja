@@ -18,7 +18,8 @@ protocol BaseLevel {
     var happinessLabel: SKLabelNode? {get}
     var backgroundFile: String? {get}
     var teethArray: [GameObject] {get set}   // array of teeth in a level
-    var otherArray: [GameObject] {get set}   // array of possible objects in a level
+    var bacteriaArray: [GameObject] {get set}   // array of possible objects in a level
+    var foodArray: [GameObject] {get set}
     var levelExecution: LevelExecution! {get}
     var levelPhysics: LevelPhysics! {get}
 }
@@ -48,7 +49,8 @@ class Level: SKScene, SKPhysicsContactDelegate, BaseLevel, LevelController {
     var happinessLabel: SKLabelNode?
     var shieldLabel: SKLabelNode?
     var teethArray: [GameObject]
-    var otherArray: [GameObject]
+    var bacteriaArray: [GameObject]
+    var foodArray: [GameObject]
     let backgroundFile: String?
     var levelExecution: LevelExecution!
     var levelPhysics: LevelPhysics!
@@ -89,12 +91,13 @@ class Level: SKScene, SKPhysicsContactDelegate, BaseLevel, LevelController {
     // Set the initial value to 0
     var delta: CGPoint = .zero
 
-    init(number: Int, size: CGSize, bgFile: String, teethArray: [GameObject], otherArray: [GameObject], c: Controller) {
+    init(number: Int, size: CGSize, bgFile: String, teethArray: [GameObject], bacteriaArray: [GameObject], foodArray: [GameObject], c: Controller) {
         self.number = number
         self.teethArray = teethArray
         self.controller = c
         self.backgroundFile = bgFile
-        self.otherArray = otherArray
+        self.bacteriaArray = bacteriaArray
+        self.foodArray = foodArray
         super.init(size: size)
         // use the JSON thing to give the level the game elements
     }
@@ -103,14 +106,15 @@ class Level: SKScene, SKPhysicsContactDelegate, BaseLevel, LevelController {
         number = 1
         teethArray = []
         backgroundFile = nil
-        otherArray = []
+        bacteriaArray = []
+        foodArray = []
         super.init(coder: aDecoder)
     }
 
     deinit{print("GameScene deinited")}
 
     public override func didMove(to view: SKView) {
-        levelExecution = LevelExecution(level: self, array: otherArray)
+        levelExecution = LevelExecution(level: self, bacteria: bacteriaArray, food: foodArray)
         levelPhysics = LevelPhysics(level: self)
         addBackgroundAndWidgets()
         physicsWorld.gravity = CGVector.zero

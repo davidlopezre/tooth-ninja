@@ -81,15 +81,18 @@ class GameConfiguration {
         return array
     }
 
-    func getObjectsByLevel(id: Int) -> [GameObject] {
+    func getObjectsByLevel(id: Int, name: String) -> [GameObject] {
         var array: [GameObject] = []
-        for bacteria in parsed.levels[id - 1].bacteria {
-            print(bacteria)
-            array.append(GameObject(type: GameObjectType.Other, properties: bacteria))
-        }
-        for food in parsed.levels[id - 1].food {
-            print(food)
-            array.append(GameObject(type: GameObjectType.Other, properties: food))
+        if name == "bacteria" {
+            for bacteria in parsed.levels[id - 1].bacteria {
+                print(bacteria)
+                array.append(GameObject(type: GameObjectType.Other, properties: bacteria))
+            }
+        } else if name == "food" {
+            for food in parsed.levels[id - 1].food {
+                print(food)
+                array.append(GameObject(type: GameObjectType.Other, properties: food))
+            }
         }
         return array
     }
