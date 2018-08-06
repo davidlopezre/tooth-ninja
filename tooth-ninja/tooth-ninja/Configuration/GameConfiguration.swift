@@ -6,6 +6,23 @@
 import Foundation
 import SpriteKit
 
+/* Functions and statements to set and query UserDefaults */
+
+let defaults = UserDefaults.standard
+
+enum DefaultTypes: String {
+    case BacteriaSize
+    case Speed
+}
+
+func setDefaults(type: DefaultTypes, value: Double) {
+    defaults.set(value, forKey: type.rawValue)
+}
+
+func queryDefaults(type: DefaultTypes) -> Double {
+    return defaults.double(forKey: type.rawValue)
+}
+
 /* Decodable struct to be able to use JSONDecoder to parse */
 struct GameConfigurationDecodable: Decodable {
     var speed: Double
@@ -32,7 +49,7 @@ struct GameConfigurationDecodable: Decodable {
    }
 }
 
-/* JSONLevelParser class provides methods to parse JSON files and creating a GameElementFactory for */
+/* GameConfiguration class reads the JSON file with the level specs */
 class GameConfiguration {
     static var screenSize: CGSize?
 
@@ -76,5 +93,4 @@ class GameConfiguration {
         }
         return array
     }
-
 }

@@ -179,9 +179,16 @@ class LevelExecution {
     var level: Level
     var bacteria: [GameObject] = []
 
+    private var defaultSpeed = 1.0
+    private var defaultSize = 1.0
+
+
     init(level: Level, array: [GameObject]) {
         self.level = level
         objectArray = array
+
+        defaultSpeed += queryDefaults(type: DefaultTypes.Speed)
+        defaultSize += queryDefaults(type: DefaultTypes.BacteriaSize)
     }
 
     /* This function is in charge of spawning food and bacteria and giving them the action to
@@ -197,7 +204,7 @@ class LevelExecution {
         // TODO (3) Fix that every object's initial position is (0,0)
         print("initial position of \(objectToAdd.name ?? "no name") is \(objectToAdd.position)")
         // Determine speed of the object
-        let actualDuration = random(min: CGFloat(1.0), max: CGFloat(3.0))
+        let actualDuration = CGFloat(defaultSpeed) * random(min: CGFloat(1.0), max: CGFloat(3.0))
 
         // Create the actions
         let teeth = level["tooth"]
@@ -218,6 +225,7 @@ class LevelExecution {
     }
 
     func takeHitAnimation() {
+//        setDefaults(type: DefaultTypes.Sp, value: <#T##Double##Swift.Double#>)
         let original = level.alpha
         level.run(SKAction.sequence(
                 [SKAction.fadeAlpha(to: 0, duration: 0.2),
