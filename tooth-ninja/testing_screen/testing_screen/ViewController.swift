@@ -11,6 +11,7 @@ import UIKit
 class ViewController: UIViewController
 {
     var button = dropDownButton()
+    var button2 = dropDownButton()
     
     override func viewDidLoad()
     {
@@ -21,13 +22,26 @@ class ViewController: UIViewController
         button.setTitle("Speed", for: .normal)
         self.view.addSubview(button)
         
+        button2 = dropDownButton.init(frame: CGRect(x:0, y: 0, width: 0, height: 0))
+        button2.translatesAutoresizingMaskIntoConstraints = false
+        button2.setTitle("Size", for: .normal)
+        self.view.addSubview(button2)
+        
         button.leftAnchor.constraint(equalTo: self.view.leftAnchor,constant: 100).isActive = true
         button.rightAnchor.constraint(equalTo: self.view.rightAnchor,constant: -100).isActive = true
         button.topAnchor.constraint(equalTo: self.view.topAnchor,constant: 200).isActive = true
         button.widthAnchor.constraint(equalToConstant: 130).isActive = true
         button.heightAnchor.constraint(equalToConstant: 40).isActive = true
         
-        button.dropView.dropDownOptions = ["Very Slow","Slow","Normal"]
+        button2.leftAnchor.constraint(equalTo: self.view.leftAnchor,constant: 100).isActive = true
+        button2.rightAnchor.constraint(equalTo: self.view.rightAnchor,constant: -100).isActive = true
+        button2.topAnchor.constraint(equalTo: self.view.topAnchor,constant: 500).isActive = true
+        button2.widthAnchor.constraint(equalToConstant: 130).isActive = true
+        button2.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        
+        button.dropView.dropDownOptions = ["Very Slow","Slow","Fast"]
+        button2.dropView.dropDownOptions = ["Very Small","Small","Large"]
+        
     }
 
     override func didReceiveMemoryWarning()
