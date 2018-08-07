@@ -18,15 +18,15 @@ class ViewController: UIViewController
         // Do any additional setup after loading the view, typically from a nib.
         button = dropDownButton.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("colors", for: .normal)
+        button.setTitle("Speed", for: .normal)
         self.view.addSubview(button)
         
         button.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         button.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
-        button.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        button.widthAnchor.constraint(equalToConstant: 130).isActive = true
         button.heightAnchor.constraint(equalToConstant: 40).isActive = true
         
-        button.dropView.dropDownOptions = ["Hello","World"]
+        button.dropView.dropDownOptions = ["Very Slow","Slow","Normal"]
     }
 
     override func didReceiveMemoryWarning()
