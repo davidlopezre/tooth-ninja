@@ -2,7 +2,7 @@
 //  ViewController.swift
 //  testing_screen
 //
-//  Created by ritu sharma on 7/8/18.
+//  Created by Kushagra Vashisht on 7/8/18.
 //  Copyright © 2018 Kush. All rights reserved.
 //
 
@@ -16,13 +16,14 @@ class ViewController: UIViewController
     {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        button = dropDownButton.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        button = dropDownButton.init(frame: CGRect(x:0, y: 0, width: 0, height: 0))
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Speed", for: .normal)
         self.view.addSubview(button)
         
-        button.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        button.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+        button.leftAnchor.constraint(equalTo: self.view.leftAnchor,constant: 100).isActive = true
+        button.rightAnchor.constraint(equalTo: self.view.rightAnchor,constant: -100).isActive = true
+        button.topAnchor.constraint(equalTo: self.view.topAnchor,constant: 200).isActive = true
         button.widthAnchor.constraint(equalToConstant: 130).isActive = true
         button.heightAnchor.constraint(equalToConstant: 40).isActive = true
         
