@@ -9,6 +9,7 @@ import SpriteKit
 /* This class is in charge of managing game object physics. For example,
  * what happens if bacteria touches tooth.
  */
+
 class LevelPhysics {
     var level: Level
     var hasShield = false
@@ -32,12 +33,13 @@ class LevelPhysics {
     private let MINUS_HAPPINESS =  25
     private let PLUS_SCORE      =  10
     private let WINNING_SCORE   = 100
-
+    
     init(level: Level) {
         self.level = level
     }
 
-    func didBegin(_ contact: SKPhysicsContact) {
+    func didBegin(_ contact: SKPhysicsContact)
+    {
         var playerBody: SKPhysicsBody
         var externalBody: SKPhysicsBody
 
@@ -94,6 +96,8 @@ class LevelPhysics {
 
         if (level.health <= 0) {
             level.levelEnd(won: false)
+            level.controller?.healthBar.isHidden = true
+            level.controller?.happinessBar.isHidden = true
         }
     }
 
@@ -108,7 +112,8 @@ class LevelPhysics {
             level.levelEnd(won: true)
         }
     }
-//
+
+
     func foodCollidesWithTooth(food: GameObject) {
         print("Collision: GoodFood-Tooth")
         food.removeFromParent()
@@ -122,6 +127,7 @@ class LevelPhysics {
             giveShield()
         }
     }
+
     func swipeCollidesWithFood(food: GameObject) {
         print("Collision: Swipe-Food")
         food.removeFromParent()
@@ -151,7 +157,7 @@ class LevelPhysics {
             for teeth in level["tooth"] {
                 let t = (teeth as! SKSpriteNode)
                 let radius = max(t.size.width / 2, t.size.height / 2) * 1.5
-                var shield = SKShapeNode(circleOfRadius: radius)
+                let shield = SKShapeNode(circleOfRadius: radius)
                 shield.alpha = 0.08
                 shield.fillColor = UIColor.white
                 shield.zPosition = 4

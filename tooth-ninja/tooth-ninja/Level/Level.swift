@@ -55,21 +55,38 @@ class Level: SKScene, SKPhysicsContactDelegate, BaseLevel, LevelController {
     var levelExecution: LevelExecution!
     var levelPhysics: LevelPhysics!
 
-    var score = 0 {
-        didSet {
+    var score = 0
+    {
+        didSet
+        {
             scoreLabel?.text = "Score: \(score)"
         }
     }
 
-    var health = 100 {
-        didSet {
-            if health > 100 {
+    var health = 100
+    {
+        didSet
+        {
+            if health > 100
+            {
                 health = 100
-            }else if (health < 0) {
+            }
+            else if (health < 0)
+            {
                 health = 0
             }
-            healthLabel?.text = "HP " +
-                    ": \(health)%"
+            healthLabel?.text = "HP " + ": \(health)%"
+            
+            let bar = controller?.healthBar
+            print(bar?.frame.width)
+            
+            var newFrame = bar?.frame
+            
+            newFrame?.size.width = CGFloat(health);
+            newFrame?.size.height = 10;
+            
+            controller?.healthBar.frame = newFrame!
+            print(bar?.frame.width)
         }
     }
 
@@ -81,6 +98,15 @@ class Level: SKScene, SKPhysicsContactDelegate, BaseLevel, LevelController {
                 happiness = 0
             }
             happinessLabel?.text = ":) : \(happiness)%"
+            
+            let bar = controller?.happinessBar
+            
+            var newFrame = bar?.frame
+            
+            newFrame?.size.width = CGFloat(happiness);
+            newFrame?.size.height = 10;
+            
+            controller?.happinessBar.frame = newFrame!
         }
     }
 
@@ -132,6 +158,7 @@ class Level: SKScene, SKPhysicsContactDelegate, BaseLevel, LevelController {
 
     /* Sets the background of the level and initialises the health and score bars */
     func addBackgroundAndWidgets() {
+        
         if let bgFile = backgroundFile {
             let background = SKSpriteNode(imageNamed: bgFile)
             background.zPosition = 1
@@ -145,7 +172,7 @@ class Level: SKScene, SKPhysicsContactDelegate, BaseLevel, LevelController {
         scoreLabel!.text = "Score: 0"
         scoreLabel!.zPosition = 2
         scoreLabel!.fontSize = 25
-        scoreLabel!.position = CGPoint(x: size.width * 0.9, y: size.height * 0.9)
+        scoreLabel!.position = CGPoint(x: size.width * 0.9, y: size.height * 0.86)
         addChild(scoreLabel!)
 
         healthLabel = SKLabelNode(fontNamed: "Chalkduster")
@@ -154,6 +181,10 @@ class Level: SKScene, SKPhysicsContactDelegate, BaseLevel, LevelController {
         healthLabel!.zPosition = 2
         healthLabel!.position = CGPoint(x: size.width * 0.1, y: size.height * 0.9)
         addChild(healthLabel!)
+        
+        controller?.healthBar.isHidden = false
+        controller?.happinessBar.isHidden = false
+
 
         happinessLabel = SKLabelNode(fontNamed: "Chalkduster")
         happinessLabel!.text = ":) : 100%"

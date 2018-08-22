@@ -2,34 +2,41 @@
 //  GameViewController.swift
 //  tooth-ninja
 //
-//  Created by David Lopez on 7/4/18.
-//  Copyright © 2018 David Lopez. All rights reserved.
-//
+//  Created by David Lopez and Kushagra Vashisht on 7/10/18.
 
 import UIKit
 import SpriteKit
 
 protocol Controller {
+    var healthBar: UIView {get}
+    var happinessBar: UIView {get}
     func levelEnd(won: Bool)
 }
 
 /* GameViewController is in charge of managing the game. This includes creating and
  * changing levels, access to main menu, etc.
  */
-class GameViewController: UIViewController, Controller {
+class GameViewController: UIViewController, Controller
+{
+    //health bar for the game
+    
+    
     var currentLevel: Level? = nil
     var config: GameConfiguration?
     var skView: SKView?
     
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
+        setupLayout()
 
         skView = initialiseSKView()
-        
-        do {
+        do
+        {
             config = try GameConfiguration(file: "level_json_sample", size: skView!.bounds.size)
-
-        }catch let error{
+        }
+        catch let error
+        {
             print("Level cannot be loaded!")
             print(error)
         }
@@ -47,12 +54,30 @@ class GameViewController: UIViewController, Controller {
         skView!.presentScene(currentLevel)
     }
     
-    override var prefersStatusBarHidden: Bool {
+    let healthBar: UIView =
+    {
+        let bar = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        bar.translatesAutoresizingMaskIntoConstraints = false
+        bar.backgroundColor = UIColor(red:0.88, green:0.16, blue:0.42, alpha:1.0)
+        return bar
+    }()
+    
+    let happinessBar: UIView =
+    {
+        let bar = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        bar.translatesAutoresizingMaskIntoConstraints = false
+        bar.backgroundColor = UIColor(red:0.36, green:0.60, blue:0.88, alpha:1.0)
+        return bar
+    }()
+    
+    override var prefersStatusBarHidden: Bool
+    {
         return true
     }
 
     /* Initialises the SKView where we display the game */
-    private func initialiseSKView() -> SKView {
+    private func initialiseSKView() -> SKView
+    {
         let skView = view as! SKView
         skView.showsFPS = true
         skView.showsPhysics = false
@@ -71,7 +96,6 @@ class GameViewController: UIViewController, Controller {
         }else{
             nextLevelId = currentLevel!.number
         }
-
         currentLevel!.removeAllChildren()
 
         let newTeethArray = config!.getTeethByLevel(id: nextLevelId)
@@ -82,7 +106,24 @@ class GameViewController: UIViewController, Controller {
         let reveal = SKTransition.flipHorizontal(withDuration: 0.5)
         let gameOverScene = GameOverScene(size: currentLevel!.size, won: won, nextScene: currentLevel!)
         skView?.presentScene(gameOverScene, transition: reveal)
+    }
+    private func setupLayout()
+    {
+        let whiteView = UIView()
+        whiteView.backgroundColor = .clear
+        
+        let bottomControlsContainer = UIStackView(arrangedSubviews: [healthBar, whiteView, happinessBar])
+        
+        bottomControlsContainer.translatesAutoresizingMaskIntoConstraints = false
+        bottomControlsContainer.distribution = .fillEqually
 
+        view.addSubview(bottomControlsContainer)
+        
+        bottomControlsContainer.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        bottomControlsContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        bottomControlsContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        bottomControlsContainer.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        bottomControlsContainer.spacing = 100
     }
     
 }
