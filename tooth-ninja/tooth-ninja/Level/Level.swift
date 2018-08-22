@@ -253,4 +253,8 @@ class Level: SKScene, SKPhysicsContactDelegate, BaseLevel, LevelController {
 
 
     }
+
+    func influx() {
+        levelExecution.influx()
+    }
 }

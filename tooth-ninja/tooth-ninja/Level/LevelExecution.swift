@@ -117,6 +117,7 @@ class LevelPhysics {
             level.happiness -= MINUS_HAPPINESS
         }else if (food.kind == BAD) {
             level.happiness += PLUS_HAPPINESS
+            level.levelExecution.influx()
         } else if (food.kind == SHIELD) {
             giveShield()
         }
@@ -196,13 +197,13 @@ class LevelExecution {
     /* This function is in charge of spawning food and bacteria and giving them the action to
      * approach the teeth in the level.
      */
-    func spawnObjects () {
+    func spawnObjects (influx: Bool) {
         let proba = random(min: 0, max: 100)    // probability, if > 90 it's food else bacteria
         print(proba)
         
         let objectToAdd : GameObject
         
-        if (proba < 80) {
+        if (proba < 80) || influx {
             let index = randomIndex(bacteriaArray.count)
             objectToAdd = bacteriaArray[index].copy() as! GameObject
             objectToAdd.position = generateRandomPosition(width: level.size.width, height: level.size.height)
@@ -234,8 +235,27 @@ class LevelExecution {
     }
 
     func runLevel() {
+        let s1 = SKAction.run {
+            self.spawnObjects(influx: false)
+        }
         level.run(SKAction.repeatForever(SKAction.sequence([
-            SKAction.run(spawnObjects),SKAction.wait(forDuration: 2.0)])))
+            s1, SKAction.wait(forDuration: 2.0)])))
+    }
+
+    func influx() {
+        let s1 = SKAction.run {
+            self.spawnObjects(influx: true)
+        }
+        let influx = SKAction.repeat(s1, count: 5)
+        let action = SKAction.sequence([
+            influx,
+            SKAction.wait(forDuration: 2),
+            influx,
+            SKAction.wait(forDuration: 2),
+            influx,
+            SKAction.wait(forDuration: 2)
+            ])
+        level.run(action)
     }
 
     func takeHitAnimation() {
