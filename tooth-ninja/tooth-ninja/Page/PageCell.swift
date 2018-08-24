@@ -28,7 +28,7 @@ class PageCell: UICollectionViewCell {
     }
     
     private let bearImageView: UIImageView = {
-        let imageView = UIImageView(image: #imageLiteral(resourceName: "bear_first"))
+        let imageView = UIImageView(image: #imageLiteral(resourceName: "myimage"))
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
         return imageView

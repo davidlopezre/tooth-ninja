@@ -97,6 +97,7 @@ class GameViewController: UIViewController, Controller
         let gameOverScene = GameOverScene(size: currentLevel!.size, won: won, nextScene: nextLevel)
         skView?.presentScene(gameOverScene, transition: reveal)
     }
+    
     private func setupLayout()
     {
         let whiteView = UIView()

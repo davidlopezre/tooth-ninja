@@ -1,10 +1,6 @@
 //
 //  SwipingController+UICollectionView.swift
 //  autolayout_lbta
-//
-//  Created by Brian Voong on 10/27/17.
-//  Copyright © 2017 Lets Build That App. All rights reserved.
-//
 
 import UIKit
 
