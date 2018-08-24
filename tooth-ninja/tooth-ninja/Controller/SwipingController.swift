@@ -16,13 +16,13 @@ extension UIColor
 
 class SwipingController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
-    let pages = [
-        Page(imageName: "bear_first", headerText: "Join use today in our fun and games!", bodyText: "Are you ready for loads and loads of fun? Don't wait any longer! We hope to see you in our stores soon."),
-        Page(imageName: "heart_second", headerText: "Subscribe and get coupons on our daily events", bodyText: "Get notified of the savings immediately when we announce them on our website. Make sure to also give us any feedback you have."),
-        Page(imageName: "leaf_third", headerText: "VIP members special services", bodyText: ""),
-        Page(imageName: "bear_first", headerText: "Join use today in our fun and games!", bodyText: "Are you ready for loads and loads of fun? Don't wait any longer! We hope to see you in our stores soon."),
-        Page(imageName: "heart_second", headerText: "Subscribe and get coupons on our daily events", bodyText: "Get notified of the savings immediately when we announce them on our website. Make sure to also give us any feedback you have."),
-        Page(imageName: "leaf_third", headerText: "VIP members special services", bodyText: "")
+    let pages =
+        [
+        Page(imageName: "brush", headerText: "Did you know?", bodyText: "Children should only start using toothpaste after 18 months of age? Before 6 years of age, children should use a pea-sized amount of children’s toothpaste, which has a lower concentration of fluoride (500-600 ppm) compared to adult toothpaste (>1000 ppm)"),
+        Page(imageName: "notification", headerText: "Did you know?", bodyText: "Snacking in between meals can increase your chances of tooth decay? Sugary foods eaten during meal times have a smaller negative impact on your teeth compared to when eaten in-between meal times."),
+        Page(imageName: "notification", headerText: "Did you know?", bodyText: "Your toothbrush should be replaced when the bristles start to fray? This is usually around 3 months after you start using a new toothbrush (or toothbrush head)."),
+        Page(imageName: "notification", headerText: "Did you know?", bodyText: "Tooth decay is caused by bacteria that stick to tooth surfaces and produce acids after digesting sugars from the food you eat?"),
+        Page(imageName: "notification", headerText: "Swipe to eliminate the bacteria and protect the teeth from tooth decay!", bodyText: "")
     ]
 
     private let previousButton: UIButton = {
