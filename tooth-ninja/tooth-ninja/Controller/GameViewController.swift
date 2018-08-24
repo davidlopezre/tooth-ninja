@@ -110,7 +110,7 @@ class GameViewController: UIViewController, Controller
 
         view.addSubview(bottomControlsContainer)
         
-        bottomControlsContainer.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        bottomControlsContainer.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         bottomControlsContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         bottomControlsContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         bottomControlsContainer.heightAnchor.constraint(equalToConstant: 20).isActive = true
