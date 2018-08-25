@@ -38,14 +38,6 @@
       ],
       "food":
       [
-        {
-          "name": "food",
-          "kind": "shield",
-          "size_width": 50,
-          "size_height": 50,
-          "position_z": 2,
-          "image": "food_tap.png"
-        }
       ]
     },
     {
@@ -150,7 +142,15 @@
             "size_height": 50,
             "position_z": 2,
             "image": "food_tap.png"
-          }
+          },
+         {
+         "name": "food",
+         "kind": "bad",
+         "size_width": 50,
+         "size_height": 50,
+         "position_z": 2,
+         "image": "food_fruit_juice.png"
+         }
         ]
     },
     {
@@ -302,7 +302,15 @@
           "size_height": 50,
           "position_z": 2,
           "image": "food_tap.png"
-        }
+        },
+       {
+       "name": "food",
+       "kind": "neutral",
+       "size_width": 50,
+       "size_height": 50,
+       "position_z": 2,
+       "image": "cola_zero.png"
+       }
       ]
     }
   ]
