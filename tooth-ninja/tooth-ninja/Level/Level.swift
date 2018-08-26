@@ -11,11 +11,15 @@ import SpriteKit
 
 /* BaseLevel protocol includes the required fields and functions for a level */
 protocol BaseLevel {
+    var number: Int {get}
     var controller: Controller? {get}
     var scoreLabel: SKLabelNode? {get}
+    var healthLabel: SKLabelNode? {get}
+    var happinessLabel: SKLabelNode? {get}
     var backgroundFile: String? {get}
     var teethArray: [GameObject] {get set}   // array of teeth in a level
-    var otherArray: [GameObject] {get set}   // array of possible objects in a level
+    var bacteriaArray: [GameObject] {get set}   // array of possible objects in a level
+    var foodArray: [GameObject] {get set}
     var levelExecution: LevelExecution! {get}
     var levelPhysics: LevelPhysics! {get}
 }
@@ -37,11 +41,16 @@ extension BaseLevel {
  * controller of level completion or failure.
  */
 class Level: SKScene, SKPhysicsContactDelegate, BaseLevel, LevelController {
-    
+
+    let number: Int
     var controller: Controller?
     var scoreLabel: SKLabelNode?
+    var healthLabel: SKLabelNode?
+    var happinessLabel: SKLabelNode?
+    var shieldLabel: SKLabelNode?
     var teethArray: [GameObject]
-    var otherArray: [GameObject]
+    var bacteriaArray: [GameObject]
+    var foodArray: [GameObject]
     let backgroundFile: String?
     var levelExecution: LevelExecution!
     var levelPhysics: LevelPhysics!
@@ -66,6 +75,38 @@ class Level: SKScene, SKPhysicsContactDelegate, BaseLevel, LevelController {
             {
                 health = 0
             }
+            healthLabel?.text = "HP " + ": \(health)%"
+            
+            let bar = controller?.healthBar
+            print(bar?.frame.width)
+            
+            var newFrame = bar?.frame
+            
+            newFrame?.size.width = CGFloat(health);
+            newFrame?.size.height = 10;
+            
+            controller?.healthBar.frame = newFrame!
+            print(bar?.frame.width)
+        }
+    }
+
+    var happiness = 100 {
+        didSet {
+            if happiness > 100 {
+                happiness = 100
+            }else if (happiness < 0) {
+                happiness = 0
+            }
+            happinessLabel?.text = ":) : \(happiness)%"
+            
+            let bar = controller?.happinessBar
+            
+            var newFrame = bar?.frame
+            
+            newFrame?.size.width = CGFloat(happiness);
+            newFrame?.size.height = 10;
+            
+            controller?.happinessBar.frame = newFrame!
         }
     }
 
@@ -76,26 +117,30 @@ class Level: SKScene, SKPhysicsContactDelegate, BaseLevel, LevelController {
     // Set the initial value to 0
     var delta: CGPoint = .zero
 
-    init(size: CGSize, bgFile: String, teethArray: [GameObject], otherArray: [GameObject], c: Controller) {
+    init(number: Int, size: CGSize, bgFile: String, teethArray: [GameObject], bacteriaArray: [GameObject], foodArray: [GameObject], c: Controller) {
+        self.number = number
         self.teethArray = teethArray
         self.controller = c
         self.backgroundFile = bgFile
-        self.otherArray = otherArray
+        self.bacteriaArray = bacteriaArray
+        self.foodArray = foodArray
         super.init(size: size)
         // use the JSON thing to give the level the game elements
     }
 
     required public init?(coder aDecoder: NSCoder) {
+        number = 1
         teethArray = []
         backgroundFile = nil
-        otherArray = []
+        bacteriaArray = []
+        foodArray = []
         super.init(coder: aDecoder)
     }
 
     deinit{print("GameScene deinited")}
 
     public override func didMove(to view: SKView) {
-        levelExecution = LevelExecution(level: self, array: otherArray)
+        levelExecution = LevelExecution(level: self, bacteria: bacteriaArray, food: foodArray)
         levelPhysics = LevelPhysics(level: self)
         addBackgroundAndWidgets()
         physicsWorld.gravity = CGVector.zero
@@ -130,14 +175,31 @@ class Level: SKScene, SKPhysicsContactDelegate, BaseLevel, LevelController {
         scoreLabel!.position = CGPoint(x: size.width * 0.9, y: size.height * 0.86)
         addChild(scoreLabel!)
 
-        //healthLabel = SKLabelNode(fontNamed: "Chalkduster")
-        levelPhysics.controller?.healthBar.isHidden = false
-        levelPhysics.controller?.happinessBar.isHidden = false
-        //healthLabel!.text = "HP: 100%"
-        //healthLabel!.fontSize = 25
-        //healthLabel!.zPosition = 2
-        //healthLabel!.position = CGPoint(x: size.width * 0.1, y: size.height * 0.9)
-        //addChild(healthLabel!)
+        healthLabel = SKLabelNode(fontNamed: "Chalkduster")
+        healthLabel!.text = "HP : 100%"
+        healthLabel!.fontSize = 25
+        healthLabel!.zPosition = 2
+        healthLabel!.position = CGPoint(x: size.width * 0.1, y: size.height * 0.9)
+        addChild(healthLabel!)
+        
+        controller?.healthBar.isHidden = false
+        controller?.happinessBar.isHidden = false
+
+
+        happinessLabel = SKLabelNode(fontNamed: "Chalkduster")
+        happinessLabel!.text = ":) : 100%"
+        happinessLabel!.fontSize = 25
+        happinessLabel!.zPosition = 2
+        happinessLabel!.position = CGPoint(x: size.width * 0.1, y: size.height * 0.8)
+        addChild(happinessLabel!)
+
+        shieldLabel = SKLabelNode(fontNamed: "Chalkduster")
+        shieldLabel!.text = ""
+        shieldLabel!.fontColor = UIColor.green
+        shieldLabel!.fontSize = 25
+        shieldLabel!.zPosition = 2
+        shieldLabel!.position = CGPoint(x: size.width * 0.1, y: size.height * 0.1)
+        addChild(shieldLabel!)
 
     }
 
@@ -201,6 +263,12 @@ class Level: SKScene, SKPhysicsContactDelegate, BaseLevel, LevelController {
     // MARK: - FPS
 
     override func update(_ currentTime: TimeInterval) {
+        if (health <= 0) {
+            levelEnd(won: false)
+        }
+        if (levelPhysics.hasSticky > 0) {
+            levelPhysics.stickyEffect()
+        }
         // if the blade is not available return
         guard let blade = blade else {
             return
@@ -213,5 +281,11 @@ class Level: SKScene, SKPhysicsContactDelegate, BaseLevel, LevelController {
         // it's important to reset delta at this point,
         // You are telling the blade to only update his position when touchesMoved is called
         delta = .zero
+
+
+    }
+
+    func influx() {
+        levelExecution.influx()
     }
 }

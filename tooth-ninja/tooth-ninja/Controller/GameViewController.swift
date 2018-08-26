@@ -8,6 +8,8 @@ import UIKit
 import SpriteKit
 
 protocol Controller {
+    var healthBar: UIView {get}
+    var happinessBar: UIView {get}
     func levelEnd(won: Bool)
 }
 
@@ -38,14 +40,14 @@ class GameViewController: UIViewController, Controller
             print("Level cannot be loaded!")
             print(error)
         }
-        LevelPhysics.GlobalVariable.viewController = self
 
         let teethArray = config!.getTeethByLevel(id: 1)
-        let objectArray = config!.getObjectsByLevel(id: 1)
-        print(objectArray[0])
+        let bacteriaArray = config!.getObjectsByLevel(id: 1, name: "bacteria")
+        let foodArray = config!.getObjectsByLevel(id: 1, name: "food")
+        print(bacteriaArray[0])
         // Use the JSON file to open level 1
-        currentLevel = Level(size: skView!.bounds.size, bgFile: "background2.png",
-                teethArray: teethArray, otherArray: objectArray, c: self)
+        currentLevel = Level(number: 1, size: skView!.bounds.size, bgFile: "background2.png",
+                             teethArray: teethArray, bacteriaArray: bacteriaArray, foodArray: foodArray,  c: self)
 
         currentLevel?.scaleMode = SKSceneScaleMode.resizeFill
 
@@ -54,17 +56,17 @@ class GameViewController: UIViewController, Controller
     
     let healthBar: UIView =
     {
-        let bar = UIView(frame: CGRect(x: 0, y: 0, width: 50, height: 20))
+        let bar = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         bar.translatesAutoresizingMaskIntoConstraints = false
-        bar.backgroundColor = UIColor.red
+        bar.backgroundColor = UIColor(red:0.88, green:0.16, blue:0.42, alpha:1.0)
         return bar
     }()
     
     let happinessBar: UIView =
     {
-        let bar = UIView(frame: CGRect(x: 0, y: 0, width: 50, height: 20))
+        let bar = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         bar.translatesAutoresizingMaskIntoConstraints = false
-        bar.backgroundColor = UIColor.yellow
+        bar.backgroundColor = UIColor(red:0.36, green:0.60, blue:0.88, alpha:1.0)
         return bar
     }()
     
@@ -78,7 +80,7 @@ class GameViewController: UIViewController, Controller
     {
         let skView = view as! SKView
         skView.showsFPS = true
-        skView.showsPhysics = true
+        skView.showsPhysics = false
         skView.showsNodeCount = true
         skView.ignoresSiblingOrder = true
         skView.isMultipleTouchEnabled = false
@@ -86,15 +88,23 @@ class GameViewController: UIViewController, Controller
     }
 
     /* This method is called by the currentLevel when it is completed */
-    func levelEnd(won: Bool)
-    {
+    func levelEnd(won: Bool) {
+        let nextLevelId : Int
+        // TODO (4) : This just loops on level 3 forever
+        if (won && currentLevel!.number < 3) {
+            nextLevelId = currentLevel!.number + 1
+        }else{
+            nextLevelId = currentLevel!.number
+        }
         currentLevel!.removeAllChildren()
-        let newTeethArray = copyArray(array: currentLevel!.teethArray) as! [GameObject]
-        let newOtherArray = copyArray(array: currentLevel!.otherArray) as! [GameObject]
-        let nextLevel = Level(size: currentLevel!.size, bgFile: currentLevel!.backgroundFile!, teethArray: newTeethArray,
-                otherArray: newOtherArray, c: self)
+
+        let newTeethArray = config!.getTeethByLevel(id: nextLevelId)
+        let newBacteriaArray = config!.getObjectsByLevel(id: nextLevelId, name: "bacteria")
+        let newFoodArray = config!.getObjectsByLevel(id: nextLevelId, name: "food")
+        currentLevel = Level(number: nextLevelId, size: currentLevel!.size, bgFile: currentLevel!.backgroundFile!, teethArray: newTeethArray,
+                             bacteriaArray: newBacteriaArray, foodArray: newFoodArray, c: self)
         let reveal = SKTransition.flipHorizontal(withDuration: 0.5)
-        let gameOverScene = GameOverScene(size: currentLevel!.size, won: won, nextScene: nextLevel)
+        let gameOverScene = GameOverScene(size: currentLevel!.size, won: won, nextScene: currentLevel!)
         skView?.presentScene(gameOverScene, transition: reveal)
     }
     

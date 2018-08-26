@@ -6,6 +6,23 @@
 import Foundation
 import SpriteKit
 
+/* Functions and statements to set and query UserDefaults */
+
+let defaults = UserDefaults.standard
+
+enum DefaultTypes: String {
+    case BacteriaSize
+    case Speed
+}
+
+func setDefaults(type: DefaultTypes, value: Double) {
+    defaults.set(value, forKey: type.rawValue)
+}
+
+func queryDefaults(type: DefaultTypes) -> Double {
+    return defaults.double(forKey: type.rawValue)
+}
+
 /* Decodable struct to be able to use JSONDecoder to parse */
 struct GameConfigurationDecodable: Decodable {
     var speed: Double
@@ -23,6 +40,7 @@ struct GameConfigurationDecodable: Decodable {
            var kind: String?
            var position_x: Double?
            var position_y: Double?
+           var rotation: Double?
            var position_z: Int
            var size_width: Double
            var size_height: Double
@@ -31,7 +49,7 @@ struct GameConfigurationDecodable: Decodable {
    }
 }
 
-/* JSONLevelParser class provides methods to parse JSON files and creating a GameElementFactory for */
+/* GameConfiguration class reads the JSON file with the level specs */
 class GameConfiguration {
     static var screenSize: CGSize?
 
@@ -63,17 +81,19 @@ class GameConfiguration {
         return array
     }
 
-    func getObjectsByLevel(id: Int) -> [GameObject] {
+    func getObjectsByLevel(id: Int, name: String) -> [GameObject] {
         var array: [GameObject] = []
-        for bacteria in parsed.levels[id - 1].bacteria {
-            print(bacteria)
-            array.append(GameObject(type: GameObjectType.Other, properties: bacteria))
-        }
-        for food in parsed.levels[id - 1].food {
-            print(food)
-            array.append(GameObject(type: GameObjectType.Other, properties: food))
+        if name == "bacteria" {
+            for bacteria in parsed.levels[id - 1].bacteria {
+                print(bacteria)
+                array.append(GameObject(type: GameObjectType.Other, properties: bacteria))
+            }
+        } else if name == "food" {
+            for food in parsed.levels[id - 1].food {
+                print(food)
+                array.append(GameObject(type: GameObjectType.Other, properties: food))
+            }
         }
         return array
     }
-
 }

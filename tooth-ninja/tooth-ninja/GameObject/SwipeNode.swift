@@ -5,7 +5,7 @@ class SwipeNode: SKNode {
     
     var emitterNode: SKEmitterNode {
         let emitterNode: SKEmitterNode = SKEmitterNode()
-        emitterNode.particleTexture = SKTexture(imageNamed: "toothbrush-exp")
+        emitterNode.particleTexture = SKTexture(imageNamed: "spark")
         emitterNode.particleBirthRate = 3000
         
         emitterNode.particleLifetime = 0.2
