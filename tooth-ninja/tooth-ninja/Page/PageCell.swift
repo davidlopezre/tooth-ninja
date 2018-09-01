@@ -1,10 +1,6 @@
 //
 //  PageCell.swift
 //  autolayout_lbta
-//
-//  Created by Brian Voong on 10/12/17.
-//  Copyright © 2017 Lets Build That App. All rights reserved.
-//
 
 import UIKit
 
@@ -37,11 +33,11 @@ class PageCell: UICollectionViewCell {
     private let descriptionTextView: UITextView = {
         let textView = UITextView()
         
-        let attributedText = NSMutableAttributedString(string: "Join us today in our fun and games!", attributes: [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 18)])
+//        let attributedText = NSMutableAttributedString(string: "Join us today in our fun and games!", attributes: [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 18)])
+//
+//        attributedText.append(NSAttributedString(string: "\n\n\nAre you ready for loads and loads of fun? Don't wait any longer! We hope to see you in our stores soon.", attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 13), NSAttributedStringKey.foregroundColor: UIColor.gray]))
         
-        attributedText.append(NSAttributedString(string: "\n\n\nAre you ready for loads and loads of fun? Don't wait any longer! We hope to see you in our stores soon.", attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 13), NSAttributedStringKey.foregroundColor: UIColor.gray]))
-        
-        textView.attributedText = attributedText
+        //textView.attributedText = attributedText
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.textAlignment = .center
         textView.isEditable = false
@@ -73,9 +69,9 @@ class PageCell: UICollectionViewCell {
         
         addSubview(descriptionTextView)
         descriptionTextView.topAnchor.constraint(equalTo: topImageContainerView.bottomAnchor).isActive = true
-        descriptionTextView.leftAnchor.constraint(equalTo: leftAnchor, constant: 24).isActive = true
-        descriptionTextView.rightAnchor.constraint(equalTo: rightAnchor, constant: -24).isActive = true
-        descriptionTextView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0).isActive = true
+        descriptionTextView.safeAreaLayoutGuide.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 24).isActive = true
+        descriptionTextView.safeAreaLayoutGuide.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -24).isActive = true
+        descriptionTextView.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: 0).isActive = true
     }
     
     required init?(coder aDecoder: NSCoder) {

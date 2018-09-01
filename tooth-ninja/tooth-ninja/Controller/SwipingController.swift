@@ -9,7 +9,6 @@ extension UIColor
     static var mainPink = UIColor(red: 232/255, green: 68/255, blue: 133/255, alpha: 1)
 }
 
-
 class SwipingController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     let pages =
@@ -19,8 +18,8 @@ class SwipingController: UICollectionViewController, UICollectionViewDelegateFlo
         Page(imageName: "notification", headerText: "Did you know?", bodyText: "Your toothbrush should be replaced when the bristles start to fray? This is usually around 3 months after you start using a new toothbrush (or toothbrush head)."),
         Page(imageName: "notification", headerText: "Did you know?", bodyText: "Tooth decay is caused by bacteria that stick to tooth surfaces and produce acids after digesting sugars from the food you eat?"),
         Page(imageName: "notification", headerText: "Swipe to eliminate the bacteria and protect the teeth from tooth decay!", bodyText: "")
-    ]
-
+        ]
+    
     private let previousButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("PREV", for: .normal)
@@ -78,10 +77,10 @@ class SwipingController: UICollectionViewController, UICollectionViewDelegateFlo
         view.addSubview(bottomControlsStackView)
         
         NSLayoutConstraint.activate([
-            bottomControlsStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            bottomControlsStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            bottomControlsStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            bottomControlsStackView.heightAnchor.constraint(equalToConstant: 50)
+            bottomControlsStackView.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            bottomControlsStackView.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            bottomControlsStackView.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            bottomControlsStackView.safeAreaLayoutGuide.heightAnchor.constraint(equalToConstant: 50)
             ])
     }
     
@@ -100,8 +99,6 @@ class SwipingController: UICollectionViewController, UICollectionViewDelegateFlo
         
         collectionView?.backgroundColor = .white
         collectionView?.register(PageCell.self, forCellWithReuseIdentifier: "cellId")
-        
         collectionView?.isPagingEnabled = true
     }
-    
 }

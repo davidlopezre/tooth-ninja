@@ -75,10 +75,10 @@ class Level: SKScene, SKPhysicsContactDelegate, BaseLevel, LevelController {
             {
                 health = 0
             }
-            healthLabel?.text = "HP " + ": \(health)%"
+            healthLabel?.text = "Health " + ": \(health)%"
             
             let bar = controller?.healthBar
-            print(bar?.frame.width)
+            print(bar!.frame.width)
             
             var newFrame = bar?.frame
             
@@ -86,7 +86,7 @@ class Level: SKScene, SKPhysicsContactDelegate, BaseLevel, LevelController {
             newFrame?.size.height = 10;
             
             controller?.healthBar.frame = newFrame!
-            print(bar?.frame.width)
+            print(bar!.frame.width)
         }
     }
 
@@ -97,7 +97,7 @@ class Level: SKScene, SKPhysicsContactDelegate, BaseLevel, LevelController {
             }else if (happiness < 0) {
                 happiness = 0
             }
-            happinessLabel?.text = ":) : \(happiness)%"
+            happinessLabel?.text = "Happiness : \(happiness)%"
             
             let bar = controller?.happinessBar
             
@@ -171,13 +171,13 @@ class Level: SKScene, SKPhysicsContactDelegate, BaseLevel, LevelController {
         scoreLabel = SKLabelNode(fontNamed: "Chalkduster")
         scoreLabel!.text = "Score: 0"
         scoreLabel!.zPosition = 2
-        scoreLabel!.fontSize = 25
+        scoreLabel!.fontSize = 20
         scoreLabel!.position = CGPoint(x: size.width * 0.9, y: size.height * 0.86)
         addChild(scoreLabel!)
 
         healthLabel = SKLabelNode(fontNamed: "Chalkduster")
-        healthLabel!.text = "HP : 100%"
-        healthLabel!.fontSize = 25
+        healthLabel!.text = "Health : 100%"
+        healthLabel!.fontSize = 20
         healthLabel!.zPosition = 2
         healthLabel!.position = CGPoint(x: size.width * 0.1, y: size.height * 0.9)
         addChild(healthLabel!)
@@ -187,10 +187,10 @@ class Level: SKScene, SKPhysicsContactDelegate, BaseLevel, LevelController {
 
 
         happinessLabel = SKLabelNode(fontNamed: "Chalkduster")
-        happinessLabel!.text = ":) : 100%"
-        happinessLabel!.fontSize = 25
+        happinessLabel!.text = "Happiness : 100%"
+        happinessLabel!.fontSize = 20
         happinessLabel!.zPosition = 2
-        happinessLabel!.position = CGPoint(x: size.width * 0.1, y: size.height * 0.8)
+        happinessLabel!.position = CGPoint(x: size.width * 0.13, y: size.height * 0.8)
         addChild(happinessLabel!)
 
         shieldLabel = SKLabelNode(fontNamed: "Chalkduster")

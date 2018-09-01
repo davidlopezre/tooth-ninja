@@ -31,7 +31,7 @@ func generateRandomPosition(width: CGFloat, height: CGFloat) -> CGPoint {
     pos1.x = helperWidth[randomIndex(2)]
     possibilities.append(pos1)
 
-    var pos2: CGPoint = CGPoint()
+    let pos2: CGPoint = CGPoint()
     pos1.x = random(min: 0, max: width)
     pos1.y = helperHeight[randomIndex(2)]
     possibilities.append(pos2)

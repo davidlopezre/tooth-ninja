@@ -11,5 +11,5 @@ let z = x.map { $0.copy() }
 
 func copyArray (array: [AnyObject]) -> [AnyObject]{
     let returnArray = array.map { $0.copy() }
-    return (returnArray as? [AnyObject])!
+    return (returnArray as [AnyObject])
 }
