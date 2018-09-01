@@ -29,6 +29,11 @@ class GameViewController: UIViewController, Controller
     {
         super.viewDidLoad()
         setupLayout()
+        let longPressGestRecg = UILongPressGestureRecognizer(target: self, action: #selector(openMenu(press:)))
+        navigationController?.isNavigationBarHidden = true
+        longPressGestRecg.minimumPressDuration = 3.0
+        
+        hiddenView.addGestureRecognizer(longPressGestRecg)
 
         skView = initialiseSKView()
         do
@@ -127,5 +132,29 @@ class GameViewController: UIViewController, Controller
         bottomControlsContainer.spacing = 100
     }
     
+    func openMenu(press: UILongPressGestureRecognizer)
+    {
+        if press.state == .began
+        {
+            navigationController?.isNavigationBarHidden = false
+            print("TRIGGERED")
+            if(menuShowing)
+            {
+                leading.constant = -170
+            }
+            else
+            {
+                leading.constant = 0
+                
+                UIView.animate(withDuration: 0.3, animations:
+                    {
+                        self.view.layoutIfNeeded()
+                })
+            }
+            menuShowing = !menuShowing
+            //navigationController?.isNavigationBarHidden = true
+        }
+        
+    }
 }
 
