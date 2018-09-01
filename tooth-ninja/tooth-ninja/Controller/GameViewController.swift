@@ -21,6 +21,7 @@ class GameViewController: UIViewController, Controller
     //health bar for the game
     
     
+    @IBOutlet var hiddenView: UIView!
     var currentLevel: Level? = nil
     var config: GameConfiguration?
     var skView: SKView?
@@ -29,6 +30,8 @@ class GameViewController: UIViewController, Controller
     {
         super.viewDidLoad()
         setupLayout()
+        
+        // ADDING THE HIDDEN VIEW CONTROLS FOR THE LONG PRESS GESTURE RECOGNISER HERE
         let longPressGestRecg = UILongPressGestureRecognizer(target: self, action: #selector(openMenu(press:)))
         navigationController?.isNavigationBarHidden = true
         longPressGestRecg.minimumPressDuration = 3.0
@@ -132,29 +135,15 @@ class GameViewController: UIViewController, Controller
         bottomControlsContainer.spacing = 100
     }
     
-    func openMenu(press: UILongPressGestureRecognizer)
+    @objc func openMenu(press: UILongPressGestureRecognizer)
     {
         if press.state == .began
         {
-            navigationController?.isNavigationBarHidden = false
             print("TRIGGERED")
-            if(menuShowing)
-            {
-                leading.constant = -170
-            }
-            else
-            {
-                leading.constant = 0
-                
-                UIView.animate(withDuration: 0.3, animations:
-                    {
-                        self.view.layoutIfNeeded()
-                })
-            }
-            menuShowing = !menuShowing
-            //navigationController?.isNavigationBarHidden = true
+            let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            let hiddenViewController = storyBoard.instantiateViewController(withIdentifier: "hiddenViewController")
+            self.present(hiddenViewController, animated: true, completion: nil)
         }
-        
     }
 }
 
