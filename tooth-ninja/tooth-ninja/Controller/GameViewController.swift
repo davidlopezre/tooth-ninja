@@ -33,7 +33,7 @@ class GameViewController: UIViewController, Controller
         
         // ADDING THE HIDDEN VIEW CONTROLS FOR THE LONG PRESS GESTURE RECOGNISER HERE
         let longPressGestRecg = UILongPressGestureRecognizer(target: self, action: #selector(openMenu(press:)))
-        navigationController?.isNavigationBarHidden = true
+        //navigationController?.isNavigationBarHidden = true
         longPressGestRecg.minimumPressDuration = 3.0
         
         hiddenView.addGestureRecognizer(longPressGestRecg)
@@ -143,7 +143,7 @@ class GameViewController: UIViewController, Controller
             let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
             let hiddenViewController = storyBoard.instantiateViewController(withIdentifier: "hiddenViewController")
             self.present(hiddenViewController, animated: true, completion: nil)
-            hiddenViewController.isNavigationBarHidden = true
+            //hiddenViewController.isNavigationBarHidden = true
         }
     }
 }
