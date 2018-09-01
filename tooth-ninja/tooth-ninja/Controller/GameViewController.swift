@@ -143,6 +143,7 @@ class GameViewController: UIViewController, Controller
             let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
             let hiddenViewController = storyBoard.instantiateViewController(withIdentifier: "hiddenViewController")
             self.present(hiddenViewController, animated: true, completion: nil)
+            hiddenViewController.isNavigationBarHidden = true
         }
     }
 }
