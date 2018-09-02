@@ -144,8 +144,9 @@ class GameViewController: UIViewController, Controller
             print("TRIGGERED")
             let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
             let hiddenViewController = storyBoard.instantiateViewController(withIdentifier: "hiddenViewController")
-            self.present(hiddenViewController, animated: true, completion: nil)
-            hiddenViewController.navigationController?.isNavigationBarHidden = false
+            //self.present(hiddenViewController, animated: true, completion: nil)
+            self.navigationController?.pushViewController(hiddenViewController, animated: true)
+            //hiddenViewController.navigationController?.isNavigationBarHidden = false
         }
     }
 }
