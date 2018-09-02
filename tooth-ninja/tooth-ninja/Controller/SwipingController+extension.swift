@@ -23,5 +23,4 @@ extension SwipingController {
             
         }
     }
-    
 }

@@ -23,7 +23,23 @@
                     </view>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-534" y="52"/>
+            <point key="canvasLocation" x="-256" y="10"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="xcf-rF-yjy">
+            <objects>
+                <navigationController hidesBarsOnSwipe="YES" id="pjT-AS-J4c" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="WcB-bh-jw1">
+                        <rect key="frame" x="0.0" y="0.0" width="812" height="32"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="vaq-ai-42h" kind="show" id="xOm-Jd-MFh"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bwf-y6-x04" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-970" y="9"/>
         </scene>
         <!--Game View Controller-->
         <scene sceneID="tXr-a1-R10">
@@ -68,6 +84,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="425.03748125937034" y="52"/>
+
         </scene>
         <!--Configuration Controller-->
         <scene sceneID="Hfq-Nm-JTM">
@@ -147,7 +164,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qP8-3a-hTB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="892"/>
+            <point key="canvasLocation" x="328" y="1014"/>
         </scene>
         <!--Starting View Controller-->
         <scene sceneID="TFL-Ky-1aG">

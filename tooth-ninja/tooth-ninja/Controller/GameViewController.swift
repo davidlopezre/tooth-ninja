@@ -33,7 +33,6 @@ class GameViewController: UIViewController, Controller
         
         // ADDING THE HIDDEN VIEW CONTROLS FOR THE LONG PRESS GESTURE RECOGNISER HERE
         let longPressGestRecg = UILongPressGestureRecognizer(target: self, action: #selector(openMenu(press:)))
-        //navigationController?.isNavigationBarHidden = true
         longPressGestRecg.minimumPressDuration = 3.0
         
         hiddenView.addGestureRecognizer(longPressGestRecg)
@@ -88,7 +87,6 @@ class GameViewController: UIViewController, Controller
     {
         let skView = view as! SKView
         skView.showsPhysics = false
-//        skView.showsNodeCount = true
         skView.ignoresSiblingOrder = true
         skView.isMultipleTouchEnabled = false
         return skView
@@ -111,6 +109,9 @@ class GameViewController: UIViewController, Controller
         currentLevel = Level(number: nextLevelId, size: currentLevel!.size, bgFile: currentLevel!.backgroundFile!, teethArray: newTeethArray,
                              bacteriaArray: newBacteriaArray, foodArray: newFoodArray, c: self)
         let reveal = SKTransition.flipHorizontal(withDuration: 0.5)
+        print("HERE")
+        self.healthBar.isHidden = true
+        self.happinessBar.isHidden = true
         let gameOverScene = GameOverScene(size: currentLevel!.size, won: won, nextScene: currentLevel!)
         skView?.presentScene(gameOverScene, transition: reveal)
     }
@@ -142,7 +143,7 @@ class GameViewController: UIViewController, Controller
             let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
             let hiddenViewController = storyBoard.instantiateViewController(withIdentifier: "hiddenViewController")
             self.present(hiddenViewController, animated: true, completion: nil)
-            //hiddenViewController.isNavigationBarHidden = true
+            hiddenViewController.navigationController?.isNavigationBarHidden = false
         }
     }
     
