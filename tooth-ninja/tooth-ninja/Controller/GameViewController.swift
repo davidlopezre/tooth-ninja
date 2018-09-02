@@ -111,6 +111,9 @@ class GameViewController: UIViewController, Controller
         currentLevel = Level(number: nextLevelId, size: currentLevel!.size, bgFile: currentLevel!.backgroundFile!, teethArray: newTeethArray,
                              bacteriaArray: newBacteriaArray, foodArray: newFoodArray, c: self)
         let reveal = SKTransition.flipHorizontal(withDuration: 0.5)
+        print("HERE")
+        self.healthBar.isHidden = true
+        self.happinessBar.isHidden = true
         let gameOverScene = GameOverScene(size: currentLevel!.size, won: won, nextScene: currentLevel!)
         skView?.presentScene(gameOverScene, transition: reveal)
     }
