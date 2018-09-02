@@ -156,7 +156,8 @@ class Level: SKScene, SKPhysicsContactDelegate, BaseLevel, LevelController {
         levelPhysics.didBegin(contact)
     }
 
-    /* Sets the background of the level and initialises the health and score bars */
+    /* Sets the background of the level and initialises the health and score bars and adds the
+     tooth brush icon */
     func addBackgroundAndWidgets() {
         
         if let bgFile = backgroundFile {
@@ -180,7 +181,7 @@ class Level: SKScene, SKPhysicsContactDelegate, BaseLevel, LevelController {
         healthLabel!.fontSize = 20
         healthLabel!.zPosition = 2
         healthLabel!.position = CGPoint(x: size.width * 0.1, y: size.height * 0.9)
-        addChild(healthLabel!)
+//        addChild(healthLabel!)
         
         controller?.healthBar.isHidden = false
         controller?.happinessBar.isHidden = false
@@ -191,7 +192,7 @@ class Level: SKScene, SKPhysicsContactDelegate, BaseLevel, LevelController {
         happinessLabel!.fontSize = 20
         happinessLabel!.zPosition = 2
         happinessLabel!.position = CGPoint(x: size.width * 0.13, y: size.height * 0.8)
-        addChild(happinessLabel!)
+//        addChild(happinessLabel!)
 
         shieldLabel = SKLabelNode(fontNamed: "Chalkduster")
         shieldLabel!.text = ""
@@ -200,6 +201,18 @@ class Level: SKScene, SKPhysicsContactDelegate, BaseLevel, LevelController {
         shieldLabel!.zPosition = 2
         shieldLabel!.position = CGPoint(x: size.width * 0.1, y: size.height * 0.1)
         addChild(shieldLabel!)
+        
+        let toothBrushIcon = SKSpriteNode(imageNamed: "toothbrush")
+        toothBrushIcon.zPosition = 2
+        toothBrushIcon.size = CGSize(width: 30, height: 30)
+        
+        let circle = SKShapeNode(circleOfRadius: 25)
+        circle.zPosition = 2
+        circle.strokeColor = UIColor.white
+        circle.position = CGPoint(x: size.width * 0.95, y: size.height * 0.1)
+        circle.addChild(toothBrushIcon)
+        
+        addChild(circle)
 
     }
 

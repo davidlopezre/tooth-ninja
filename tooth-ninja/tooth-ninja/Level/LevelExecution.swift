@@ -80,7 +80,7 @@ class LevelPhysics {
 
     func bacteriaCollidesWithTooth(bacteria: GameObject) {
         print("Collision: Bacteria-Tooth")
-        level.levelExecution.takeHitAnimation()
+//        level.levelExecution.takeHitAnimation()
         if (hasShield) {
             removeShield()
             bacteria.removeFromParent()
@@ -187,9 +187,8 @@ class LevelExecution {
     var level: Level
     var bacteria: [GameObject] = []
 
-    private var defaultSpeed = 1.0
+    private var defaultSpeed = queryDefaults(type: DefaultTypes.Speed)
     private var defaultSize = 1.0
-
 
     init(level: Level, bacteria: [GameObject], food: [GameObject]) {
         self.level = level
@@ -222,7 +221,10 @@ class LevelExecution {
         }
         
         // Determine speed of the object
-        let actualDuration = CGFloat(defaultSpeed) * random(min: CGFloat(1.0), max: CGFloat(3.0))
+        var actualDuration = random(min: CGFloat(1.0), max: CGFloat(4.0))
+        if (defaultSpeed > 0) {
+            actualDuration *= CGFloat(defaultSpeed)
+        }
 
         // Create the actions
         let teeth = level["tooth"]

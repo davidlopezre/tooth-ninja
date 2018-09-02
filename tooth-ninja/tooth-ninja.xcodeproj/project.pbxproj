@@ -11,6 +11,8 @@
 		611788D62078B0B000FC8590 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 611788D42078B0B000FC8590 /* Main.storyboard */; };
 		611788D82078B0B000FC8590 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 611788D72078B0B000FC8590 /* Assets.xcassets */; };
 		611788DB2078B0B000FC8590 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 611788D92078B0B000FC8590 /* LaunchScreen.storyboard */; };
+		619298C9213BE04300D0C818 /* ConfigurationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619298C8213BE04300D0C818 /* ConfigurationController.swift */; };
+		61FDE6FB213AD7D700177C74 /* StartingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FDE6FA213AD7D700177C74 /* StartingViewController.swift */; };
 		CBC211725040A2B6BAB13F13 /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC21F80435DE8D0AEA45AA1 /* Level.swift */; };
 		CBC215186666379A3BB22368 /* SwipeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC2110A61FF06C1C8BD5A66 /* SwipeNode.swift */; };
 		CBC216A6402B853F690780C0 /* GameObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC21D72AB6822F596C08DB1 /* GameObject.swift */; };
@@ -35,6 +37,8 @@
 		611788D72078B0B000FC8590 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		611788DA2078B0B000FC8590 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		611788DC2078B0B000FC8590 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		619298C8213BE04300D0C818 /* ConfigurationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationController.swift; sourceTree = "<group>"; };
+		61FDE6FA213AD7D700177C74 /* StartingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartingViewController.swift; sourceTree = "<group>"; };
 		CBC2110A61FF06C1C8BD5A66 /* SwipeNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeNode.swift; sourceTree = "<group>"; };
 		CBC21199A292CDE54C19F27C /* GameOverScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
 		CBC213FE966B59811FACAB1B /* GameConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameConfiguration.swift; sourceTree = "<group>"; };
@@ -141,6 +145,8 @@
 				FD72050C210A1CE500AAE74B /* SwipingController+UICollectionView.swift */,
 				FD72050E210A1D0100AAE74B /* SwipingController.swift */,
 				FD720511210A1D0300AAE74B /* SwipingController+extension.swift */,
+				61FDE6FA213AD7D700177C74 /* StartingViewController.swift */,
+				619298C8213BE04300D0C818 /* ConfigurationController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -229,10 +235,12 @@
 			files = (
 				FD72050D210A1CE600AAE74B /* SwipingController+UICollectionView.swift in Sources */,
 				611788CB2078B0AF00FC8590 /* AppDelegate.swift in Sources */,
+				61FDE6FB213AD7D700177C74 /* StartingViewController.swift in Sources */,
 				CBC211725040A2B6BAB13F13 /* Level.swift in Sources */,
 				CBC218168A8AFFA64ED06F1B /* LevelExecution.swift in Sources */,
 				CBC21A2C25E6F9756BB4E45B /* GameConfiguration.swift in Sources */,
 				CBC215186666379A3BB22368 /* SwipeNode.swift in Sources */,
+				619298C9213BE04300D0C818 /* ConfigurationController.swift in Sources */,
 				FD720513210A1D0300AAE74B /* PageCell.swift in Sources */,
 				FD720512210A1D0300AAE74B /* SwipingController.swift in Sources */,
 				CBC216A6402B853F690780C0 /* GameObject.swift in Sources */,
@@ -380,7 +388,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = B4L8G3T47Z;
 				INFOPLIST_FILE = "tooth-ninja/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.something.tooth-ninja";
@@ -396,7 +404,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = B4L8G3T47Z;
 				INFOPLIST_FILE = "tooth-ninja/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.something.tooth-ninja";

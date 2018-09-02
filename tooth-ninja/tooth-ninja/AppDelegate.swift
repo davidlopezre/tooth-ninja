@@ -12,15 +12,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         // this is how we build out our app in code
-        window = UIWindow()
-        window?.makeKeyAndVisible()
-        
-
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        let swipingController = SwipingController(collectionViewLayout: layout)
-        
-        window?.rootViewController = swipingController
+//        window = UIWindow()
+//        window?.makeKeyAndVisible()
+//        
+//
+//        let layout = UICollectionViewFlowLayout()
+//        layout.scrollDirection = .horizontal
+//        let swipingController = SwipingController(collectionViewLayout: layout)
+//
+//        window?.rootViewController = swipingController
         
         return true
     }

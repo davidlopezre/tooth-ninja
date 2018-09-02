@@ -87,9 +87,8 @@ class GameViewController: UIViewController, Controller
     private func initialiseSKView() -> SKView
     {
         let skView = view as! SKView
-        skView.showsFPS = true
         skView.showsPhysics = false
-        skView.showsNodeCount = true
+//        skView.showsNodeCount = true
         skView.ignoresSiblingOrder = true
         skView.isMultipleTouchEnabled = false
         return skView
@@ -145,6 +144,12 @@ class GameViewController: UIViewController, Controller
             self.present(hiddenViewController, animated: true, completion: nil)
             //hiddenViewController.isNavigationBarHidden = true
         }
+    }
+    
+    @IBAction func goToStartingScreen(button: UIButton) {
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let hiddenViewController = storyBoard.instantiateViewController(withIdentifier: "StartingViewController")
+        self.present(hiddenViewController, animated: true, completion: nil)
     }
 }
 

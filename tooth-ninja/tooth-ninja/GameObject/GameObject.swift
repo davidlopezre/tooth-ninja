@@ -27,12 +27,14 @@ struct PhysicsCategory {
 class GameObject: SKSpriteNode {
     let gameObjectType: GameObjectType
     let kind: String?
+    let defaultSize = queryDefaults(type: DefaultTypes.BacteriaSize)
 
     /* Initialises the sprite with the properties specified in the properties */
     init (type: GameObjectType, properties p: GameConfigurationDecodable.LevelConfig.GameObjectConfig) {
         self.gameObjectType = type
         self.kind = p.kind
         let texture = SKTexture(imageNamed: p.image)
+
         super.init(texture: texture, color: UIColor.clear, size: CGSize(width: p.size_width, height: p.size_height))
         name = p.name
         if let x = p.position_x, let y = p.position_y, let screenSize = GameConfiguration.screenSize {
@@ -62,6 +64,11 @@ class GameObject: SKSpriteNode {
                     collisionBitMask: PhysicsCategory.None)
             case .Other:
                 // This one is meant for bacteria and food
+                if defaultSize > 0 {
+                    size.width = size.width * CGFloat(defaultSize)
+                    size.height = size.height * CGFloat(defaultSize)
+                }
+                
                 addCircularPhysicsBody(
                         categoryBitMask: PhysicsCategory.External,
                         contactTestBitMask: PhysicsCategory.Player,
