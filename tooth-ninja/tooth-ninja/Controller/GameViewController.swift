@@ -155,9 +155,21 @@ class GameViewController: UIViewController, Controller
     @IBOutlet weak var menuButton: UIButton!
     @IBAction func goToStartingScreen(button: UIButton)
     {
+<<<<<<< HEAD
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let hiddenViewController = storyBoard.instantiateViewController(withIdentifier: "StartingViewController")
         self.present(hiddenViewController, animated: true, completion: nil)
+=======
+        if press.state == .began
+        {
+            print("TRIGGERED")
+            let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            let hiddenViewController = storyBoard.instantiateViewController(withIdentifier: "hiddenViewController")
+            //self.present(hiddenViewController, animated: true, completion: nil)
+            self.navigationController?.pushViewController(hiddenViewController, animated: true)
+            //hiddenViewController.navigationController?.isNavigationBarHidden = false
+        }
+>>>>>>> 289b7b8fe660d2239f15fb0d43a57971cc569379
     }
 }
 
