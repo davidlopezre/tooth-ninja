@@ -9,7 +9,16 @@
 import Foundation
 import UIKit
 
-class ConfigurationController : UIViewController {
+class ConfigurationController : UIViewController
+{
+    override func viewDidLoad()
+    {
+        super.viewDidLoad()
+        backButton.backgroundColor = .clear
+        backButton.layer.cornerRadius = 5
+        backButton.layer.borderWidth = 1
+        backButton.layer.borderColor = UIColor.black.cgColor
+    }
     
     @IBOutlet weak var speedController: UISegmentedControl!
     @IBOutlet weak var sizeController: UISegmentedControl!
@@ -40,7 +49,9 @@ class ConfigurationController : UIViewController {
         }
     }
     
-    @IBAction func goBack(button: UIButton) {
+    @IBOutlet weak var backButton: UIButton!
+    @IBAction func goBack(button: UIButton)
+    {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let controller = storyboard.instantiateViewController(withIdentifier: "StartingViewController")
         self.present(controller, animated: true, completion: nil)

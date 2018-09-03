@@ -15,7 +15,9 @@ class StartingViewController: UIViewController
         super.viewDidLoad()
     }
     
-    @IBAction func goToGame(button: UIButton) {
+    @IBAction func goToGame(button: UIButton)
+    {
+        
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let controller = storyboard.instantiateViewController(withIdentifier: "GameViewController")
         self.present(controller, animated: true, completion: nil)
