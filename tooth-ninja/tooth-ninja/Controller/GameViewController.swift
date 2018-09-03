@@ -20,8 +20,6 @@ class GameViewController: UIViewController, Controller
 {
     //health bar for the game
     
-    
-    @IBOutlet var hiddenView: UIView!
     var currentLevel: Level? = nil
     var config: GameConfiguration?
     var skView: SKView?
@@ -31,11 +29,16 @@ class GameViewController: UIViewController, Controller
         super.viewDidLoad()
         setupLayout()
         
-        // ADDING THE HIDDEN VIEW CONTROLS FOR THE LONG PRESS GESTURE RECOGNISER HERE
-        let longPressGestRecg = UILongPressGestureRecognizer(target: self, action: #selector(openMenu(press:)))
-        longPressGestRecg.minimumPressDuration = 3.0
+        menuButton.backgroundColor = .clear
+        menuButton.layer.cornerRadius = 5
+        menuButton.layer.borderWidth = 1
+        menuButton.layer.borderColor = UIColor.white.cgColor
         
-        hiddenView.addGestureRecognizer(longPressGestRecg)
+        // ADDING THE HIDDEN VIEW CONTROLS FOR THE LONG PRESS GESTURE RECOGNISER HERE
+//        let longPressGestRecg = UILongPressGestureRecognizer(target: self, action: #selector(openMenu(press:)))
+//        longPressGestRecg.minimumPressDuration = 3.0
+//
+//        hiddenView.addGestureRecognizer(longPressGestRecg)
 
         skView = initialiseSKView()
         do
@@ -135,19 +138,23 @@ class GameViewController: UIViewController, Controller
         bottomControlsContainer.spacing = 100
     }
     
-    @objc func openMenu(press: UILongPressGestureRecognizer)
-    {
-        if press.state == .began
-        {
-            print("TRIGGERED")
-            let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            let hiddenViewController = storyBoard.instantiateViewController(withIdentifier: "hiddenViewController")
-            self.present(hiddenViewController, animated: true, completion: nil)
-            hiddenViewController.navigationController?.isNavigationBarHidden = false
-        }
-    }
+//    @objc func openMenu(press: UILongPressGestureRecognizer)
+//    {
+//        if press.state == .began
+//        {
+//            print("TRIGGERED")
+//            let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+//            let hiddenViewController = storyBoard.instantiateViewController(withIdentifier: "hiddenViewController")
+//            self.present(hiddenViewController, animated: true, completion: nil)
+//            hiddenViewController.navigationController?.isNavigationBarHidden = false
+//        }
+//    }
     
-    @IBAction func goToStartingScreen(button: UIButton) {
+    
+    
+    @IBOutlet weak var menuButton: UIButton!
+    @IBAction func goToStartingScreen(button: UIButton)
+    {
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let hiddenViewController = storyBoard.instantiateViewController(withIdentifier: "StartingViewController")
         self.present(hiddenViewController, animated: true, completion: nil)
