@@ -131,18 +131,7 @@ class LevelPhysics {
     func swipeCollidesWithFood(food: GameObject) {
         print("Collision: Swipe-Food")
         food.removeFromParent()
-//        if (food.kind == BAD) {
-//            let influx = SKAction.repeat(s1, count: 5)
-//        let action = SKAction.sequence([
-//            influx,
-//            SKAction.wait(forDuration: 1),
-//            influx,
-//            SKAction.wait(forDuration: 1),
-//            influx,
-//            SKAction.wait(forDuration: 1)
-//            ])
-//        level.run(action)
-//        }
+
     }
 
     func stickyEffect() {
