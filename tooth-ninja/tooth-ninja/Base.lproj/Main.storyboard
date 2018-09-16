@@ -99,7 +99,7 @@
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="l6g-0c-ivF">
                                         <rect key="frame" x="0.0" y="49" width="300" height="29"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="300" id="ZE3-T9-yQC"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="w7X-jH-8UW"/>
                                         </constraints>
                                         <segments>
                                             <segment title="Slow"/>
@@ -119,7 +119,7 @@
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="6ZZ-1X-V61">
                                         <rect key="frame" x="0.0" y="147" width="300" height="29"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="300" id="cpa-cK-ogQ"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="cpa-cK-ogQ"/>
                                         </constraints>
                                         <segments>
                                             <segment title="Small"/>
@@ -147,10 +147,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="R8H-3i-ART" firstAttribute="centerY" secondItem="wUW-4R-ePa" secondAttribute="centerY" id="37N-Es-7D1"/>
-                            <constraint firstItem="R8H-3i-ART" firstAttribute="centerX" secondItem="wUW-4R-ePa" secondAttribute="centerX" id="Ke1-ih-aeo"/>
                             <constraint firstItem="hIQ-pp-5h5" firstAttribute="top" secondItem="7Ew-1C-bbw" secondAttribute="top" constant="10" id="dcA-y8-Ori"/>
                             <constraint firstItem="hIQ-pp-5h5" firstAttribute="leading" secondItem="7Ew-1C-bbw" secondAttribute="leading" id="dnA-r5-z6X"/>
+                            <constraint firstItem="R8H-3i-ART" firstAttribute="centerY" secondItem="7Ew-1C-bbw" secondAttribute="centerY" constant="10.5" id="kiN-GP-890"/>
+                            <constraint firstItem="R8H-3i-ART" firstAttribute="centerX" secondItem="7Ew-1C-bbw" secondAttribute="centerX" id="wvu-hF-cL6"/>
                             <constraint firstItem="7Ew-1C-bbw" firstAttribute="bottom" secondItem="hIQ-pp-5h5" secondAttribute="bottom" constant="316" id="zIt-al-dl1"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="7Ew-1C-bbw"/>
