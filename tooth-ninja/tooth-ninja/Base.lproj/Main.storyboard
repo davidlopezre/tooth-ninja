@@ -39,7 +39,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bwf-y6-x04" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-970" y="9"/>
+            <point key="canvasLocation" x="-1179" y="10"/>
         </scene>
         <!--Game View Controller-->
         <scene sceneID="tXr-a1-R10">
@@ -77,7 +77,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="493.5960591133005" y="8.8000000000000007"/>
+            <point key="canvasLocation" x="716" y="10"/>
         </scene>
         <!--Configuration Controller-->
         <scene sceneID="Hfq-Nm-JTM">
@@ -163,7 +163,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qP8-3a-hTB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-256" y="1039"/>
+            <point key="canvasLocation" x="-256" y="701"/>
         </scene>
         <!--Starting View Controller-->
         <scene sceneID="TFL-Ky-1aG">
@@ -218,19 +218,19 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="Puj-eF-V75" firstAttribute="bottom" secondItem="Skn-X6-6tC" secondAttribute="bottom" id="5gy-zP-XyX"/>
-                            <constraint firstItem="Puj-eF-V75" firstAttribute="top" secondItem="Skn-X6-6tC" secondAttribute="top" id="6je-Ut-Q4E"/>
+                            <constraint firstItem="Puj-eF-V75" firstAttribute="top" secondItem="Skn-X6-6tC" secondAttribute="top" id="8Uq-wi-6GZ"/>
                             <constraint firstAttribute="bottom" secondItem="dP5-Ga-25V" secondAttribute="bottom" constant="20" id="Aiw-ey-03a"/>
+                            <constraint firstItem="Puj-eF-V75" firstAttribute="leading" secondItem="CMk-kh-9ek" secondAttribute="leading" id="Haa-LC-7SG"/>
                             <constraint firstItem="dP5-Ga-25V" firstAttribute="centerX" secondItem="Skn-X6-6tC" secondAttribute="centerX" id="KBN-FU-KdW"/>
-                            <constraint firstAttribute="trailing" secondItem="Puj-eF-V75" secondAttribute="trailing" id="OzX-3c-G8V"/>
-                            <constraint firstItem="Puj-eF-V75" firstAttribute="leading" secondItem="CMk-kh-9ek" secondAttribute="leading" id="Rsp-be-9F2"/>
+                            <constraint firstAttribute="trailing" secondItem="Puj-eF-V75" secondAttribute="trailing" id="Kzy-D4-8oH"/>
+                            <constraint firstItem="Puj-eF-V75" firstAttribute="bottom" secondItem="Skn-X6-6tC" secondAttribute="bottom" id="R9L-RS-x9n"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Skn-X6-6tC"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cte-x4-DyD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-256" y="-1046"/>
+            <point key="canvasLocation" x="-256" y="-734"/>
         </scene>
     </scenes>
     <resources>
