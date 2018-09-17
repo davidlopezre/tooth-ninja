@@ -166,11 +166,6 @@ class GameViewController: UIViewController, Controller
         bottomControlsContainer.spacing = 100
     }
 
-    
-    
-    @IBAction func goBackInfoScreen(_ sender: Any) {
-        
-    }
     @IBOutlet weak var menuButton: UIButton!
     @IBAction func goToStartingScreen(button: UIButton)
     {

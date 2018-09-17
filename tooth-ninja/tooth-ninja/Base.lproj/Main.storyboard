@@ -28,7 +28,7 @@
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="goBackInfoScreen:" destination="BWY-Li-YEX" eventType="touchUpInside" id="K2A-dN-8YE"/>
+                                    <action selector="goBackHome:" destination="vaq-ai-42h" eventType="touchUpInside" id="BZD-5Q-6tG"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -39,9 +39,11 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="aTP-FE-Y4L"/>
                     </view>
+                    <connections>
+                        <outlet property="goBackInfoScreen" destination="6ML-vV-Viq" id="x73-va-UkA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Kh-sk-NfH" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="BWY-Li-YEX" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-256" y="10"/>
         </scene>

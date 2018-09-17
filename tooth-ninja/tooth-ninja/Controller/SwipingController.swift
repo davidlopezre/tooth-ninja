@@ -101,11 +101,21 @@ class SwipingController: UICollectionViewController, UICollectionViewDelegateFlo
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        let myNewView=UIView(frame: CGRect(x: 10, y: 100, width: 300, height: 200))
+        myNewView.addSubview(goBackInfoScreen)
+        view.addSubview(myNewView)
         setupBottomControls()
-        
         collectionView?.backgroundColor = .white
         collectionView?.register(PageCell.self, forCellWithReuseIdentifier: "cellId")
         collectionView?.isPagingEnabled = true
     }
+    
+   
+    @IBOutlet weak var goBackInfoScreen: UIButton!
+    @IBAction func goBackHome(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let controller = storyboard.instantiateViewController(withIdentifier: "StartingViewController")
+        self.present(controller, animated: true, completion: nil)
+    }
+    
 }
