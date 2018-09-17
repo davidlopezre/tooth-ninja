@@ -17,6 +17,13 @@ class SwipingController: UICollectionViewController, UICollectionViewDelegateFlo
         Page(imageName: "notification", headerText: "Did you know?", bodyText: "Snacking in between meals can increase your chances of tooth decay? Sugary foods eaten during meal times have a smaller negative impact on your teeth compared to when eaten in-between meal times."),
         Page(imageName: "notification", headerText: "Did you know?", bodyText: "Your toothbrush should be replaced when the bristles start to fray? This is usually around 3 months after you start using a new toothbrush (or toothbrush head)."),
         Page(imageName: "notification", headerText: "Did you know?", bodyText: "Tooth decay is caused by bacteria that stick to tooth surfaces and produce acids after digesting sugars from the food you eat?"),
+        Page(imageName: "notification", headerText: "Did you know?", bodyText: """
+            You should remove the baby bottle from the child when feeding is finished.
+            Leaving your child to sleep with a bottle of baby formula (which contains sugar), or
+            anything else containing sugar, can greatly increase their risk of tooth decay.
+ """),
+        Page(imageName: "notification", headerText: "Did you know?", bodyText: "Some parents sweeten pacifiers/dummies (e.g. with honey) before giving it to their child. This increases the risk of tooth decay and should not be done."),
+        Page(imageName: "notification", headerText: "Did you know?", bodyText: "It is recommended that you take your child to see the dentist when they reach 12 months of age."),
         Page(imageName: "notification", headerText: "Swipe to eliminate the bacteria and protect the teeth from tooth decay!", bodyText: "")
         ]
     

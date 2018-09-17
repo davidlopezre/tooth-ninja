@@ -8,7 +8,6 @@ class PageCell: UICollectionViewCell {
     
     var page: Page? {
         didSet {
-//            print(page?.imageName)
             
             guard let unwrappedPage = page else { return }
             
