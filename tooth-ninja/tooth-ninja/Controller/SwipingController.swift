@@ -11,6 +11,14 @@ extension UIColor
 
 class SwipingController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
+    @IBOutlet weak var goBackViewInfoScreen: UIView!
+    @IBOutlet weak var goBackInfoScreen: UIButton!
+    @IBAction func goBackHome(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let controller = storyboard.instantiateViewController(withIdentifier: "StartingViewController")
+        self.present(controller, animated: true, completion: nil)
+    }
+    
     let pages =
         [
         Page(imageName: "brush", headerText: "Did you know?", bodyText: "Children should only start using toothpaste after 18 months of age? Before 6 years of age, children should use a pea-sized amount of children’s toothpaste, which has a lower concentration of fluoride (500-600 ppm) compared to adult toothpaste (>1000 ppm)"),
@@ -101,21 +109,13 @@ class SwipingController: UICollectionViewController, UICollectionViewDelegateFlo
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let myNewView=UIView(frame: CGRect(x: 10, y: 100, width: 300, height: 200))
-        myNewView.addSubview(goBackInfoScreen)
-        view.addSubview(myNewView)
         setupBottomControls()
+        view.addSubview(goBackViewInfoScreen)
+        
         collectionView?.backgroundColor = .white
         collectionView?.register(PageCell.self, forCellWithReuseIdentifier: "cellId")
         collectionView?.isPagingEnabled = true
-    }
-    
-   
-    @IBOutlet weak var goBackInfoScreen: UIButton!
-    @IBAction func goBackHome(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let controller = storyboard.instantiateViewController(withIdentifier: "StartingViewController")
-        self.present(controller, animated: true, completion: nil)
+        
     }
     
 }

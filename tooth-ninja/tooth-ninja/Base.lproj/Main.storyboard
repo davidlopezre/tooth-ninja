@@ -31,21 +31,31 @@
                                     <action selector="goBackHome:" destination="vaq-ai-42h" eventType="touchUpInside" id="BZD-5Q-6tG"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HVM-qL-MEA" userLabel="goBackView">
+                                <rect key="frame" x="44" y="10" width="63" height="28"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <viewLayoutGuide key="safeArea" id="Xbd-b0-mLi"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="6ML-vV-Viq" firstAttribute="top" secondItem="aTP-FE-Y4L" secondAttribute="top" constant="10" id="BDN-Vt-qx2"/>
+                            <constraint firstItem="6ML-vV-Viq" firstAttribute="height" secondItem="HVM-qL-MEA" secondAttribute="height" id="NVY-63-kHI"/>
                             <constraint firstItem="6ML-vV-Viq" firstAttribute="leading" secondItem="aTP-FE-Y4L" secondAttribute="leading" id="R05-Vv-PDr"/>
+                            <constraint firstItem="6ML-vV-Viq" firstAttribute="width" secondItem="HVM-qL-MEA" secondAttribute="width" id="USr-Z4-PoM"/>
+                            <constraint firstItem="HVM-qL-MEA" firstAttribute="top" secondItem="aTP-FE-Y4L" secondAttribute="top" constant="10" id="sF7-gS-dhy"/>
+                            <constraint firstItem="HVM-qL-MEA" firstAttribute="leading" secondItem="aTP-FE-Y4L" secondAttribute="leading" id="yb9-9f-HIB"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="aTP-FE-Y4L"/>
                     </view>
                     <connections>
                         <outlet property="goBackInfoScreen" destination="6ML-vV-Viq" id="x73-va-UkA"/>
+                        <outlet property="goBackViewInfoScreen" destination="HVM-qL-MEA" id="DRh-U2-FFK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Kh-sk-NfH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-256" y="10"/>
+            <point key="canvasLocation" x="-256.4039408866995" y="8.8000000000000007"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="xcf-rF-yjy">
