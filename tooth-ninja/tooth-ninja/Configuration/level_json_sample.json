@@ -4,6 +4,8 @@
   "levels": [
     {
       "id": 1,
+      "score": 200,
+      "toothbrush_icon": "toothbrush_no_tooth_paste",
       "teeth":
       [
         {
@@ -42,6 +44,8 @@
     },
     {
       "id": 2,
+      "score": 400,
+      "toothbrush_icon": "toothbrush_no_tooth_paste",
       "teeth":
       [
         {
@@ -155,6 +159,8 @@
     },
     {
       "id": 3,
+      "score": 1000,
+      "toothbrush_icon": "toothbrush",
       "teeth":
       [
        {

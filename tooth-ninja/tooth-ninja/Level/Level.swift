@@ -12,6 +12,8 @@ import SpriteKit
 /* BaseLevel protocol includes the required fields and functions for a level */
 protocol BaseLevel {
     var number: Int {get}
+    var winningScore: Int {get}
+    var icon: String {get}
     var controller: Controller? {get}
     var scoreLabel: SKLabelNode? {get}
     var healthLabel: SKLabelNode? {get}
@@ -43,6 +45,8 @@ extension BaseLevel {
 class Level: SKScene, SKPhysicsContactDelegate, BaseLevel, LevelController {
 
     let number: Int
+    let icon: String
+    let winningScore: Int
     var controller: Controller?
     var scoreLabel: SKLabelNode?
     var healthLabel: SKLabelNode?
@@ -54,7 +58,7 @@ class Level: SKScene, SKPhysicsContactDelegate, BaseLevel, LevelController {
     let backgroundFile: String?
     var levelExecution: LevelExecution!
     var levelPhysics: LevelPhysics!
-
+    
     var score = 0
     {
         didSet
@@ -117,8 +121,10 @@ class Level: SKScene, SKPhysicsContactDelegate, BaseLevel, LevelController {
     // Set the initial value to 0
     var delta: CGPoint = .zero
 
-    init(number: Int, size: CGSize, bgFile: String, teethArray: [GameObject], bacteriaArray: [GameObject], foodArray: [GameObject], c: Controller) {
+    init(number: Int, winningScore: Int, icon: String, size: CGSize, bgFile: String, teethArray: [GameObject], bacteriaArray: [GameObject], foodArray: [GameObject], c: Controller) {
         self.number = number
+        self.winningScore = winningScore
+        self.icon = icon
         self.teethArray = teethArray
         self.controller = c
         self.backgroundFile = bgFile
@@ -130,10 +136,12 @@ class Level: SKScene, SKPhysicsContactDelegate, BaseLevel, LevelController {
 
     required public init?(coder aDecoder: NSCoder) {
         number = 1
+        winningScore = 200
         teethArray = []
         backgroundFile = nil
         bacteriaArray = []
         foodArray = []
+        icon = "toothbrush_no_paste"
         super.init(coder: aDecoder)
     }
 
@@ -202,7 +210,7 @@ class Level: SKScene, SKPhysicsContactDelegate, BaseLevel, LevelController {
         shieldLabel!.position = CGPoint(x: size.width * 0.1, y: size.height * 0.1)
         addChild(shieldLabel!)
         
-        let toothBrushIcon = SKSpriteNode(imageNamed: "toothbrush")
+        let toothBrushIcon = SKSpriteNode(imageNamed: icon)
         toothBrushIcon.zPosition = 2
         toothBrushIcon.size = CGSize(width: 30, height: 30)
         

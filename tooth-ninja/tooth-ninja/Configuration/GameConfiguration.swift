@@ -29,22 +29,24 @@ struct GameConfigurationDecodable: Decodable {
     var size: Double
     var levels: [LevelConfig]
 
-   struct LevelConfig: Decodable {
-       var id: Int
-       var teeth: [GameObjectConfig]
-       var bacteria: [GameObjectConfig]
-       var food: [GameObjectConfig]
+    struct LevelConfig: Decodable {
+        var id: Int
+        var toothbrush_icon: String
+        var score: Int
+        var teeth: [GameObjectConfig]
+        var bacteria: [GameObjectConfig]
+        var food: [GameObjectConfig]
 
-       struct GameObjectConfig: Decodable {
-           var name: String
-           var kind: String?
-           var position_x: Double?
-           var position_y: Double?
-           var rotation: Double?
-           var position_z: Int
-           var size_width: Double
-           var size_height: Double
-           var image: String
+        struct GameObjectConfig: Decodable {
+            var name: String
+            var kind: String?
+            var position_x: Double?
+            var position_y: Double?
+            var rotation: Double?
+            var position_z: Int
+            var size_width: Double
+            var size_height: Double
+            var image: String
        }
    }
 }
@@ -95,5 +97,13 @@ class GameConfiguration {
             }
         }
         return array
+    }
+    
+    func getScoreByLevel(id: Int) -> Int {
+        return parsed.levels[id - 1].score
+    }
+    
+    func getToothBrushIconByLevel(id: Int) -> String {
+        return parsed.levels[id - 1].toothbrush_icon
     }
 }

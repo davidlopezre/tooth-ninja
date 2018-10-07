@@ -64,11 +64,9 @@ class SwipingController: UICollectionViewController, UICollectionViewDelegateFlo
     
     @objc private func handleNext() {
         print("\(pageControl.currentPage) - \(pageControl.numberOfPages)")
-        if (pageControl.currentPage == pageControl.numberOfPages - 1) {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let controller = storyboard.instantiateViewController(withIdentifier: "GameViewController")
-            self.present(controller, animated: true, completion: nil)
-        }
+//        if (pageControl.currentPage == pageControl.numberOfPages - 1) {
+//            nextButton.isUserInteractionEnabled = false
+//        }
         let nextIndex = min(pageControl.currentPage + 1, pages.count - 1)
         let indexPath = IndexPath(item: nextIndex, section: 0)
         pageControl.currentPage = nextIndex
@@ -110,7 +108,7 @@ class SwipingController: UICollectionViewController, UICollectionViewDelegateFlo
     override func viewDidLoad() {
         super.viewDidLoad()
         setupBottomControls()
-        view.addSubview(goBackViewInfoScreen)
+//        view.addSubview(goBackViewInfoScreen)
         
         collectionView?.backgroundColor = .white
         collectionView?.register(PageCell.self, forCellWithReuseIdentifier: "cellId")

@@ -59,9 +59,11 @@ class GameViewController: UIViewController, Controller
         let teethArray = config!.getTeethByLevel(id: 1)
         let bacteriaArray = config!.getObjectsByLevel(id: 1, name: "bacteria")
         let foodArray = config!.getObjectsByLevel(id: 1, name: "food")
+        let score = config!.getScoreByLevel(id: 1)
+        let icon = config!.getToothBrushIconByLevel(id: 1)
         print(bacteriaArray[0])
         // Use the JSON file to open level 1
-        currentLevel = Level(number: 1, size: skView!.bounds.size, bgFile: "background2.png",
+        currentLevel = Level(number: 1, winningScore: score, icon: icon, size: skView!.bounds.size, bgFile: "background2.png",
                              teethArray: teethArray, bacteriaArray: bacteriaArray, foodArray: foodArray,  c: self)
 
         currentLevel?.scaleMode = SKSceneScaleMode.resizeFill
@@ -79,7 +81,7 @@ class GameViewController: UIViewController, Controller
     
     let healthBarPic: UIImageView =
     {
-        let image = UIImage(named: "meme")
+        let image = UIImage(named: "heart")
         let imageView = UIImageView(image: image!)
         imageView.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -90,7 +92,7 @@ class GameViewController: UIViewController, Controller
     
     let happinessBarPic: UIImageView =
     {
-        let image = UIImage(named: "meme")
+        let image = UIImage(named: "smile")
         let imageView = UIImageView(image: image!)
         imageView.frame = CGRect(x: 0, y: 0, width: 25, height: 200)
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -135,7 +137,9 @@ class GameViewController: UIViewController, Controller
         let newTeethArray = config!.getTeethByLevel(id: nextLevelId)
         let newBacteriaArray = config!.getObjectsByLevel(id: nextLevelId, name: "bacteria")
         let newFoodArray = config!.getObjectsByLevel(id: nextLevelId, name: "food")
-        currentLevel = Level(number: nextLevelId, size: currentLevel!.size, bgFile: currentLevel!.backgroundFile!, teethArray: newTeethArray,
+        let score = config!.getScoreByLevel(id: nextLevelId)
+        let icon = config!.getToothBrushIconByLevel(id: nextLevelId)
+        currentLevel = Level(number: nextLevelId, winningScore: score, icon: icon, size: currentLevel!.size, bgFile: currentLevel!.backgroundFile!, teethArray: newTeethArray,
                              bacteriaArray: newBacteriaArray, foodArray: newFoodArray, c: self)
         let reveal = SKTransition.flipHorizontal(withDuration: 0.5)
         print("HERE")

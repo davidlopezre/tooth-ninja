@@ -32,10 +32,11 @@ class LevelPhysics {
     private let PLUS_HAPPINESS  =  10
     private let MINUS_HAPPINESS =  25
     private let PLUS_SCORE      =  10
-    private let WINNING_SCORE   = 100
+    private var WINNING_SCORE : Int
     
     init(level: Level) {
         self.level = level
+        WINNING_SCORE = level.winningScore
     }
 
     func didBegin(_ contact: SKPhysicsContact)
@@ -193,7 +194,7 @@ class LevelExecution {
      */
     func spawnObjects (influx: Bool) {
         let proba = random(min: 0, max: 100)    // probability, if > 90 it's food else bacteria
-        print(proba)
+//        print(proba)
         
         var objectToAdd : GameObject? = nil
         
