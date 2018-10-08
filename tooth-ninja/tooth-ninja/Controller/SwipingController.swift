@@ -9,9 +9,11 @@ extension UIColor
     static var mainPink = UIColor(red: 232/255, green: 68/255, blue: 133/255, alpha: 1)
 }
 
+let niceBlue = UIColor(red: 24/255, green: 67/255, blue: 140/255, alpha: 1)
+let niceRed = UIColor(red: 252/255, green: 117/255, blue: 118/255, alpha: 1)
+
 class SwipingController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
-    @IBOutlet weak var goBackViewInfoScreen: UIView!
     @IBOutlet weak var goBackInfoScreen: UIButton!
     @IBAction func goBackHome(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -57,13 +59,13 @@ class SwipingController: UICollectionViewController, UICollectionViewDelegateFlo
         button.setTitle("NEXT", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
-        button.setTitleColor(.red, for: .normal)
+        button.setTitleColor(niceBlue, for: .normal)
         button.addTarget(self, action: #selector(handleNext), for: .touchUpInside)
         return button
     }()
     
     @objc private func handleNext() {
-        print("\(pageControl.currentPage) - \(pageControl.numberOfPages)")
+//        print("\(pageControl.currentPage) - \(pageControl.numberOfPages)")
 //        if (pageControl.currentPage == pageControl.numberOfPages - 1) {
 //            nextButton.isUserInteractionEnabled = false
 //        }
@@ -77,8 +79,8 @@ class SwipingController: UICollectionViewController, UICollectionViewDelegateFlo
         let pc = UIPageControl()
         pc.currentPage = 0
         pc.numberOfPages = pages.count
-        pc.currentPageIndicatorTintColor = .red
-        pc.pageIndicatorTintColor = UIColor(red: 249/255, green: 207/255, blue: 224/255, alpha: 1)
+        pc.currentPageIndicatorTintColor = niceRed
+        pc.pageIndicatorTintColor = niceBlue
         return pc
     }()
     
@@ -107,13 +109,29 @@ class SwipingController: UICollectionViewController, UICollectionViewDelegateFlo
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupBottomControls()
-//        view.addSubview(goBackViewInfoScreen)
         
+        setupBottomControls()
+        
+        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
+        button.backgroundColor = niceBlue
+        button.setTitle("Back", for: .normal)
+        button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+//        button.layer.cornerRadius = 5
+        
+        self.view.addSubview(button)
+        
+//        print("VIEW: \(String(describing: goBackInfoScreen))")
+       
         collectionView?.backgroundColor = .white
         collectionView?.register(PageCell.self, forCellWithReuseIdentifier: "cellId")
         collectionView?.isPagingEnabled = true
         
+    }
+    
+    @objc func buttonAction(sender: UIButton!) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let controller = storyboard.instantiateViewController(withIdentifier: "StartingViewController")
+        self.present(controller, animated: true, completion: nil)
     }
     
 }

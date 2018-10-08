@@ -80,7 +80,7 @@ class LevelPhysics {
     }
 
     func bacteriaCollidesWithTooth(bacteria: GameObject) {
-        print("Collision: Bacteria-Tooth")
+//        print("Collision: Bacteria-Tooth")
 //        level.levelExecution.takeHitAnimation()
         if (hasShield) {
             removeShield()
@@ -97,8 +97,8 @@ class LevelPhysics {
 
         if (level.health <= 0) {
             level.levelEnd(won: false)
-            level.controller?.healthBar.isHidden = true
-            level.controller?.happinessBar.isHidden = true
+//            level.controller?.healthBar.isHidden = true
+//            level.controller?.happinessBar.isHidden = true
         }
     }
 
@@ -106,7 +106,7 @@ class LevelPhysics {
         if (bacteria.kind == STICKY){
             hasSticky -= 1
         }
-        print("Collision: Swipe-Bacteria")
+//        print("Collision: Swipe-Bacteria")
         bacteria.removeFromParent()
         level.score += PLUS_SCORE
         if (level.score >= WINNING_SCORE) {
@@ -116,7 +116,7 @@ class LevelPhysics {
 
 
     func foodCollidesWithTooth(food: GameObject) {
-        print("Collision: GoodFood-Tooth")
+//        print("Collision: GoodFood-Tooth")
         food.removeFromParent()
         if (food.kind == GOOD) {
             level.health += PLUS_HEALTH
@@ -130,7 +130,7 @@ class LevelPhysics {
     }
 
     func swipeCollidesWithFood(food: GameObject) {
-        print("Collision: Swipe-Food")
+//        print("Collision: Swipe-Food")
         food.removeFromParent()
 
     }

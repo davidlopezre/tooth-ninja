@@ -58,6 +58,8 @@ class Level: SKScene, SKPhysicsContactDelegate, BaseLevel, LevelController {
     let backgroundFile: String?
     var levelExecution: LevelExecution!
     var levelPhysics: LevelPhysics!
+    var healthBar : CustomBar!
+    var happinessBar: CustomBar!
     
     var score = 0
     {
@@ -81,16 +83,19 @@ class Level: SKScene, SKPhysicsContactDelegate, BaseLevel, LevelController {
             }
             healthLabel?.text = "Health " + ": \(health)%"
             
-            let bar = controller?.healthBar
-            print(bar!.frame.width)
+            let damage = Double(health)/100.0
+            healthBar.setProgress(x: CGFloat(damage))
             
-            var newFrame = bar?.frame
+//            let bar = controller?.healthBar
+//            print(bar!.frame.width)
             
-            newFrame?.size.width = CGFloat(health);
-            newFrame?.size.height = 10;
+//            var newFrame = bar?.frame
+//
+//            newFrame?.size.width = CGFloat(health);
+//            newFrame?.size.height = 10;
             
-            controller?.healthBar.frame = newFrame!
-            print(bar!.frame.width)
+//            controller?.healthBar.frame = newFrame!
+//            print(bar!.frame.width)
         }
     }
 
@@ -103,14 +108,17 @@ class Level: SKScene, SKPhysicsContactDelegate, BaseLevel, LevelController {
             }
             happinessLabel?.text = "Happiness : \(happiness)%"
             
-            let bar = controller?.happinessBar
+            let damage = Double(happiness)/100.0
+            happinessBar.setProgress(x: CGFloat(damage))
             
-            var newFrame = bar?.frame
-            
-            newFrame?.size.width = CGFloat(happiness);
-            newFrame?.size.height = 10;
-            
-            controller?.happinessBar.frame = newFrame!
+//            let bar = controller?.happinessBar
+//
+//            var newFrame = bar?.frame
+//
+//            newFrame?.size.width = CGFloat(happiness);
+//            newFrame?.size.height = 10;
+//
+//            controller?.happinessBar.frame = newFrame!
         }
     }
 
@@ -191,10 +199,31 @@ class Level: SKScene, SKPhysicsContactDelegate, BaseLevel, LevelController {
         healthLabel!.position = CGPoint(x: size.width * 0.1, y: size.height * 0.9)
 //        addChild(healthLabel!)
         
-        controller?.healthBar.isHidden = false
-        controller?.happinessBar.isHidden = false
-
-
+//        controller?.healthBar.isHidden = false
+//        controller?.happinessBar.isHidden = false
+        
+        let heart = SKSpriteNode(imageNamed: "heart")
+        heart.zPosition = 3
+        heart.size = CGSize(width: 20, height: 20)
+        heart.position = CGPoint(x: size.width * 0.02, y: size.height * 0.9)
+        addChild(heart)
+        
+        healthBar = CustomBar(color: .red, size: CGSize(width: health, height: 15))
+        healthBar.position = CGPoint(x: size.width * 0.05, y: size.height * 0.9)
+        healthBar.zPosition = 3
+        addChild(healthBar)
+        
+        let smiley = SKSpriteNode(imageNamed: "smile")
+        smiley.zPosition = 3
+        smiley.size = CGSize(width: 20, height: 20)
+        smiley.position = CGPoint(x: size.width * 0.02, y: size.height * 0.83)
+        addChild(smiley)
+        
+        happinessBar = CustomBar(color: .blue, size: CGSize(width: health, height: 15))
+        happinessBar.position = CGPoint(x: size.width * 0.05, y: size.height * 0.83)
+        happinessBar.zPosition = 3
+        addChild(happinessBar)
+        
         happinessLabel = SKLabelNode(fontNamed: "Chalkduster")
         happinessLabel!.text = "Happiness : 100%"
         happinessLabel!.fontSize = 20

@@ -9,10 +9,10 @@ import SpriteKit
 import AVFoundation
 
 protocol Controller {
-    var healthBar: UIView {get}
-    var happinessBar: UIView {get}
-    var happinessBarPic: UIImageView{get}
-    var healthBarPic: UIImageView{get}
+//    var healthBar: UIView {get}
+//    var happinessBar: UIView {get}
+//    var happinessBarPic: UIImageView{get}
+//    var healthBarPic: UIImageView{get}
     func levelEnd(won: Bool)
 }
 
@@ -37,9 +37,8 @@ class GameViewController: UIViewController, Controller
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        setupLayout()
         
-        menuButton.backgroundColor = .clear
+        menuButton.backgroundColor = niceBlue
         menuButton.layer.cornerRadius = 5
         menuButton.layer.borderWidth = 1
         menuButton.layer.borderColor = UIColor.white.cgColor
@@ -61,7 +60,6 @@ class GameViewController: UIViewController, Controller
         let foodArray = config!.getObjectsByLevel(id: 1, name: "food")
         let score = config!.getScoreByLevel(id: 1)
         let icon = config!.getToothBrushIconByLevel(id: 1)
-        print(bacteriaArray[0])
         // Use the JSON file to open level 1
         currentLevel = Level(number: 1, winningScore: score, icon: icon, size: skView!.bounds.size, bgFile: "background2.png",
                              teethArray: teethArray, bacteriaArray: bacteriaArray, foodArray: foodArray,  c: self)
@@ -71,42 +69,42 @@ class GameViewController: UIViewController, Controller
         skView!.presentScene(currentLevel)
     }
     
-    let healthBar: UIView =
-    {
-        let bar = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 75))
-        bar.translatesAutoresizingMaskIntoConstraints = false
-        bar.backgroundColor = UIColor(red:0.88, green:0.16, blue:0.42, alpha:1.0)
-        return bar
-    }()
-    
-    let healthBarPic: UIImageView =
-    {
-        let image = UIImage(named: "heart")
-        let imageView = UIImageView(image: image!)
-        imageView.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-//        imageView.layer.cornerRadius = imageView.frame.width/2
-        imageView.backgroundColor = .clear
-        return imageView
-    }()
-    
-    let happinessBarPic: UIImageView =
-    {
-        let image = UIImage(named: "smile")
-        let imageView = UIImageView(image: image!)
-        imageView.frame = CGRect(x: 0, y: 0, width: 25, height: 200)
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.backgroundColor = .clear
-        return imageView
-    }()
-    
-    let happinessBar: UIView =
-    {
-        let bar = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 75))
-        bar.translatesAutoresizingMaskIntoConstraints = false
-        bar.backgroundColor = UIColor(red:0.36, green:0.60, blue:0.88, alpha:1.0)
-        return bar
-    }()
+//    let healthBar: UIView =
+//    {
+//        let bar = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 75))
+//        bar.translatesAutoresizingMaskIntoConstraints = false
+//        bar.backgroundColor = UIColor(red:0.88, green:0.16, blue:0.42, alpha:1.0)
+//        return bar
+//    }()
+//
+//    let healthBarPic: UIImageView =
+//    {
+//        let image = UIImage(named: "heart")
+//        let imageView = UIImageView(image: image!)
+//        imageView.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+//        imageView.translatesAutoresizingMaskIntoConstraints = false
+////        imageView.layer.cornerRadius = imageView.frame.width/2
+//        imageView.backgroundColor = .clear
+//        return imageView
+//    }()
+//
+//    let happinessBarPic: UIImageView =
+//    {
+//        let image = UIImage(named: "smile")
+//        let imageView = UIImageView(image: image!)
+//        imageView.frame = CGRect(x: 0, y: 0, width: 25, height: 200)
+//        imageView.translatesAutoresizingMaskIntoConstraints = false
+//        imageView.backgroundColor = .clear
+//        return imageView
+//    }()
+//
+//    let happinessBar: UIView =
+//    {
+//        let bar = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 75))
+//        bar.translatesAutoresizingMaskIntoConstraints = false
+//        bar.backgroundColor = UIColor(red:0.36, green:0.60, blue:0.88, alpha:1.0)
+//        return bar
+//    }()
     
     override var prefersStatusBarHidden: Bool
     {
@@ -142,33 +140,32 @@ class GameViewController: UIViewController, Controller
         currentLevel = Level(number: nextLevelId, winningScore: score, icon: icon, size: currentLevel!.size, bgFile: currentLevel!.backgroundFile!, teethArray: newTeethArray,
                              bacteriaArray: newBacteriaArray, foodArray: newFoodArray, c: self)
         let reveal = SKTransition.flipHorizontal(withDuration: 0.5)
-        print("HERE")
-        self.healthBar.isHidden = true
-        self.happinessBar.isHidden = true
-        self.happinessBarPic.isHidden = true
-        self.healthBarPic.isHidden = true
+//        self.healthBar.isHidden = true
+//        self.happinessBar.isHidden = true
+//        self.happinessBarPic.isHidden = true
+//        self.healthBarPic.isHidden = true
         let gameOverScene = GameOverScene(size: currentLevel!.size, won: won, nextScene: currentLevel!)
         skView?.presentScene(gameOverScene, transition: reveal)
     }
     
-    private func setupLayout()
-    {
-        let whiteView = UIView()
-        whiteView.backgroundColor = .clear
-        
-        let bottomControlsContainer = UIStackView(arrangedSubviews: [healthBar, healthBarPic, whiteView, happinessBarPic, happinessBar])
-        
-        bottomControlsContainer.translatesAutoresizingMaskIntoConstraints = false
-        bottomControlsContainer.distribution = .fillEqually
-
-        view.addSubview(bottomControlsContainer)
-        
-        bottomControlsContainer.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        bottomControlsContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        bottomControlsContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        bottomControlsContainer.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        bottomControlsContainer.spacing = 100
-    }
+//    private func setupLayout()
+//    {
+//        let whiteView = UIView()
+//        whiteView.backgroundColor = .clear
+//
+//        let bottomControlsContainer = UIStackView(arrangedSubviews: [healthBar, healthBarPic, whiteView, happinessBarPic, happinessBar])
+//
+//        bottomControlsContainer.translatesAutoresizingMaskIntoConstraints = false
+//        bottomControlsContainer.distribution = .fillEqually
+//
+//        view.addSubview(bottomControlsContainer)
+//
+//        bottomControlsContainer.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+//        bottomControlsContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+//        bottomControlsContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+//        bottomControlsContainer.heightAnchor.constraint(equalToConstant: 20).isActive = true
+//        bottomControlsContainer.spacing = 100
+//    }
 
     @IBOutlet weak var menuButton: UIButton!
     @IBAction func goToStartingScreen(button: UIButton)

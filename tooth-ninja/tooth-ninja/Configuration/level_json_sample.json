@@ -165,79 +165,167 @@
       [
        {
        "name": "tooth",
-       "position_x": 0.562,
+       "position_x": 0.542,
        "position_y": 0.32,
        "position_z": 2,
-       "size_width": 80,
-       "size_height": 80,
+       "size_width": 50,
+       "size_height": 50,
        "image": "tooth_1"
        },
        {
        "name": "tooth",
-       "position_x": 0.432,
+       "position_x": 0.452,
        "position_y": 0.32,
        "position_z": 2,
-       "size_width": 80,
-       "size_height": 80,
+       "size_width": 50,
+       "size_height": 50,
        "image": "tooth_1"
        },
        {
           "name": "tooth",
-          "position_x": 0.722,
-          "position_y": 0.32,
+          "position_x": 0.632,
+          "position_y": 0.31,
           "position_z": 2,
-          "size_width": 90,
-          "size_height": 90,
+          "size_width": 50,
+          "size_height": 50,
+          "rotation" : -5,
           "image": "tooth_1"
         },
         {
           "name": "tooth",
-          "position_x": 0.272,
-          "position_y": 0.32,
+          "position_x": 0.362,
+          "position_y": 0.31,
           "position_z": 2,
-          "size_width": 90,
-          "size_height": 90,
+          "size_width": 50,
+          "rotation" : 5,
+          "size_height": 50,
           "image": "tooth_1"
         },
+        
         {
-          "name": "tooth",
-          "position_x": 0.572,
-          "position_y": 0.7,
-          "position_z": 2,
-          "rotation": 180,
-          "size_width": 90,
-          "size_height": 90,
-          "image": "tooth_1"
+            "name": "tooth",
+            "position_x": 0.722,
+            "position_y": 0.28,
+            "position_z": 2,
+            "size_width": 50,
+            "size_height": 50,
+            "rotation" : -5,
+            "image": "tooth_r"
         },
         {
-          "name": "tooth",
-          "position_x": 0.422,
-          "position_y": 0.7,
-          "position_z": 2,
-          "rotation": 180,
-          "size_width": 90,
-          "size_height": 90,
-          "image": "tooth_1"
+            "name": "tooth",
+            "position_x": 0.272,
+            "position_y": 0.28,
+            "position_z": 2,
+            "size_width": 50,
+            "rotation" : 5,
+            "size_height": 50,
+            "image": "tooth_l"
+        },
+        
+        {
+            "name": "tooth",
+            "position_x": 0.812,
+            "position_y": 0.23,
+            "position_z": 2,
+            "size_width": 50,
+            "size_height": 40,
+            "rotation" : -15,
+            "image": "tooth_1"
         },
         {
-          "name": "tooth",
-          "position_x": 0.722,
-          "position_y": 0.7,
-          "position_z": 2,
-          "rotation": 180,
-          "size_width": 80,
-          "size_height": 80,
-          "image": "tooth_1"
+            "name": "tooth",
+            "position_x": 0.182,
+            "position_y": 0.23,
+            "position_z": 2,
+            "size_width": 50,
+            "rotation" : 15,
+            "size_height": 40,
+            "image": "tooth_1"
+        },
+        
+        
+        {
+            "name": "tooth",
+            "position_x": 0.542,
+            "position_y": 0.7,
+            "position_z": 2,
+            "size_width": 50,
+            "size_height": 50,
+            "rotation" : 180,
+            "image": "tooth_1"
         },
         {
-          "name": "tooth",
-          "position_x": 0.272,
-          "position_y": 0.7,
-          "position_z": 2,
-          "rotation": 180,
-          "size_width": 80,
-          "size_height": 80,
-          "image": "tooth_1"
+            "name": "tooth",
+            "position_x": 0.452,
+            "position_y": 0.7,
+            "position_z": 2,
+            "size_width": 50,
+            "size_height": 50,
+            "rotation" : 180,
+            "image": "tooth_1"
+        },
+        {
+            "name": "tooth",
+            "position_x": 0.632,
+            "position_y": 0.71,
+            "position_z": 2,
+            "size_width": 50,
+            "size_height": 50,
+            "rotation" : 185,
+            "image": "tooth_1"
+        },
+        {
+            "name": "tooth",
+            "position_x": 0.362,
+            "position_y": 0.71,
+            "position_z": 2,
+            "size_width": 50,
+            "rotation" : 175,
+            "size_height": 50,
+            "image": "tooth_1"
+        },
+        
+        {
+            "name": "tooth",
+            "position_x": 0.722,
+            "position_y": 0.74,
+            "position_z": 2,
+            "size_width": 50,
+            "size_height": 50,
+            "rotation" : 185,
+            "image": "tooth_l"
+        },
+        {
+            "name": "tooth",
+            "position_x": 0.272,
+            "position_y": 0.74,
+            "position_z": 2,
+            "size_width": 50,
+            "rotation" : 175,
+            "size_height": 50,
+            "image": "tooth_r"
+        },
+        
+        {
+            "name": "tooth",
+            "position_x": 0.812,
+            "position_y": 0.79,
+            "position_z": 2,
+            "size_width": 50,
+            "size_height": 40,
+            "rotation" : 195,
+            "image": "tooth_1"
+        },
+        {
+            "name": "tooth",
+            "position_x": 0.182,
+            "position_y": 0.79,
+            "position_z": 2,
+            "size_width": 50,
+            "rotation" : 165,
+            "size_height": 40,
+            "image": "tooth_1"
         }
       ],
       "bacteria":

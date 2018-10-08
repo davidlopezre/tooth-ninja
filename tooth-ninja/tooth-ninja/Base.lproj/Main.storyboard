@@ -10,53 +10,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Swiping Controller-->
-        <scene sceneID="aDK-3I-E1b">
-            <objects>
-                <viewController storyboardIdentifier="SwipingController" id="vaq-ai-42h" customClass="SwipingController" customModule="tooth_ninja" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="l7j-t4-wHq">
-                        <rect key="frame" x="0.0" y="0.0" width="812" height="375"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6ML-vV-Viq">
-                                <rect key="frame" x="44" y="10" width="63" height="28"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="28" id="fLA-DO-EZQ"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="63" id="oVq-Xg-jO2"/>
-                                </constraints>
-                                <state key="normal" title="Back">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="goBackHome:" destination="vaq-ai-42h" eventType="touchUpInside" id="BZD-5Q-6tG"/>
-                                </connections>
-                            </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HVM-qL-MEA" userLabel="goBackView">
-                                <rect key="frame" x="44" y="10" width="63" height="28"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <viewLayoutGuide key="safeArea" id="Xbd-b0-mLi"/>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="6ML-vV-Viq" firstAttribute="top" secondItem="aTP-FE-Y4L" secondAttribute="top" constant="10" id="BDN-Vt-qx2"/>
-                            <constraint firstItem="6ML-vV-Viq" firstAttribute="height" secondItem="HVM-qL-MEA" secondAttribute="height" id="NVY-63-kHI"/>
-                            <constraint firstItem="6ML-vV-Viq" firstAttribute="leading" secondItem="aTP-FE-Y4L" secondAttribute="leading" id="R05-Vv-PDr"/>
-                            <constraint firstItem="6ML-vV-Viq" firstAttribute="width" secondItem="HVM-qL-MEA" secondAttribute="width" id="USr-Z4-PoM"/>
-                            <constraint firstItem="HVM-qL-MEA" firstAttribute="top" secondItem="aTP-FE-Y4L" secondAttribute="top" constant="10" id="sF7-gS-dhy"/>
-                            <constraint firstItem="HVM-qL-MEA" firstAttribute="leading" secondItem="aTP-FE-Y4L" secondAttribute="leading" id="yb9-9f-HIB"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="aTP-FE-Y4L"/>
-                    </view>
-                    <connections>
-                        <outlet property="goBackInfoScreen" destination="6ML-vV-Viq" id="x73-va-UkA"/>
-                        <outlet property="goBackViewInfoScreen" destination="HVM-qL-MEA" id="DRh-U2-FFK"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="7Kh-sk-NfH" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-256.4039408866995" y="8.8000000000000007"/>
-        </scene>
         <!--Game View Controller-->
         <scene sceneID="tXr-a1-R10">
             <objects>
@@ -65,12 +18,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="812" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Xw-IR-Lkz">
-                                <rect key="frame" x="44" y="336" width="63" height="28"/>
+                            <button opaque="NO" alpha="0.34999999999999998" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Xw-IR-Lkz">
+                                <rect key="frame" x="44" y="325" width="100" height="50"/>
                                 <accessibility key="accessibilityConfiguration" label="Menu"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="28" id="Vut-4z-om6"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="63" id="v9q-3r-Bh5"/>
+                                    <constraint firstAttribute="width" constant="100" id="Zhi-5y-4F2"/>
                                 </constraints>
                                 <state key="normal" title="Menu">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -82,8 +34,9 @@
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="2Xw-IR-Lkz" firstAttribute="leading" secondItem="4qk-I5-YsI" secondAttribute="leading" id="JTI-X2-Mhb"/>
-                            <constraint firstAttribute="bottom" secondItem="2Xw-IR-Lkz" secondAttribute="bottom" constant="11" id="MnJ-ye-uVd"/>
+                            <constraint firstItem="2Xw-IR-Lkz" firstAttribute="leading" secondItem="4qk-I5-YsI" secondAttribute="leading" id="17e-cL-0hM"/>
+                            <constraint firstItem="2Xw-IR-Lkz" firstAttribute="top" secondItem="4qk-I5-YsI" secondAttribute="top" constant="325" id="Ud5-Fu-Qwz"/>
+                            <constraint firstAttribute="bottom" secondItem="2Xw-IR-Lkz" secondAttribute="bottom" id="t9L-2s-MgO"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="4qk-I5-YsI"/>
                     </view>
@@ -122,6 +75,7 @@
                                             <segment title="Medium"/>
                                             <segment title="Fast"/>
                                         </segments>
+                                        <color key="tintColor" red="0.094117647060000004" green="0.26274509800000001" blue="0.54901960780000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
                                             <action selector="speedChanged:" destination="Oqd-X8-uOX" eventType="valueChanged" id="IfR-zi-9Yv"/>
                                         </connections>
@@ -142,20 +96,22 @@
                                             <segment title="Medium"/>
                                             <segment title="Large"/>
                                         </segments>
+                                        <color key="tintColor" red="0.094117647060000004" green="0.26274509800000001" blue="0.54901960780000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
                                             <action selector="sizeChanged:" destination="Oqd-X8-uOX" eventType="valueChanged" id="OWc-Qv-cf8"/>
                                         </connections>
                                     </segmentedControl>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hIQ-pp-5h5">
-                                <rect key="frame" x="44" y="10" width="63" height="28"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hIQ-pp-5h5">
+                                <rect key="frame" x="0.0" y="0.0" width="100" height="50"/>
+                                <color key="backgroundColor" red="0.094117647058823528" green="0.2627450980392157" blue="0.5490196078431373" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="28" id="P0a-As-eYT"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="63" id="fDK-TC-eA4"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="O5O-11-yZg"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" title="Back">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
                                     <action selector="goBackWithButton:" destination="Oqd-X8-uOX" eventType="touchUpInside" id="75e-xv-gQq"/>
@@ -164,9 +120,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="hIQ-pp-5h5" firstAttribute="top" secondItem="7Ew-1C-bbw" secondAttribute="top" constant="10" id="8nD-7w-dm1"/>
+                            <constraint firstItem="hIQ-pp-5h5" firstAttribute="top" secondItem="7Ew-1C-bbw" secondAttribute="top" id="8xg-Ys-ThX"/>
+                            <constraint firstItem="7Ew-1C-bbw" firstAttribute="bottom" secondItem="hIQ-pp-5h5" secondAttribute="bottom" constant="304" id="UsZ-UA-yQI"/>
                             <constraint firstItem="R8H-3i-ART" firstAttribute="centerY" secondItem="7Ew-1C-bbw" secondAttribute="centerY" constant="10.5" id="kiN-GP-890"/>
-                            <constraint firstItem="hIQ-pp-5h5" firstAttribute="leading" secondItem="7Ew-1C-bbw" secondAttribute="leading" id="plC-OB-rJB"/>
+                            <constraint firstItem="hIQ-pp-5h5" firstAttribute="leading" secondItem="wUW-4R-ePa" secondAttribute="leading" id="pus-Lh-4c5"/>
                             <constraint firstItem="R8H-3i-ART" firstAttribute="centerX" secondItem="7Ew-1C-bbw" secondAttribute="centerX" id="wvu-hF-cL6"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="7Ew-1C-bbw"/>
@@ -197,11 +154,16 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u1j-8g-dxk">
                                         <rect key="frame" x="0.0" y="0.0" width="157" height="30"/>
-                                        <color key="backgroundColor" red="0.093020059168338776" green="0.26311564445495605" blue="0.54853469133377075" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.094117647058823528" green="0.2627450980392157" blue="0.5490196078431373" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <state key="normal" title="Play">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="goToGameWithButton:" destination="0zk-dn-7Qx" eventType="touchUpInside" id="gNh-i8-SNH"/>
                                         </connections>
@@ -212,6 +174,11 @@
                                         <state key="normal" title="Info">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="goToInstructionsWithButton:" destination="0zk-dn-7Qx" eventType="touchUpInside" id="5uE-8j-6v8"/>
                                         </connections>
@@ -219,9 +186,14 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0jH-zi-kbC">
                                         <rect key="frame" x="0.0" y="70" width="157" height="30"/>
                                         <color key="backgroundColor" red="0.093020059168338776" green="0.26311564445495605" blue="0.54853469133377075" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <state key="normal" title="Configuration">
+                                        <state key="normal" title="Settings">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="goToConfigurationWithButton:" destination="0zk-dn-7Qx" eventType="touchUpInside" id="Eya-xc-ssv"/>
                                         </connections>

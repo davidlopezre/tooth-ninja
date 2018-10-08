@@ -35,9 +35,4 @@ class StartingViewController: UIViewController
         let swipingController = SwipingController(collectionViewLayout: layout)
         self.present(swipingController, animated: true, completion: nil)
     }
-    
-    @IBAction func printConfiguration(button: UIButton) {
-        print("Speed is \(queryDefaults(type: DefaultTypes.Speed))")
-        print("Size is \(queryDefaults(type: DefaultTypes.BacteriaSize))")
-    }
 }

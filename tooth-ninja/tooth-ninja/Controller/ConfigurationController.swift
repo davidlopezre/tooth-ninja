@@ -14,10 +14,6 @@ class ConfigurationController : UIViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        backButton.backgroundColor = .clear
-        backButton.layer.cornerRadius = 5
-        backButton.layer.borderWidth = 1
-        backButton.layer.borderColor = UIColor.black.cgColor
     }
     
     @IBOutlet weak var speedController: UISegmentedControl!
