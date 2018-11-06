@@ -174,5 +174,7 @@ class GameViewController: UIViewController, Controller
         let hiddenViewController = storyBoard.instantiateViewController(withIdentifier: "StartingViewController")
         self.present(hiddenViewController, animated: true, completion: nil)
     }
+    
+    
 }
 

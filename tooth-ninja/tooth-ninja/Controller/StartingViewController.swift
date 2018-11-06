@@ -7,12 +7,23 @@
 //
 import UIKit
 import Foundation
+import AVFoundation
 
 class StartingViewController: UIViewController
 {
+    var audioPlayer = AVAudioPlayer()
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        do
+        {
+            audioPlayer = try AVAudioPlayer(contentsOf: URL.init()
+        }
+        catch
+        {
+            print(error)
+        }
     }
     
     @IBAction func goToGame(button: UIButton)
@@ -35,4 +46,8 @@ class StartingViewController: UIViewController
         let swipingController = SwipingController(collectionViewLayout: layout)
         self.present(swipingController, animated: true, completion: nil)
     }
+    
+    @IBAction func playAudio(_ sender: Any) {
+    }
+    
 }
