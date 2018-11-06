@@ -22,7 +22,6 @@ protocol Controller {
 class GameViewController: UIViewController, Controller
 {
     //health bar for the game
-    
     var currentLevel: Level? = nil
     var config: GameConfiguration?
     var skView: SKView?

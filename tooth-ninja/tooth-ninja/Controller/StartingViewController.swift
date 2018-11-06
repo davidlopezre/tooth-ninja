@@ -15,6 +15,18 @@ class StartingViewController: UIViewController
     var audioPlayer = AVAudioPlayer()
     var count = 0
     
+    //    Calling the audioPlayer created in the App Delegate to solve the bug wherein two streams of audio are created when transitioning from one view controller to the other or back
+    var audioPlayerAD : AVAudioPlayer? {
+        get {
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            return appDelegate.audioPlayerAD
+        }
+        set {
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.audioPlayerAD = newValue
+        }
+    }
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -23,6 +35,7 @@ class StartingViewController: UIViewController
             audioPlayer = try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: "Off Limits", ofType: "wav")!))
             audioPlayer.prepareToPlay()
             audioPlayer.play()
+            
 //            if (audioPlayer.isPlaying)
 //            {
 //                audioPlayer.pause()
