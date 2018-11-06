@@ -11,6 +11,7 @@ import AVFoundation
 
 class StartingViewController: UIViewController
 {
+    @IBOutlet weak var playButton: UIButton!
     var audioPlayer = AVAudioPlayer()
     var count = 0
     
@@ -22,6 +23,14 @@ class StartingViewController: UIViewController
             audioPlayer = try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: "Off Limits", ofType: "wav")!))
             audioPlayer.prepareToPlay()
             audioPlayer.play()
+//            if (audioPlayer.isPlaying)
+//            {
+//                audioPlayer.pause()
+//            }
+//            else
+//            {
+//                audioPlayer.play()
+//            }
             audioPlayer.numberOfLoops = -1
             print("Started")
         }
@@ -56,6 +65,12 @@ class StartingViewController: UIViewController
         if audioPlayer.isPlaying
         {
             audioPlayer.pause()
+            playButton.setImage(UIImage(named:"play.png"),for:UIControlState.normal)
+        }
+        else
+        {
+            audioPlayer.play()
+            playButton.setImage(UIImage(named:"pause.png"),for:UIControlState.normal)
         }
     }
 }
