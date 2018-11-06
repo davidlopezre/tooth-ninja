@@ -12,13 +12,18 @@ import AVFoundation
 class StartingViewController: UIViewController
 {
     var audioPlayer = AVAudioPlayer()
+    var count = 0
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
         do
         {
-            audioPlayer = try AVAudioPlayer(contentsOf: URL.init()
+            audioPlayer = try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: "Off Limits", ofType: "wav")!))
+            audioPlayer.prepareToPlay()
+            audioPlayer.play()
+            audioPlayer.numberOfLoops = -1
+            print("Started")
         }
         catch
         {
@@ -48,6 +53,9 @@ class StartingViewController: UIViewController
     }
     
     @IBAction func playAudio(_ sender: Any) {
+        if audioPlayer.isPlaying
+        {
+            audioPlayer.pause()
+        }
     }
-    
 }
