@@ -2,8 +2,8 @@
 //  Level.swift includes all classes and protocols related to level
 //  initialisation and running.
 //
-//  Created by David Lopez on 9/6/18.
-//  Copyright © 2018 David Lopez. All rights reserved.
+//  Created by David Lopez and Kushagra Vashisht on 9/6/18.
+//  Copyright © 2018 David Lopez and Kushagra Vashisht. All rights reserved.
 //
 
 import Foundation
@@ -85,17 +85,6 @@ class Level: SKScene, SKPhysicsContactDelegate, BaseLevel, LevelController {
             
             let damage = Double(health)/100.0
             healthBar.setProgress(x: CGFloat(damage))
-            
-//            let bar = controller?.healthBar
-//            print(bar!.frame.width)
-            
-//            var newFrame = bar?.frame
-//
-//            newFrame?.size.width = CGFloat(health);
-//            newFrame?.size.height = 10;
-            
-//            controller?.healthBar.frame = newFrame!
-//            print(bar!.frame.width)
         }
     }
 
@@ -110,15 +99,6 @@ class Level: SKScene, SKPhysicsContactDelegate, BaseLevel, LevelController {
             
             let damage = Double(happiness)/100.0
             happinessBar.setProgress(x: CGFloat(damage))
-            
-//            let bar = controller?.happinessBar
-//
-//            var newFrame = bar?.frame
-//
-//            newFrame?.size.width = CGFloat(happiness);
-//            newFrame?.size.height = 10;
-//
-//            controller?.happinessBar.frame = newFrame!
         }
     }
 
@@ -197,10 +177,6 @@ class Level: SKScene, SKPhysicsContactDelegate, BaseLevel, LevelController {
         healthLabel!.fontSize = 20
         healthLabel!.zPosition = 2
         healthLabel!.position = CGPoint(x: size.width * 0.1, y: size.height * 0.9)
-//        addChild(healthLabel!)
-        
-//        controller?.healthBar.isHidden = false
-//        controller?.happinessBar.isHidden = false
         
         let heart = SKSpriteNode(imageNamed: "heart")
         heart.zPosition = 3
@@ -229,7 +205,6 @@ class Level: SKScene, SKPhysicsContactDelegate, BaseLevel, LevelController {
         happinessLabel!.fontSize = 20
         happinessLabel!.zPosition = 2
         happinessLabel!.position = CGPoint(x: size.width * 0.13, y: size.height * 0.8)
-//        addChild(happinessLabel!)
 
         shieldLabel = SKLabelNode(fontNamed: "Chalkduster")
         shieldLabel!.text = ""

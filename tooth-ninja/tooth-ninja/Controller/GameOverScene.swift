@@ -2,8 +2,8 @@
 //  GameOverScene.swift
 //  SpriteKitSimpleGame
 //
-//  Created by David Lopez on 13/4/18.
-//  Copyright © 2018 David Lopez. All rights reserved.
+//  Created by David Lopez and Kushagra Vashisht on 13/4/18.
+//  Copyright © 2018 David Lopez and Kushagra Vashisht. All rights reserved.
 //
 
 import Foundation

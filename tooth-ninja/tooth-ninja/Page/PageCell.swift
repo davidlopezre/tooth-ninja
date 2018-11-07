@@ -1,7 +1,3 @@
-//
-//  PageCell.swift
-//  autolayout_lbta
-
 import UIKit
 
 class PageCell: UICollectionViewCell {
@@ -32,11 +28,6 @@ class PageCell: UICollectionViewCell {
     private let descriptionTextView: UITextView = {
         let textView = UITextView()
         
-//        let attributedText = NSMutableAttributedString(string: "Join us today in our fun and games!", attributes: [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 18)])
-//
-//        attributedText.append(NSAttributedString(string: "\n\n\nAre you ready for loads and loads of fun? Don't wait any longer! We hope to see you in our stores soon.", attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 13), NSAttributedStringKey.foregroundColor: UIColor.gray]))
-        
-        //textView.attributedText = attributedText
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.textAlignment = .center
         textView.isEditable = false

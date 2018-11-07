@@ -65,10 +65,6 @@ class SwipingController: UICollectionViewController, UICollectionViewDelegateFlo
     }()
     
     @objc private func handleNext() {
-//        print("\(pageControl.currentPage) - \(pageControl.numberOfPages)")
-//        if (pageControl.currentPage == pageControl.numberOfPages - 1) {
-//            nextButton.isUserInteractionEnabled = false
-//        }
         let nextIndex = min(pageControl.currentPage + 1, pages.count - 1)
         let indexPath = IndexPath(item: nextIndex, section: 0)
         pageControl.currentPage = nextIndex
@@ -116,12 +112,9 @@ class SwipingController: UICollectionViewController, UICollectionViewDelegateFlo
         button.backgroundColor = niceBlue
         button.setTitle("Back", for: .normal)
         button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
-//        button.layer.cornerRadius = 5
         
         self.view.addSubview(button)
-        
-//        print("VIEW: \(String(describing: goBackInfoScreen))")
-       
+               
         collectionView?.backgroundColor = .white
         collectionView?.register(PageCell.self, forCellWithReuseIdentifier: "cellId")
         collectionView?.isPagingEnabled = true

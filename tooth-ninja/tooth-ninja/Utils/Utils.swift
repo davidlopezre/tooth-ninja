@@ -1,6 +1,6 @@
 //
-// Created by David Lopez on 8/7/18.
-// Copyright (c) 2018 David Lopez. All rights reserved.
+// Created by David Lopez and Kushagra Vashisht on 8/7/18.
+// Copyright (c) 2018 David Lopez and Kushagra Vashisht. All rights reserved.
 //
 
 import Foundation

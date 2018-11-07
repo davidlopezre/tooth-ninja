@@ -1,7 +1,3 @@
-//
-//  Page.swift
-//  autolayout_lbta
-
 import Foundation
 
 struct Page {

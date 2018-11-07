@@ -2,7 +2,7 @@
 //  ConfigurationController.swift
 //  tooth-ninja
 //
-//  Created by David Lopez on 2/9/18.
+//  Created by David Lopez and Kushagra Vashisht on 2/9/18.
 //  Copyright © 2018 Kushagra Vashisht. All rights reserved.
 //
 

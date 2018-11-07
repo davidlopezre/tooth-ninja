@@ -9,10 +9,6 @@ import SpriteKit
 import AVFoundation
 
 protocol Controller {
-//    var healthBar: UIView {get}
-//    var happinessBar: UIView {get}
-//    var happinessBarPic: UIImageView{get}
-//    var healthBarPic: UIImageView{get}
     func levelEnd(won: Bool)
 }
 
@@ -26,13 +22,6 @@ class GameViewController: UIViewController, Controller
     var config: GameConfiguration?
     var skView: SKView?
     
-    // ADDING MUSIC IN THE BACKGROUND
-//    let soundFilePath = Bundle.mainBundle.pathForResource("mySound", ofType: "mySound")
-//    let soundFileURL = NSURL(fileURLWithPath: soundFilePath!)
-//    let player = AVAudioPlayer(contentsOfURL: soundFileURL, error: nil)
-//    player.numberOfLoops = -1 //infinite
-//    player.play()
-    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -41,8 +30,6 @@ class GameViewController: UIViewController, Controller
         menuButton.layer.cornerRadius = 5
         menuButton.layer.borderWidth = 1
         menuButton.layer.borderColor = UIColor.white.cgColor
-        
-        // ADDING THE HIDDEN VIEW CONTROLS FOR THE LONG PRESS GESTURE RECOGNISER HERE
         skView = initialiseSKView()
         do
         {
@@ -67,43 +54,6 @@ class GameViewController: UIViewController, Controller
 
         skView!.presentScene(currentLevel)
     }
-    
-//    let healthBar: UIView =
-//    {
-//        let bar = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 75))
-//        bar.translatesAutoresizingMaskIntoConstraints = false
-//        bar.backgroundColor = UIColor(red:0.88, green:0.16, blue:0.42, alpha:1.0)
-//        return bar
-//    }()
-//
-//    let healthBarPic: UIImageView =
-//    {
-//        let image = UIImage(named: "heart")
-//        let imageView = UIImageView(image: image!)
-//        imageView.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
-//        imageView.translatesAutoresizingMaskIntoConstraints = false
-////        imageView.layer.cornerRadius = imageView.frame.width/2
-//        imageView.backgroundColor = .clear
-//        return imageView
-//    }()
-//
-//    let happinessBarPic: UIImageView =
-//    {
-//        let image = UIImage(named: "smile")
-//        let imageView = UIImageView(image: image!)
-//        imageView.frame = CGRect(x: 0, y: 0, width: 25, height: 200)
-//        imageView.translatesAutoresizingMaskIntoConstraints = false
-//        imageView.backgroundColor = .clear
-//        return imageView
-//    }()
-//
-//    let happinessBar: UIView =
-//    {
-//        let bar = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 75))
-//        bar.translatesAutoresizingMaskIntoConstraints = false
-//        bar.backgroundColor = UIColor(red:0.36, green:0.60, blue:0.88, alpha:1.0)
-//        return bar
-//    }()
     
     override var prefersStatusBarHidden: Bool
     {
@@ -139,32 +89,9 @@ class GameViewController: UIViewController, Controller
         currentLevel = Level(number: nextLevelId, winningScore: score, icon: icon, size: currentLevel!.size, bgFile: currentLevel!.backgroundFile!, teethArray: newTeethArray,
                              bacteriaArray: newBacteriaArray, foodArray: newFoodArray, c: self)
         let reveal = SKTransition.flipHorizontal(withDuration: 0.5)
-//        self.healthBar.isHidden = true
-//        self.happinessBar.isHidden = true
-//        self.happinessBarPic.isHidden = true
-//        self.healthBarPic.isHidden = true
         let gameOverScene = GameOverScene(size: currentLevel!.size, won: won, nextScene: currentLevel!)
         skView?.presentScene(gameOverScene, transition: reveal)
     }
-    
-//    private func setupLayout()
-//    {
-//        let whiteView = UIView()
-//        whiteView.backgroundColor = .clear
-//
-//        let bottomControlsContainer = UIStackView(arrangedSubviews: [healthBar, healthBarPic, whiteView, happinessBarPic, happinessBar])
-//
-//        bottomControlsContainer.translatesAutoresizingMaskIntoConstraints = false
-//        bottomControlsContainer.distribution = .fillEqually
-//
-//        view.addSubview(bottomControlsContainer)
-//
-//        bottomControlsContainer.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-//        bottomControlsContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-//        bottomControlsContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-//        bottomControlsContainer.heightAnchor.constraint(equalToConstant: 20).isActive = true
-//        bottomControlsContainer.spacing = 100
-//    }
 
     @IBOutlet weak var menuButton: UIButton!
     @IBAction func goToStartingScreen(button: UIButton)

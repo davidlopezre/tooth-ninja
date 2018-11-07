@@ -102,12 +102,12 @@
 		611788C92078B0AF00FC8590 /* tooth-ninja */ = {
 			isa = PBXGroup;
 			children = (
-				28A3220321924AAC00606013 /* Audio Files */,
 				611788CA2078B0AF00FC8590 /* AppDelegate.swift */,
 				611788D42078B0B000FC8590 /* Main.storyboard */,
 				611788D72078B0B000FC8590 /* Assets.xcassets */,
 				611788D92078B0B000FC8590 /* LaunchScreen.storyboard */,
 				611788DC2078B0B000FC8590 /* Info.plist */,
+				28A3220321924AAC00606013 /* Audio Files */,
 				CBC215617A1FBB5D9FA00805 /* Level */,
 				CBC212F36ADE92D58F75D6E6 /* Configuration */,
 				CBC214BEF140E697818B7D16 /* GameObject */,
