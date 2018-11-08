@@ -192,6 +192,8 @@ class LevelExecution {
     /* This function is in charge of spawning food and bacteria and giving them the action to
      * approach the teeth in the level.
      */
+    
+//    NEED TO FIX HERE
     func spawnObjects (influx: Bool) {
         let proba = random(min: 0, max: 100)    // probability, if > 90 it's food else bacteria
         
@@ -210,7 +212,7 @@ class LevelExecution {
         }
         
         // Determine speed of the object
-        var actualDuration = random(min: CGFloat(1.0), max: CGFloat(4.0))
+        var actualDuration = random(min: CGFloat(2.0), max: CGFloat(5.0))
         if (defaultSpeed > 0) {
             actualDuration *= CGFloat(defaultSpeed)
         }
