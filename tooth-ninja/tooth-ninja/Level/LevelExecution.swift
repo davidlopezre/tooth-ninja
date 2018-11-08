@@ -5,12 +5,14 @@
 
 import Foundation
 import SpriteKit
+import AVFoundation
 
 /* This class is in charge of managing game object physics. For example,
  * what happens if bacteria touches tooth.
  */
 
 class LevelPhysics {
+    var audioPlayer = AVAudioPlayer()
     var level: Level
     var hasShield = false
     var hasSticky: Int = 0
@@ -38,7 +40,7 @@ class LevelPhysics {
         self.level = level
         WINNING_SCORE = level.winningScore
     }
-
+    
     func didBegin(_ contact: SKPhysicsContact)
     {
         var playerBody: SKPhysicsBody
@@ -95,6 +97,17 @@ class LevelPhysics {
     }
 
     func swipeCollidesWithBacteria(bacteria: GameObject) {
+        do
+        {
+            audioPlayer = try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: "swish", ofType: "mp3")!))
+            audioPlayer.prepareToPlay()
+            audioPlayer.play()
+            print("Swipe collides with Bacteria, audio initiated")
+        }
+        catch
+        {
+            print(error)
+        }
         if (bacteria.kind == STICKY){
             hasSticky -= 1
         }
@@ -120,6 +133,17 @@ class LevelPhysics {
     }
 
     func swipeCollidesWithFood(food: GameObject) {
+        do
+        {
+            audioPlayer = try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: "swish", ofType: "mp3")!))
+            audioPlayer.prepareToPlay()
+            audioPlayer.play()
+            print("Swipe collided with food, audio initiated")
+        }
+        catch
+        {
+            print(error)
+        }
         food.removeFromParent()
 
     }
