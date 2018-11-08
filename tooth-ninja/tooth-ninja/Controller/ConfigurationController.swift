@@ -23,17 +23,18 @@ class ConfigurationController : UIViewController
     @IBOutlet weak var sizeLabel: UILabel!
     @IBAction func speedSlider(_ sender: UISlider)
     {
-        speedValue = String((sender.value))
+        speedValue = String(Int(sender.value))
         speedLabel.text = "Speed = " + speedValue
-//        setDefaults(type: DefaultTypes.Speed, value: Double(speedValue)! * 1000)
-        setDefaults(type: DefaultTypes.Speed, value: 2)
+        setDefaults(type: DefaultTypes.Speed, value: Double(speedValue)!)
+        print(speedValue)
+//        setDefaults(type: DefaultTypes.Speed, value: 2)
 
     }
     @IBAction func sizeSlider(_ sender: UISlider)
     {
-        sizeValue = String((sender.value))
+        sizeValue = String(Int(sender.value))
         sizeLabel.text = "Size = " + sizeValue
-        setDefaults(type: DefaultTypes.BacteriaSize, value: Double(sizeValue)! * 1000)
+        setDefaults(type: DefaultTypes.BacteriaSize, value: Double(sizeValue)!)
     }
     @IBOutlet weak var backButton: UIButton!
     @IBAction func goBack(button: UIButton)

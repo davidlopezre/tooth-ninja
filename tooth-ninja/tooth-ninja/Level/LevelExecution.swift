@@ -186,6 +186,7 @@ class LevelExecution {
         foodArray = food
 
         defaultSpeed += queryDefaults(type: DefaultTypes.Speed)
+        print(defaultSpeed)
         defaultSize += queryDefaults(type: DefaultTypes.BacteriaSize)
     }
 
@@ -206,8 +207,6 @@ class LevelExecution {
             let index = randomIndex(bacteriaArray.count)
             objectToAdd = bacteriaArray[index].copy() as? GameObject
             objectToAdd?.position = generateRandomPosition(width: level.size.width, height: level.size.height)
-            print("Level Width: " , level.size.width)
-            print("Level Height: " , level.size.height)
             
             level.addChild(objectToAdd!)
         } else if (foodArray.count > 0){
@@ -233,7 +232,11 @@ class LevelExecution {
         // Determine speed of the object
         var actualDuration = random(min: CGFloat(2.0), max: CGFloat(4.0))
         if (defaultSpeed > 0) {
+//            SORT OF A HACK TO INCORPORATE THE SPEED WHICH IS NOW FROM 0-100 INSTEAD OF 0-2. THE INITIAL SPEED IS 50 ATM, SO /500
+            print("Actual Duration before: ",actualDuration)
             actualDuration *= CGFloat(defaultSpeed)
+            print("Actual Duration after: ",actualDuration)
+            print("Default Speed: ",defaultSpeed)
         }
 
         // Create the actions
