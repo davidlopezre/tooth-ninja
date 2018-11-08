@@ -3,6 +3,7 @@
 //  autolayout_lbta
 
 import UIKit
+import AVFoundation
 
 extension UIColor
 {
@@ -13,6 +14,7 @@ let niceBlue = UIColor(red: 24/255, green: 67/255, blue: 140/255, alpha: 1)
 let niceRed = UIColor(red: 252/255, green: 117/255, blue: 118/255, alpha: 1)
 
 class SwipingController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+    var audioPlayer = AVAudioPlayer()
     
     @IBOutlet weak var goBackInfoScreen: UIButton!
     @IBAction func goBackHome(_ sender: Any) {
@@ -105,6 +107,22 @@ class SwipingController: UICollectionViewController, UICollectionViewDelegateFlo
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        do
+        {
+            audioPlayer = try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: "Off Limits", ofType: "wav")!))
+            audioPlayer.prepareToPlay()
+            audioPlayer.pause()
+            print("Music Player Paused in SwipingController")
+        }
+        catch
+        {
+            print(error)
+        }
+//        if(audioPlayer.isPlaying)
+//        {
+//            audioPlayer.pause()
+//            print("Music Player Paused in SwipingController")
+//        }
         
         setupBottomControls()
         

@@ -8,12 +8,19 @@
 
 import Foundation
 import SpriteKit
+import AVFoundation
 
 class GameOverScene: SKScene {
+    var audioPlayer = AVAudioPlayer()
 
     init(size: CGSize, won:Bool, nextScene: SKScene) {
 
         super.init(size: size)
+        if(audioPlayer.isPlaying)
+        {
+            audioPlayer.pause()
+            print("AudioPlayer stopped in GameOverScene")
+        }
 
         // 1
         backgroundColor = SKColor.white

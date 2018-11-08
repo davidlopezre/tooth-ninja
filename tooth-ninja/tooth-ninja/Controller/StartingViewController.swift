@@ -42,6 +42,11 @@ class StartingViewController: UIViewController
         {
             print(error)
         }
+        if(audioPlayer.isPlaying)
+        {
+            audioPlayer.pause()
+            print("Audio Player stopped in Starting View Controller")
+        }
     }
     
     @IBAction func goToGame(button: UIButton)

@@ -8,12 +8,30 @@
 
 import Foundation
 import UIKit
+import AVFoundation
 
 class ConfigurationController : UIViewController
 {
+    var audioPlayer = AVAudioPlayer()
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        do
+        {
+            audioPlayer = try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: "Off Limits", ofType: "wav")!))
+            audioPlayer.prepareToPlay()
+            audioPlayer.pause()
+            print("Music Player Paused in ConfigurationController")
+        }
+        catch
+        {
+            print(error)
+        }
+//        if(audioPlayer.isPlaying)
+//        {
+//            audioPlayer.pause()
+//            print("Music Player Paused in ConfigurationController")
+//        }
     }
     
     @IBOutlet weak var speedController: UISegmentedControl!

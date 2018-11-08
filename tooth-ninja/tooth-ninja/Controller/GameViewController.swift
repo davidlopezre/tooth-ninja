@@ -21,10 +21,22 @@ class GameViewController: UIViewController, Controller
     var currentLevel: Level? = nil
     var config: GameConfiguration?
     var skView: SKView?
+    var audioPlayer = AVAudioPlayer()
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        do
+        {
+            audioPlayer = try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: "Off Limits", ofType: "wav")!))
+            audioPlayer.prepareToPlay()
+            audioPlayer.pause()
+            print("Music Player Paused in GameViewController")
+        }
+        catch
+        {
+            print(error)
+        }
         
         menuButton.backgroundColor = niceBlue
         menuButton.layer.cornerRadius = 5
@@ -40,6 +52,11 @@ class GameViewController: UIViewController, Controller
             print("Level cannot be loaded!")
             print(error)
         }
+//        if(audioPlayer.isPlaying)
+//        {
+//            audioPlayer.pause()
+//            print("Music Player Paused in GameViewController")
+//        }
 
         let teethArray = config!.getTeethByLevel(id: 1)
         let bacteriaArray = config!.getObjectsByLevel(id: 1, name: "bacteria")
