@@ -196,7 +196,7 @@ class LevelExecution {
 //    NEEDS FIXING HERE
     func spawnObjects (influx: Bool) {
         let proba = random(min: 0, max: 100)    // probability, if > 90 it's food else bacteria
-        let probb = random(min: 0, max: 100)
+        let probb = random(min: 0, max: 50)
         
         var objectToAdd : GameObject? = nil
         var objectToAdd2: GameObject? = nil
@@ -206,6 +206,9 @@ class LevelExecution {
             let index = randomIndex(bacteriaArray.count)
             objectToAdd = bacteriaArray[index].copy() as? GameObject
             objectToAdd?.position = generateRandomPosition(width: level.size.width, height: level.size.height)
+            print("Level Width: " , level.size.width)
+            print("Level Height: " , level.size.height)
+            
             level.addChild(objectToAdd!)
         } else if (foodArray.count > 0){
             let index = randomIndex(foodArray.count)
@@ -214,7 +217,7 @@ class LevelExecution {
             level.addChild(objectToAdd!)
         }
 //        TRYING TO REPLICATE THE PREVIOUS PARAGRAPH TO GET TWO STREAMS OF SPAWNS INSTEAD OF ONE WHICH WILL(HOPEFULLY) SOLVE THE SPAWN ISSUE
-        if (probb < 50) || influx {
+        if (probb < 25) || influx {
             let index2 = randomIndex(bacteriaArray.count)
             objectToAdd2 = bacteriaArray[index2].copy() as? GameObject
             objectToAdd2?.position = generateRandomPosition(width: level.size.width, height: level.size.height)
