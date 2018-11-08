@@ -126,14 +126,14 @@
           },
           {
             "name": "food",
-            "kind": "good",
+            "kind": "no_change",
             "size_width": 50,
             "size_height": 50,
             "position_z": 2,
             "image": "food_cheese2.png"
           },{
             "name": "food",
-            "kind": "good",
+            "kind": "no_change",
             "size_width": 40,
             "size_height": 50,
             "position_z": 2,
@@ -375,7 +375,7 @@
         },
         {
           "name": "food",
-          "kind": "good",
+          "kind": "no_change",
           "size_width": 50,
           "size_height": 50,
           "position_z": 2,
@@ -383,7 +383,7 @@
         },
         {
           "name": "food",
-          "kind": "good",
+          "kind": "no_change",
           "size_width": 40,
           "size_height": 50,
           "position_z": 2,

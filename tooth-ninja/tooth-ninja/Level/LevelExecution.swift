@@ -25,12 +25,13 @@ class LevelPhysics {
     private let NORMAL   = "normal"
     private let SHIELD   = "shield"
     private let NEUTRAL  = "neutral"
+    private let NOCHANGE = "nochange"
 
     /* Numeric Constants */
     private let PLUS_HEALTH     =  25
     private let MINUS_HEALTH    =  10
     private let PLUS_HAPPINESS  =  10
-    private let MINUS_HAPPINESS =  25
+    private let MINUS_HAPPINESS =  10
     private let PLUS_SCORE      =  10
     private var WINNING_SCORE : Int
     
@@ -105,16 +106,26 @@ class LevelPhysics {
         }
     }
 
-
-    func foodCollidesWithTooth(food: GameObject) {
+//  MADE A NEW FOOD_TYPE NOCHANGE FOR CHEESE AND MILK WHICH DOESN'T DECREASE THE HAPPINESS WHEN SWIPED
+    func foodCollidesWithTooth(food: GameObject)
+    {
         food.removeFromParent()
-        if (food.kind == GOOD) {
+        if (food.kind == GOOD)
+        {
             level.health += PLUS_HEALTH
             level.happiness -= MINUS_HAPPINESS
-        }else if (food.kind == BAD) {
+        }
+        else if (food.kind == NOCHANGE)
+        {
+            level.health += PLUS_HEALTH
+        }
+        else if (food.kind == BAD)
+        {
             level.happiness += PLUS_HAPPINESS
             level.levelExecution.influx()
-        } else if (food.kind == SHIELD) {
+        }
+        else if (food.kind == SHIELD)
+        {
             giveShield()
         }
     }
