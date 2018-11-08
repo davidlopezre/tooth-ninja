@@ -193,13 +193,16 @@ class LevelExecution {
      * approach the teeth in the level.
      */
     
-//    NEED TO FIX HERE
+//    NEEDS FIXING HERE
     func spawnObjects (influx: Bool) {
         let proba = random(min: 0, max: 100)    // probability, if > 90 it's food else bacteria
+        let probb = random(min: 0, max: 100)
         
         var objectToAdd : GameObject? = nil
+        var objectToAdd2: GameObject? = nil
         
-        if (proba < 80) || influx {
+//        TRYING TO PLAY AROUND WITH THE PROB NUMBER TO EVEN OUT THE NUMBER OF BACTERIA'S AND FOOD THAT APPEAR
+        if (proba < 50) || influx {
             let index = randomIndex(bacteriaArray.count)
             objectToAdd = bacteriaArray[index].copy() as? GameObject
             objectToAdd?.position = generateRandomPosition(width: level.size.width, height: level.size.height)
@@ -210,9 +213,22 @@ class LevelExecution {
             objectToAdd?.position = generateRandomPosition(width: level.size.width, height: level.size.height)
             level.addChild(objectToAdd!)
         }
+//        TRYING TO REPLICATE THE PREVIOUS PARAGRAPH TO GET TWO STREAMS OF SPAWNS INSTEAD OF ONE WHICH WILL(HOPEFULLY) SOLVE THE SPAWN ISSUE
+        if (probb < 50) || influx {
+            let index2 = randomIndex(bacteriaArray.count)
+            objectToAdd2 = bacteriaArray[index2].copy() as? GameObject
+            objectToAdd2?.position = generateRandomPosition(width: level.size.width, height: level.size.height)
+            level.addChild(objectToAdd2!)
+        } else if (foodArray.count > 0){
+            let index2 = randomIndex(foodArray.count)
+            objectToAdd2 = foodArray[index2].copy() as? GameObject
+            objectToAdd2?.position = generateRandomPosition(width: level.size.width, height: level.size.height)
+            level.addChild(objectToAdd2!)
+        }
+        
         
         // Determine speed of the object
-        var actualDuration = random(min: CGFloat(2.0), max: CGFloat(5.0))
+        var actualDuration = random(min: CGFloat(2.0), max: CGFloat(4.0))
         if (defaultSpeed > 0) {
             actualDuration *= CGFloat(defaultSpeed)
         }
@@ -226,6 +242,7 @@ class LevelExecution {
         let actionMove = SKAction.move(to: targetTooth.position, duration: TimeInterval(actualDuration))
 
         objectToAdd?.run(actionMove)
+        objectToAdd2?.run(actionMove)
 
     }
 
