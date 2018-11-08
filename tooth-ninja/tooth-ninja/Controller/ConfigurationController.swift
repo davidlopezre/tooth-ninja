@@ -16,35 +16,25 @@ class ConfigurationController : UIViewController
         super.viewDidLoad()
     }
     
-    @IBOutlet weak var speedController: UISegmentedControl!
-    @IBOutlet weak var sizeController: UISegmentedControl!
+    var speedValue = "0"
+    var sizeValue = "0"
     
-    @IBAction func speedChanged(_ sender: Any) {
-        switch speedController.selectedSegmentIndex {
-            case 0:
-                setDefaults(type: DefaultTypes.Speed, value: 2)
-            case 1:
-                setDefaults(type: DefaultTypes.Speed, value: 1)
-            case 2:
-                setDefaults(type: DefaultTypes.Speed, value: 0.25)
-            default:
-                break
-        }
+    @IBOutlet weak var speedLabel: UILabel!
+    @IBOutlet weak var sizeLabel: UILabel!
+    @IBAction func speedSlider(_ sender: UISlider)
+    {
+        speedValue = String((sender.value))
+        speedLabel.text = "Speed = " + speedValue
+//        setDefaults(type: DefaultTypes.Speed, value: Double(speedValue)! * 1000)
+        setDefaults(type: DefaultTypes.Speed, value: 2)
+
     }
-    
-    @IBAction func sizeChanged(_ sender: Any) {
-        switch sizeController.selectedSegmentIndex {
-        case 0:
-            setDefaults(type: DefaultTypes.BacteriaSize, value: 0.5)
-        case 1:
-            setDefaults(type: DefaultTypes.BacteriaSize, value: 1)
-        case 2:
-             setDefaults(type: DefaultTypes.BacteriaSize, value: 1.5)
-        default:
-            break
-        }
+    @IBAction func sizeSlider(_ sender: UISlider)
+    {
+        sizeValue = String((sender.value))
+        sizeLabel.text = "Size = " + sizeValue
+        setDefaults(type: DefaultTypes.BacteriaSize, value: Double(sizeValue)! * 1000)
     }
-    
     @IBOutlet weak var backButton: UIButton!
     @IBAction func goBack(button: UIButton)
     {
@@ -53,3 +43,34 @@ class ConfigurationController : UIViewController
         self.present(controller, animated: true, completion: nil)
     }
 }
+    
+//    @IBOutlet weak var speedController: UISegmentedControl!
+//    @IBOutlet weak var sizeController: UISegmentedControl!
+//
+//    @IBAction func speedChanged(_ sender: Any) {
+//        switch speedController.selectedSegmentIndex {
+//            case 0:
+//                setDefaults(type: DefaultTypes.Speed, value: 2)
+//            case 1:
+//                setDefaults(type: DefaultTypes.Speed, value: 1)
+//            case 2:
+//                setDefaults(type: DefaultTypes.Speed, value: 0.25)
+//            default:
+//                break
+//        }
+//    }
+//
+//    @IBAction func sizeChanged(_ sender: Any) {
+//        switch sizeController.selectedSegmentIndex {
+//        case 0:
+//            setDefaults(type: DefaultTypes.BacteriaSize, value: 0.5)
+//        case 1:
+//            setDefaults(type: DefaultTypes.BacteriaSize, value: 1)
+//        case 2:
+//             setDefaults(type: DefaultTypes.BacteriaSize, value: 1.5)
+//        default:
+//            break
+//        }
+//    }
+//
+//
