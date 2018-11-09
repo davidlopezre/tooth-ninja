@@ -14,17 +14,19 @@ class GameOverScene: SKScene {
     init(size: CGSize, won:Bool, nextScene: SKScene) {
 
         super.init(size: size)
-
+        
         // 1
         backgroundColor = SKColor.white
 
         // 2
-        let message = won ? "You Won!" : "You Lose :["
+        let message = won ? "Well done! You’ve kept your child’s teeth and clean and balanced their diet appropriately! Keep this up!" : "Sorry, your child’s tooth received too much decay from the bacteria! Try again!"
 
         // 3
         let label = SKLabelNode(fontNamed: "Chalkduster")
+        
+        
         label.text = message
-        label.fontSize = 40
+        label.fontSize = 15
         label.fontColor = SKColor.black
         label.position = CGPoint(x: size.width/2, y: size.height/2)
         addChild(label)
