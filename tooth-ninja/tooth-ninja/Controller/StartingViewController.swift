@@ -11,9 +11,9 @@ import AVFoundation
 
 class StartingViewController: UIViewController
 {
-    @IBOutlet weak var playButton: UIButton!
     var audioPlayer = AVAudioPlayer()
-    var count = 0
+    static var musicPlaying = 0
+    
     
     //    Calling the audioPlayer created in the App Delegate to solve the bug wherein two streams of audio are created when transitioning from one view controller to the other or back
     var audioPlayerAD : AVAudioPlayer? {
@@ -35,14 +35,16 @@ class StartingViewController: UIViewController
             audioPlayer = try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: "Off Limits", ofType: "wav")!))
             audioPlayer.prepareToPlay()
             audioPlayer.play()
+            StartingViewController.musicPlaying += 1
             audioPlayer.numberOfLoops = -1
             print("Started")
+            print("musicPlayer variable count = ",StartingViewController.musicPlaying)
         }
         catch
         {
             print(error)
         }
-        if(audioPlayer.isPlaying)
+        if(StartingViewController.musicPlaying > 1)
         {
             audioPlayer.pause()
             print("Audio Player stopped in Starting View Controller")
@@ -68,18 +70,5 @@ class StartingViewController: UIViewController
         layout.scrollDirection = .horizontal
         let swipingController = SwipingController(collectionViewLayout: layout)
         self.present(swipingController, animated: true, completion: nil)
-    }
-    
-    @IBAction func playAudio(_ sender: Any) {
-        if audioPlayer.isPlaying
-        {
-            audioPlayer.pause()
-            playButton.setImage(UIImage(named:"play.png"),for:UIControlState.normal)
-        }
-        else
-        {
-            audioPlayer.play()
-            playButton.setImage(UIImage(named:"pause.png"),for:UIControlState.normal)
-        }
     }
 }

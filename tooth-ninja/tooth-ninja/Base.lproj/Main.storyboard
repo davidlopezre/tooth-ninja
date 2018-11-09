@@ -203,34 +203,18 @@
                                     <constraint firstAttribute="width" constant="157" id="cwP-BZ-zaU"/>
                                 </constraints>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mZx-xZ-fpw" userLabel="playButton">
-                                <rect key="frame" x="731" y="0.0" width="37" height="36"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="36" id="3Nb-Gl-iUi"/>
-                                    <constraint firstAttribute="width" constant="37" id="hRP-tc-Mto"/>
-                                </constraints>
-                                <state key="normal" image="pause"/>
-                                <connections>
-                                    <action selector="playAudio:" destination="0zk-dn-7Qx" eventType="touchUpInside" id="MpO-5I-P2d"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="Skn-X6-6tC" firstAttribute="trailing" secondItem="mZx-xZ-fpw" secondAttribute="trailing" id="7Yz-R7-vhN"/>
                             <constraint firstItem="Puj-eF-V75" firstAttribute="top" secondItem="Skn-X6-6tC" secondAttribute="top" id="8Uq-wi-6GZ"/>
                             <constraint firstAttribute="bottom" secondItem="dP5-Ga-25V" secondAttribute="bottom" constant="20" id="Aiw-ey-03a"/>
                             <constraint firstItem="Puj-eF-V75" firstAttribute="leading" secondItem="CMk-kh-9ek" secondAttribute="leading" id="Haa-LC-7SG"/>
                             <constraint firstItem="dP5-Ga-25V" firstAttribute="centerX" secondItem="Skn-X6-6tC" secondAttribute="centerX" id="KBN-FU-KdW"/>
                             <constraint firstAttribute="trailing" secondItem="Puj-eF-V75" secondAttribute="trailing" id="Kzy-D4-8oH"/>
-                            <constraint firstItem="mZx-xZ-fpw" firstAttribute="top" secondItem="Skn-X6-6tC" secondAttribute="top" id="Q5L-Bt-T7Y"/>
                             <constraint firstItem="Puj-eF-V75" firstAttribute="bottom" secondItem="Skn-X6-6tC" secondAttribute="bottom" id="R9L-RS-x9n"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Skn-X6-6tC"/>
                     </view>
-                    <connections>
-                        <outlet property="playButton" destination="mZx-xZ-fpw" id="csk-PZ-vU1"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cte-x4-DyD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -238,7 +222,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="pause" width="512" height="512"/>
         <image name="tooth_ninja" width="1336" height="751"/>
     </resources>
 </document>
