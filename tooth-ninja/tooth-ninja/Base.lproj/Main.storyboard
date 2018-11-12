@@ -57,51 +57,41 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="21" translatesAutoresizingMaskIntoConstraints="NO" id="R8H-3i-ART">
-                                <rect key="frame" x="256" y="100" width="300" height="175"/>
+                                <rect key="frame" x="281" y="96" width="250" height="183"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Speed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kGT-bo-Hx7">
-                                        <rect key="frame" x="125.3333333333333" y="0.0" width="49.333333333333329" height="28"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Speed = 50" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kGT-bo-Hx7">
+                                        <rect key="frame" x="80.333333333333314" y="0.0" width="89.333333333333314" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="l6g-0c-ivF">
-                                        <rect key="frame" x="0.0" y="49" width="300" height="29"/>
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="50" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="Q5d-Gz-E3m">
+                                        <rect key="frame" x="-2" y="51" width="254" height="31"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="w7X-jH-8UW"/>
+                                            <constraint firstAttribute="height" constant="30" id="EQk-ui-35U"/>
+                                            <constraint firstAttribute="width" constant="250" id="rjG-zW-sWH"/>
                                         </constraints>
-                                        <segments>
-                                            <segment title="Slow"/>
-                                            <segment title="Medium"/>
-                                            <segment title="Fast"/>
-                                        </segments>
-                                        <color key="tintColor" red="0.094117647060000004" green="0.26274509800000001" blue="0.54901960780000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
-                                            <action selector="speedChanged:" destination="Oqd-X8-uOX" eventType="valueChanged" id="IfR-zi-9Yv"/>
+                                            <action selector="speedSlider:" destination="Oqd-X8-uOX" eventType="valueChanged" id="QJt-CR-gNQ"/>
                                         </connections>
-                                    </segmentedControl>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Size of items" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cj8-Ip-46D">
-                                        <rect key="frame" x="101" y="98" width="98" height="28"/>
+                                    </slider>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Size = 50" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cj8-Ip-46D">
+                                        <rect key="frame" x="89" y="102" width="72" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="6ZZ-1X-V61">
-                                        <rect key="frame" x="0.0" y="147" width="300" height="29"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="cpa-cK-ogQ"/>
-                                        </constraints>
-                                        <segments>
-                                            <segment title="Small"/>
-                                            <segment title="Medium"/>
-                                            <segment title="Large"/>
-                                        </segments>
-                                        <color key="tintColor" red="0.094117647060000004" green="0.26274509800000001" blue="0.54901960780000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="50" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="OOI-H0-6oL">
+                                        <rect key="frame" x="-2" y="153" width="254" height="31"/>
                                         <connections>
-                                            <action selector="sizeChanged:" destination="Oqd-X8-uOX" eventType="valueChanged" id="OWc-Qv-cf8"/>
+                                            <action selector="sizeSlider:" destination="Oqd-X8-uOX" eventType="valueChanged" id="pzD-zn-1WL"/>
                                         </connections>
-                                    </segmentedControl>
+                                    </slider>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="OOI-H0-6oL" firstAttribute="width" secondItem="Q5d-Gz-E3m" secondAttribute="width" id="Thr-4K-dTI"/>
+                                    <constraint firstItem="OOI-H0-6oL" firstAttribute="height" secondItem="Q5d-Gz-E3m" secondAttribute="height" id="oxq-Dv-CzG"/>
+                                </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hIQ-pp-5h5">
                                 <rect key="frame" x="0.0" y="0.0" width="122" height="45"/>
@@ -130,8 +120,8 @@
                     </view>
                     <connections>
                         <outlet property="backButton" destination="hIQ-pp-5h5" id="Qlu-Lr-DSa"/>
-                        <outlet property="sizeController" destination="6ZZ-1X-V61" id="PBz-L3-tTk"/>
-                        <outlet property="speedController" destination="l6g-0c-ivF" id="Xds-sE-DDH"/>
+                        <outlet property="sizeLabel" destination="cj8-Ip-46D" id="chL-04-1VP"/>
+                        <outlet property="speedLabel" destination="kGT-bo-Hx7" id="cSN-yK-FMa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qP8-3a-hTB" userLabel="First Responder" sceneMemberID="firstResponder"/>

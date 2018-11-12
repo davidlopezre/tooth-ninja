@@ -4,7 +4,7 @@
   "levels": [
     {
       "id": 1,
-      "score": 200,
+      "score": 400,
       "toothbrush_icon": "toothbrush_no_tooth_paste",
       "teeth":
       [
@@ -44,7 +44,7 @@
     },
     {
       "id": 2,
-      "score": 400,
+      "score": 800,
       "toothbrush_icon": "toothbrush_no_tooth_paste",
       "teeth":
       [
@@ -117,6 +117,22 @@
           "image": "chocolate.png"
           },
           {
+              "name": "food",
+              "kind": "bad",
+              "size_width": 50,
+              "size_height": 50,
+              "position_z": 2,
+              "image": "food_dark_chocolate.png"
+          },
+          {
+              "name": "food",
+              "kind": "shield",
+              "size_width": 50,
+              "size_height": 50,
+              "position_z": 2,
+              "image": "tooth_paste.png"
+          },
+          {
             "name": "food",
             "kind": "bad",
             "size_width": 50,
@@ -126,14 +142,14 @@
           },
           {
             "name": "food",
-            "kind": "good",
+            "kind": "no_change",
             "size_width": 50,
             "size_height": 50,
             "position_z": 2,
             "image": "food_cheese2.png"
           },{
             "name": "food",
-            "kind": "good",
+            "kind": "no_change",
             "size_width": 40,
             "size_height": 50,
             "position_z": 2,
@@ -159,7 +175,7 @@
     },
     {
       "id": 3,
-      "score": 1000,
+      "score": 2000,
       "toothbrush_icon": "toothbrush",
       "teeth":
       [
@@ -358,6 +374,14 @@
           "image": "chocolate.png"
         },
         {
+            "name": "food",
+            "kind": "shield",
+            "size_width": 50,
+            "size_height": 50,
+            "position_z": 2,
+            "image": "tooth_paste.png"
+        },
+        {
           "name": "food",
           "kind": "bad",
           "size_width": 50,
@@ -375,7 +399,7 @@
         },
         {
           "name": "food",
-          "kind": "good",
+          "kind": "no_change",
           "size_width": 50,
           "size_height": 50,
           "position_z": 2,
@@ -383,7 +407,7 @@
         },
         {
           "name": "food",
-          "kind": "good",
+          "kind": "no_change",
           "size_width": 40,
           "size_height": 50,
           "position_z": 2,
@@ -398,12 +422,28 @@
           "image": "food_tap.png"
         },
        {
-       "name": "food",
-       "kind": "neutral",
-       "size_width": 50,
-       "size_height": 50,
-       "position_z": 2,
-       "image": "cola_zero.png"
+           "name": "food",
+           "kind": "neutral",
+           "size_width": 50,
+           "size_height": 50,
+           "position_z": 2,
+           "image": "cola_zero.png"
+       },
+       {
+           "name": "food",
+           "kind": "bad",
+           "size_width": 50,
+           "size_height": 50,
+           "position_z": 2,
+           "image": "food_dark_chocolate.png"
+       },
+       {
+           "name": "food",
+           "kind": "neutral",
+           "size_width": 50,
+           "size_height": 50,
+           "position_z": 2,
+           "image": "food_fruit_juice.png"
        }
       ]
     }
