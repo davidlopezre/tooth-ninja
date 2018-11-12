@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		281FD1F62193DAB9006945DA /* swish.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 281FD1F52193DAB8006945DA /* swish.mp3 */; };
+		28A3220521924B5A00606013 /* Lounge Game2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 28A3220421924B5900606013 /* Lounge Game2.wav */; };
+		28A3220721924B6700606013 /* Off Limits.wav in Resources */ = {isa = PBXBuildFile; fileRef = 28A3220621924B6700606013 /* Off Limits.wav */; };
 		611788CB2078B0AF00FC8590 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 611788CA2078B0AF00FC8590 /* AppDelegate.swift */; };
 		611788D62078B0B000FC8590 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 611788D42078B0B000FC8590 /* Main.storyboard */; };
 		611788D82078B0B000FC8590 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 611788D72078B0B000FC8590 /* Assets.xcassets */; };
@@ -32,6 +35,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		281FD1F52193DAB8006945DA /* swish.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = swish.mp3; sourceTree = "<group>"; };
+		28A3220421924B5900606013 /* Lounge Game2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Lounge Game2.wav"; sourceTree = "<group>"; };
+		28A3220621924B6700606013 /* Off Limits.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Off Limits.wav"; sourceTree = "<group>"; };
 		611788C72078B0AF00FC8590 /* tooth-ninja.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "tooth-ninja.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		611788CA2078B0AF00FC8590 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		611788D52078B0B000FC8590 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -69,6 +75,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		28A3220321924AAC00606013 /* Audio Files */ = {
+			isa = PBXGroup;
+			children = (
+				28A3220621924B6700606013 /* Off Limits.wav */,
+				28A3220421924B5900606013 /* Lounge Game2.wav */,
+				281FD1F52193DAB8006945DA /* swish.mp3 */,
+			);
+			name = "Audio Files";
+			path = "New Group";
+			sourceTree = "<group>";
+		};
 		611788BE2078B0AF00FC8590 = {
 			isa = PBXGroup;
 			children = (
@@ -93,6 +110,7 @@
 				611788D72078B0B000FC8590 /* Assets.xcassets */,
 				611788D92078B0B000FC8590 /* LaunchScreen.storyboard */,
 				611788DC2078B0B000FC8590 /* Info.plist */,
+				28A3220321924AAC00606013 /* Audio Files */,
 				CBC215617A1FBB5D9FA00805 /* Level */,
 				CBC212F36ADE92D58F75D6E6 /* Configuration */,
 				CBC214BEF140E697818B7D16 /* GameObject */,
@@ -223,8 +241,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28A3220521924B5A00606013 /* Lounge Game2.wav in Resources */,
+				281FD1F62193DAB9006945DA /* swish.mp3 in Resources */,
 				611788D62078B0B000FC8590 /* Main.storyboard in Resources */,
 				611788D82078B0B000FC8590 /* Assets.xcassets in Resources */,
+				28A3220721924B6700606013 /* Off Limits.wav in Resources */,
 				611788DB2078B0B000FC8590 /* LaunchScreen.storyboard in Resources */,
 				CBC21DA8B0733628FFC51174 /* level_json_sample.json in Resources */,
 			);
@@ -402,7 +423,7 @@
 				INFOPLIST_FILE = "tooth-ninja/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.kush.tooth-ninja";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.kv.tooth-ninja";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
@@ -421,7 +442,7 @@
 				INFOPLIST_FILE = "tooth-ninja/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.kush.tooth-ninja";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.kv.tooth-ninja";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;

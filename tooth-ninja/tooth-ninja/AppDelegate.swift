@@ -3,9 +3,13 @@
 //  autolayout_lbta
 
 import UIKit
+import AVFoundation
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    
+//    Trying to solve the bug where the music still keeps playing when transitioning from one view controller to the other
+    var audioPlayerAD : AVAudioPlayer? = nil
     
     var window: UIWindow?
 

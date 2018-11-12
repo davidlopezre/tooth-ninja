@@ -2,19 +2,25 @@
 //  GameOverScene.swift
 //  SpriteKitSimpleGame
 //
-//  Created by David Lopez on 13/4/18.
-//  Copyright © 2018 David Lopez. All rights reserved.
+//  Created by David Lopez and Kushagra Vashisht on 13/4/18.
+//  Copyright © 2018 David Lopez and Kushagra Vashisht. All rights reserved.
 //
 
 import Foundation
 import SpriteKit
+import AVFoundation
 
 class GameOverScene: SKScene {
+    var audioPlayer = AVAudioPlayer()
 
     init(size: CGSize, won:Bool, nextScene: SKScene) {
 
         super.init(size: size)
-        
+        if(audioPlayer.isPlaying)
+        {
+            audioPlayer.pause()
+            print("AudioPlayer stopped in GameOverScene")
+        }
         // 1
         backgroundColor = SKColor.white
 

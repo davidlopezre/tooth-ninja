@@ -1,16 +1,18 @@
 //
-// Created by David Lopez on 20/6/18.
-// Copyright (c) 2018 David Lopez. All rights reserved.
+// Created by David Lopez and Kushagra Vashisht on 20/6/18.
+// Copyright (c) 2018 David Lopez and Kushagra Vashisht. All rights reserved.
 //
 
 import Foundation
 import SpriteKit
+import AVFoundation
 
 /* This class is in charge of managing game object physics. For example,
  * what happens if bacteria touches tooth.
  */
 
 class LevelPhysics {
+    var audioPlayer = AVAudioPlayer()
     var level: Level
     var hasShield = false
     var hasSticky: Int = 0
@@ -38,14 +40,12 @@ class LevelPhysics {
         self.level = level
         WINNING_SCORE = level.winningScore
     }
-
+    
     func didBegin(_ contact: SKPhysicsContact)
     {
         var playerBody: SKPhysicsBody
         var externalBody: SKPhysicsBody
 
-//        print("body a bitmask: \(contact.bodyA.categoryBitMask)")
-//        print("body b bitmask: \(contact.bodyB.categoryBitMask)")
         if contact.bodyA.categoryBitMask > contact.bodyB.categoryBitMask {
             playerBody = contact.bodyA
             externalBody = contact.bodyB
@@ -53,8 +53,6 @@ class LevelPhysics {
             playerBody = contact.bodyB
             externalBody = contact.bodyA
         }
-//        print("player body is set to: \(playerBody.categoryBitMask)")
-//        print("external body is set to: \(externalBody.categoryBitMask)")
 
         if playerBody.node?.name == SWIPE {
             if externalBody.node?.name == BACTERIA {
@@ -80,8 +78,6 @@ class LevelPhysics {
     }
 
     func bacteriaCollidesWithTooth(bacteria: GameObject) {
-//        print("Collision: Bacteria-Tooth")
-//        level.levelExecution.takeHitAnimation()
         if (hasShield) {
             removeShield()
             bacteria.removeFromParent()
@@ -97,16 +93,24 @@ class LevelPhysics {
 
         if (level.health <= 0) {
             level.levelEnd(won: false)
-//            level.controller?.healthBar.isHidden = true
-//            level.controller?.happinessBar.isHidden = true
         }
     }
 
     func swipeCollidesWithBacteria(bacteria: GameObject) {
+        do
+        {
+            audioPlayer = try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: "swish", ofType: "mp3")!))
+            audioPlayer.prepareToPlay()
+            audioPlayer.play()
+            print("Swipe collides with Bacteria, audio initiated")
+        }
+        catch
+        {
+            print(error)
+        }
         if (bacteria.kind == STICKY){
             hasSticky -= 1
         }
-//        print("Collision: Swipe-Bacteria")
         bacteria.removeFromParent()
         level.score += PLUS_SCORE
         if (level.score >= WINNING_SCORE) {
@@ -116,7 +120,6 @@ class LevelPhysics {
 
 
     func foodCollidesWithTooth(food: GameObject) {
-//        print("Collision: GoodFood-Tooth")
         food.removeFromParent()
         if (food.kind == GOOD) {
             level.health += PLUS_HEALTH
@@ -130,7 +133,17 @@ class LevelPhysics {
     }
 
     func swipeCollidesWithFood(food: GameObject) {
-//        print("Collision: Swipe-Food")
+        do
+        {
+            audioPlayer = try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: "swish", ofType: "mp3")!))
+            audioPlayer.prepareToPlay()
+            audioPlayer.play()
+            print("Swipe collided with food, audio initiated")
+        }
+        catch
+        {
+            print(error)
+        }
         food.removeFromParent()
 
     }
@@ -194,7 +207,6 @@ class LevelExecution {
      */
     func spawnObjects (influx: Bool) {
         let proba = random(min: 0, max: 100)    // probability, if > 90 it's food else bacteria
-//        print(proba)
         
         var objectToAdd : GameObject? = nil
         
@@ -218,7 +230,6 @@ class LevelExecution {
 
         // Create the actions
         let teeth = level["tooth"]
-//        print("There are \(teeth.count) teeth")
 
         let targetToothIndex = random(min: 0, max: CGFloat(teeth.count))
         let targetTooth = teeth[Int(targetToothIndex)]
@@ -254,7 +265,6 @@ class LevelExecution {
     }
 
     func takeHitAnimation() {
-//        setDefaults(type: DefaultTypes.Sp, value: <#T##Double##Swift.Double#>)
         let original = level.alpha
         level.run(SKAction.sequence(
                 [SKAction.fadeAlpha(to: 0, duration: 0.2),

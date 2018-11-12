@@ -1,9 +1,6 @@
 //
-//  CustomBar.swift
-//  HealthBarExperiment
-//
-//  Created by David Lopez on 8/10/18.
-//  Copyright © 2018 David Lopez. All rights reserved.
+//  Created by David Lopez and Kushagra Vashisht on 8/10/18.
+//  Copyright © 2018 David Lopez and Kushagra Vashisht. All rights reserved.
 //
 
 import Foundation
