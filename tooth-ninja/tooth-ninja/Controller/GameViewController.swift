@@ -61,6 +61,12 @@ class GameViewController: UIViewController
         menuButton.layer.cornerRadius = 5
         menuButton.layer.borderWidth = 1
         menuButton.layer.borderColor = UIColor.white.cgColor
+        
+        menuButton.isUserInteractionEnabled = true
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tapped))
+        tap.numberOfTapsRequired = 2
+        menuButton.addGestureRecognizer(tap)
+        
         skView = initialiseSKView()
         do
         {
@@ -71,11 +77,7 @@ class GameViewController: UIViewController
             print("Level cannot be loaded!")
             print(error)
         }
-//        if(audioPlayer.isPlaying)
-//        {
-//            audioPlayer.pause()
-//            print("Music Player Paused in GameViewController")
-//        }
+
         if skView?.scene == nil {
             let teethArray = config!.getTeethByLevel(id: levelId)
             let bacteriaArray = config!.getObjectsByLevel(id: levelId, name: "bacteria")
@@ -97,6 +99,13 @@ class GameViewController: UIViewController
         return true
     }
 
+    @objc func tapped() {
+        print("2 times tapped")
+        currentLevel = nil
+        self.skView?.presentScene(nil)
+        self.navigationController?.popViewController(animated: true)
+    }
+    
     /* Initialises the SKView where we display the game */
     private func initialiseSKView() -> SKView
     {
@@ -134,12 +143,6 @@ class GameViewController: UIViewController
     }
 
     @IBOutlet weak var menuButton: UIButton!
-    @IBAction func goToStartingScreen(button: UIButton)
-    {
-        currentLevel = nil
-        self.skView?.presentScene(nil)
-        self.navigationController?.popViewController(animated: true)
-    }
     
     func presentLevel(level: Level) -> SKScene {
         let text : String
