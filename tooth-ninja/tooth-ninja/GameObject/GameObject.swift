@@ -35,7 +35,7 @@ class GameObject: SKSpriteNode {
         self.kind = p.kind
         let texture = SKTexture(imageNamed: p.image)
 
-        super.init(texture: texture, color: UIColor.clear, size: CGSize(width: 80, height: 80))
+        super.init(texture: texture, color: UIColor.clear, size: CGSize(width: p.size_width, height: p.size_height))
         name = p.name
         if let x = p.position_x, let y = p.position_y, let screenSize = GameConfiguration.screenSize {
             position.x = screenSize.width * CGFloat(x)
@@ -65,12 +65,12 @@ class GameObject: SKSpriteNode {
                     collisionBitMask: PhysicsCategory.None)
             case .Other:
                 // This one is meant for bacteria and food
-
-                    print("default size is \(defaultSize)")
+                if (defaultSize > 0) {
                     size.width = size.width * CGFloat(defaultSize)
-                    print("\(size)")
                     size.height = size.height * CGFloat(defaultSize)
-                
+                } else {
+                    print("GameObject: defaultSize is < 0. Therefore, it will not be used.")
+                }
                 addCircularPhysicsBody(
                         categoryBitMask: PhysicsCategory.External,
                         contactTestBitMask: PhysicsCategory.Player,

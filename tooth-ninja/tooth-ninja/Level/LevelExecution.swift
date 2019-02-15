@@ -228,7 +228,7 @@ class LevelExecution {
             let index = randomIndex(bacteriaArray.count)
             objectToAdd = bacteriaArray[index].copy() as? GameObject
             objectToAdd?.position = generateRandomPosition(width: level.size.width, height: level.size.height)
-            print("levexec \(String(describing: objectToAdd?.size))")
+//            print("levexec \(String(describing: objectToAdd?.size))")
             if (objectToAdd != nil) {
                 level.addChild(objectToAdd!)
             }
@@ -236,7 +236,7 @@ class LevelExecution {
             let index = randomIndex(foodArray.count)
             objectToAdd = foodArray[index].copy() as? GameObject
             objectToAdd?.position = generateRandomPosition(width: level.size.width, height: level.size.height)
-            print("levexec \(String(describing: objectToAdd?.size))")
+//            print("levexec \(String(describing: objectToAdd?.size))")
             if (objectToAdd != nil) {
                 level.addChild(objectToAdd!)
             }
@@ -246,13 +246,13 @@ class LevelExecution {
             let index2 = randomIndex(bacteriaArray.count)
             objectToAdd2 = bacteriaArray[index2].copy() as? GameObject
             objectToAdd2?.position = generateRandomPosition(width: level.size.width, height: level.size.height)
-            print("levexec \(String(describing: objectToAdd2?.size))")
+//            print("levexec \(String(describing: objectToAdd2?.size))")
             level.addChild(objectToAdd2!)
         } else if (foodArray.count > 0){
             let index2 = randomIndex(foodArray.count)
             objectToAdd2 = foodArray[index2].copy() as? GameObject
             objectToAdd2?.position = generateRandomPosition(width: level.size.width, height: level.size.height)
-            print("levexec \(String(describing: objectToAdd2?.size))")
+//            print("levexec \(String(describing: objectToAdd2?.size))")
             level.addChild(objectToAdd2!)
         }
         
@@ -262,7 +262,9 @@ class LevelExecution {
         print("actual duration: \(actualDuration)")
         print("default speed: \(queryDefaults(type: DefaultTypes.Speed))")
         defaultSpeed = queryDefaults(type: DefaultTypes.Speed) / 4
-        actualDuration *= CGFloat(queryDefaults(type: DefaultTypes.Speed))
+        if (defaultSpeed > 0) {
+            actualDuration *= CGFloat(queryDefaults(type: DefaultTypes.Speed))
+        }
         
 
         // Create the actions
