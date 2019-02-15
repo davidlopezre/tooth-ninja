@@ -11,64 +11,45 @@ import AVFoundation
 
 class StartingViewController: UIViewController
 {
-    var audioPlayer = AVAudioPlayer()
-    static var musicPlaying = 0
-    
-    
-    //    Calling the audioPlayer created in the App Delegate to solve the bug wherein two streams of audio are created when transitioning from one view controller to the other or back
-    var audioPlayerAD : AVAudioPlayer? {
-        get {
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            return appDelegate.audioPlayerAD
-        }
-        set {
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            appDelegate.audioPlayerAD = newValue
-        }
+    deinit {
+        print ("StartingView deinited")
     }
     
+    @IBOutlet weak var toothNinja: UIImageView!
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        do
-        {
-            audioPlayer = try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: "Off Limits", ofType: "wav")!))
-            audioPlayer.prepareToPlay()
-            audioPlayer.play()
-            StartingViewController.musicPlaying += 1
-            audioPlayer.numberOfLoops = -1
-            print("Started")
-            print("musicPlayer variable count = ",StartingViewController.musicPlaying)
-        }
-        catch
-        {
-            print(error)
-        }
-        if(StartingViewController.musicPlaying > 1)
-        {
-            audioPlayer.pause()
-            print("Audio Player stopped in Starting View Controller")
-        }
+        self.toothNinja.isUserInteractionEnabled = true
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tapped))
+        tap.numberOfTapsRequired = 10
+        toothNinja.addGestureRecognizer(tap)
     }
     
-    @IBAction func goToGame(button: UIButton)
-    {
+    @objc func tapped() {
+        print("10 times tapped")
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let settingsController = storyboard.instantiateViewController(withIdentifier: "ConfigurationController") as! ConfigurationController
+        self.navigationController?.pushViewController(settingsController, animated: true)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let controller = storyboard.instantiateViewController(withIdentifier: "GameViewController")
-        self.present(controller, animated: true, completion: nil)
+        // Hide the navigation bar on the this view controller
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     
-    @IBAction func goToConfiguration(button: UIButton) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let controller = storyboard.instantiateViewController(withIdentifier: "ConfigurationController")
-        self.present(controller, animated: true, completion: nil)
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        // Show the navigation bar on other view controllers
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
-    @IBAction func goToInstructions(button: UIButton) {
+    @IBAction func goToInfoScreen(_ sender: Any) {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let swipingController = SwipingController(collectionViewLayout: layout)
-        self.present(swipingController, animated: true, completion: nil)
+        self.navigationController?.pushViewController(swipingController, animated: true)
     }
 }

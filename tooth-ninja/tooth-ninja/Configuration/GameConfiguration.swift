@@ -23,6 +23,19 @@ func queryDefaults(type: DefaultTypes) -> Double {
     return defaults.double(forKey: type.rawValue)
 }
 
+func setLevelUnlocked(id: Int) {
+    var currentUnlocked = queryLevelsUnlocked()
+    currentUnlocked.append(id)
+    let unique = Array(Set(currentUnlocked))
+    defaults.set(unique, forKey: "unlockedLevels")
+}
+
+func queryLevelsUnlocked() -> [Int] {
+    let defaults = UserDefaults.standard
+    let array = defaults.array(forKey: "unlockedLevels")  as? [Int] ?? [1]
+    return array
+}
+
 /* Decodable struct to be able to use JSONDecoder to parse */
 struct GameConfigurationDecodable: Decodable {
     var speed: Double

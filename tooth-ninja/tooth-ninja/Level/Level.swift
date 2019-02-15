@@ -10,11 +10,10 @@ import Foundation
 import SpriteKit
 
 /* BaseLevel protocol includes the required fields and functions for a level */
-protocol BaseLevel {
+protocol BaseLevel: class {
     var number: Int {get}
     var winningScore: Int {get}
     var icon: String {get}
-    var controller: Controller? {get}
     var scoreLabel: SKLabelNode? {get}
     var healthLabel: SKLabelNode? {get}
     var happinessLabel: SKLabelNode? {get}
@@ -26,17 +25,9 @@ protocol BaseLevel {
     var levelPhysics: LevelPhysics! {get}
 }
 
-protocol LevelController {
+protocol LevelController: class {
     var score: Int {get set}
     var health: Int {get set}
-}
-
-/* This extension provides functionality to make callbacks to the Controller */
-extension BaseLevel {
-
-    func levelEnd(won: Bool) {
-        controller?.levelEnd(won: won)
-    }
 }
 
 /* Level class is in charge of initialising, running the level and notifying the
@@ -47,7 +38,7 @@ class Level: SKScene, SKPhysicsContactDelegate, BaseLevel, LevelController {
     let number: Int
     let icon: String
     let winningScore: Int
-    var controller: Controller?
+    weak var controller: GameViewController?
     var scoreLabel: SKLabelNode?
     var healthLabel: SKLabelNode?
     var happinessLabel: SKLabelNode?
@@ -83,6 +74,16 @@ class Level: SKScene, SKPhysicsContactDelegate, BaseLevel, LevelController {
             }
             healthLabel?.text = "Health " + ": \(health)%"
             
+            if health < 51 {
+                for teeth in teethArray {
+                    let pulsedYellow = SKAction.sequence([
+                        SKAction.colorize(with: .yellow, colorBlendFactor: 0.2, duration: 0.15),
+                        SKAction.wait(forDuration: 0.1),
+                        SKAction.colorize(withColorBlendFactor: 0.0, duration: 0.15)])
+                    teeth.run(pulsedYellow)
+                }
+            }
+            
             let damage = Double(health)/100.0
             healthBar.setProgress(x: CGFloat(damage))
         }
@@ -109,7 +110,7 @@ class Level: SKScene, SKPhysicsContactDelegate, BaseLevel, LevelController {
     // Set the initial value to 0
     var delta: CGPoint = .zero
 
-    init(number: Int, winningScore: Int, icon: String, size: CGSize, bgFile: String, teethArray: [GameObject], bacteriaArray: [GameObject], foodArray: [GameObject], c: Controller) {
+    init(number: Int, winningScore: Int, icon: String, size: CGSize, bgFile: String, teethArray: [GameObject], bacteriaArray: [GameObject], foodArray: [GameObject], c: GameViewController) {
         self.number = number
         self.winningScore = winningScore
         self.icon = icon
@@ -133,7 +134,7 @@ class Level: SKScene, SKPhysicsContactDelegate, BaseLevel, LevelController {
         super.init(coder: aDecoder)
     }
 
-    deinit{print("GameScene deinited")}
+    deinit{print("Level deinited")}
 
     public override func didMove(to view: SKView) {
         levelExecution = LevelExecution(level: self, bacteria: bacteriaArray, food: foodArray)
@@ -312,5 +313,9 @@ class Level: SKScene, SKPhysicsContactDelegate, BaseLevel, LevelController {
 
     func influx() {
         levelExecution.influx()
+    }
+    
+    func levelEnd(won: Bool) {
+        controller?.levelEnd(won: won)
     }
 }

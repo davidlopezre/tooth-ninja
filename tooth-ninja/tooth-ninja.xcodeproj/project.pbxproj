@@ -16,11 +16,13 @@
 		611788DB2078B0B000FC8590 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 611788D92078B0B000FC8590 /* LaunchScreen.storyboard */; };
 		619298C9213BE04300D0C818 /* ConfigurationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619298C8213BE04300D0C818 /* ConfigurationController.swift */; };
 		61FDE6FB213AD7D700177C74 /* StartingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FDE6FA213AD7D700177C74 /* StartingViewController.swift */; };
+		A951F71B21E0D204006AAEF6 /* LevelSelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A951F71A21E0D204006AAEF6 /* LevelSelectionController.swift */; };
 		A98DA143216B897600475EC8 /* CustomBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98DA142216B897600475EC8 /* CustomBar.swift */; };
+		A9E2989C21F306FD00A65A93 /* TextConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E2989B21F306FD00A65A93 /* TextConstants.swift */; };
 		CBC211725040A2B6BAB13F13 /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC21F80435DE8D0AEA45AA1 /* Level.swift */; };
 		CBC215186666379A3BB22368 /* SwipeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC2110A61FF06C1C8BD5A66 /* SwipeNode.swift */; };
 		CBC216A6402B853F690780C0 /* GameObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC21D72AB6822F596C08DB1 /* GameObject.swift */; };
-		CBC217568D0CE41352C8BC30 /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC21199A292CDE54C19F27C /* GameOverScene.swift */; };
+		CBC217568D0CE41352C8BC30 /* TextTransitionScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC21199A292CDE54C19F27C /* TextTransitionScene.swift */; };
 		CBC218168A8AFFA64ED06F1B /* LevelExecution.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC2198C5D1BA821E0CF1756 /* LevelExecution.swift */; };
 		CBC21896B89015B37FD5868B /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC21B223E71EB8FDF32A1BE /* Utils.swift */; };
 		CBC21A17987451CCD35B9BE1 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC21A9B5072EF82109B860B /* GameViewController.swift */; };
@@ -46,9 +48,11 @@
 		611788DC2078B0B000FC8590 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		619298C8213BE04300D0C818 /* ConfigurationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationController.swift; sourceTree = "<group>"; };
 		61FDE6FA213AD7D700177C74 /* StartingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartingViewController.swift; sourceTree = "<group>"; };
+		A951F71A21E0D204006AAEF6 /* LevelSelectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelSelectionController.swift; sourceTree = "<group>"; };
 		A98DA142216B897600475EC8 /* CustomBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBar.swift; sourceTree = "<group>"; };
+		A9E2989B21F306FD00A65A93 /* TextConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextConstants.swift; sourceTree = "<group>"; };
 		CBC2110A61FF06C1C8BD5A66 /* SwipeNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeNode.swift; sourceTree = "<group>"; };
-		CBC21199A292CDE54C19F27C /* GameOverScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
+		CBC21199A292CDE54C19F27C /* TextTransitionScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextTransitionScene.swift; sourceTree = "<group>"; };
 		CBC213FE966B59811FACAB1B /* GameConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameConfiguration.swift; sourceTree = "<group>"; };
 		CBC215E141816B738517BB8C /* MathUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MathUtils.swift; sourceTree = "<group>"; };
 		CBC2198C5D1BA821E0CF1756 /* LevelExecution.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelExecution.swift; sourceTree = "<group>"; };
@@ -145,6 +149,7 @@
 			children = (
 				CBC215E141816B738517BB8C /* MathUtils.swift */,
 				CBC21B223E71EB8FDF32A1BE /* Utils.swift */,
+				A9E2989B21F306FD00A65A93 /* TextConstants.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -162,12 +167,13 @@
 			isa = PBXGroup;
 			children = (
 				CBC21A9B5072EF82109B860B /* GameViewController.swift */,
-				CBC21199A292CDE54C19F27C /* GameOverScene.swift */,
+				CBC21199A292CDE54C19F27C /* TextTransitionScene.swift */,
 				FD72050C210A1CE500AAE74B /* SwipingController+UICollectionView.swift */,
 				FD72050E210A1D0100AAE74B /* SwipingController.swift */,
 				FD720511210A1D0300AAE74B /* SwipingController+extension.swift */,
 				61FDE6FA213AD7D700177C74 /* StartingViewController.swift */,
 				619298C8213BE04300D0C818 /* ConfigurationController.swift */,
+				A951F71A21E0D204006AAEF6 /* LevelSelectionController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -266,6 +272,7 @@
 				CBC218168A8AFFA64ED06F1B /* LevelExecution.swift in Sources */,
 				CBC21A2C25E6F9756BB4E45B /* GameConfiguration.swift in Sources */,
 				CBC215186666379A3BB22368 /* SwipeNode.swift in Sources */,
+				A9E2989C21F306FD00A65A93 /* TextConstants.swift in Sources */,
 				619298C9213BE04300D0C818 /* ConfigurationController.swift in Sources */,
 				FD720513210A1D0300AAE74B /* PageCell.swift in Sources */,
 				FD720512210A1D0300AAE74B /* SwipingController.swift in Sources */,
@@ -273,7 +280,8 @@
 				CBC21CFEF8EBB0FA518C35CF /* MathUtils.swift in Sources */,
 				FD720515210A1D0300AAE74B /* SwipingController+extension.swift in Sources */,
 				CBC21A17987451CCD35B9BE1 /* GameViewController.swift in Sources */,
-				CBC217568D0CE41352C8BC30 /* GameOverScene.swift in Sources */,
+				CBC217568D0CE41352C8BC30 /* TextTransitionScene.swift in Sources */,
+				A951F71B21E0D204006AAEF6 /* LevelSelectionController.swift in Sources */,
 				CBC21896B89015B37FD5868B /* Utils.swift in Sources */,
 				FD720514210A1D0300AAE74B /* Page.swift in Sources */,
 			);
@@ -419,11 +427,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = R6NNG48UV9;
+				DEVELOPMENT_TEAM = B4L8G3T47Z;
 				INFOPLIST_FILE = "tooth-ninja/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.kv.tooth-ninja";
+				PRODUCT_BUNDLE_IDENTIFIER = "-4fgavghsr1r16u2bs";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
@@ -438,11 +446,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = R6NNG48UV9;
+				DEVELOPMENT_TEAM = B4L8G3T47Z;
 				INFOPLIST_FILE = "tooth-ninja/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.kv.tooth-ninja";
+				PRODUCT_BUNDLE_IDENTIFIER = "-4fgavghsr1r16u2bs";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;

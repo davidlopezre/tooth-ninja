@@ -13,3 +13,4 @@ func copyArray (array: [AnyObject]) -> [AnyObject]{
     let returnArray = array.map { $0.copy() }
     return (returnArray as [AnyObject])
 }
+

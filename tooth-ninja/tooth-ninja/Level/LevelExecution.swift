@@ -13,7 +13,7 @@ import AVFoundation
 
 class LevelPhysics {
     var audioPlayer = AVAudioPlayer()
-    var level: Level
+    unowned var level: Level
     var hasShield = false
     var hasSticky: Int = 0
 
@@ -198,20 +198,17 @@ class LevelPhysics {
 class LevelExecution {
     let bacteriaArray: [GameObject]
     let foodArray: [GameObject]
-    var level: Level
+    unowned var level: Level
     var bacteria: [GameObject] = []
 
-    private var defaultSpeed = queryDefaults(type: DefaultTypes.Speed)
+    private var defaultSpeed = 1.0
     private var defaultSize = 1.0
 
     init(level: Level, bacteria: [GameObject], food: [GameObject]) {
         self.level = level
         bacteriaArray = bacteria
         foodArray = food
-
-        defaultSpeed += queryDefaults(type: DefaultTypes.Speed)
         print(defaultSpeed)
-        defaultSize += queryDefaults(type: DefaultTypes.BacteriaSize)
     }
 
     /* This function is in charge of spawning food and bacteria and giving them the action to
@@ -231,37 +228,42 @@ class LevelExecution {
             let index = randomIndex(bacteriaArray.count)
             objectToAdd = bacteriaArray[index].copy() as? GameObject
             objectToAdd?.position = generateRandomPosition(width: level.size.width, height: level.size.height)
-            
-            level.addChild(objectToAdd!)
+            print("levexec \(String(describing: objectToAdd?.size))")
+            if (objectToAdd != nil) {
+                level.addChild(objectToAdd!)
+            }
         } else if (foodArray.count > 0){
             let index = randomIndex(foodArray.count)
             objectToAdd = foodArray[index].copy() as? GameObject
             objectToAdd?.position = generateRandomPosition(width: level.size.width, height: level.size.height)
-            level.addChild(objectToAdd!)
+            print("levexec \(String(describing: objectToAdd?.size))")
+            if (objectToAdd != nil) {
+                level.addChild(objectToAdd!)
+            }
         }
 //        TRYING TO REPLICATE THE PREVIOUS PARAGRAPH TO GET TWO STREAMS OF SPAWNS INSTEAD OF ONE WHICH WILL(HOPEFULLY) SOLVE THE SPAWN ISSUE
         if (probb < 25) || influx {
             let index2 = randomIndex(bacteriaArray.count)
             objectToAdd2 = bacteriaArray[index2].copy() as? GameObject
             objectToAdd2?.position = generateRandomPosition(width: level.size.width, height: level.size.height)
+            print("levexec \(String(describing: objectToAdd2?.size))")
             level.addChild(objectToAdd2!)
         } else if (foodArray.count > 0){
             let index2 = randomIndex(foodArray.count)
             objectToAdd2 = foodArray[index2].copy() as? GameObject
             objectToAdd2?.position = generateRandomPosition(width: level.size.width, height: level.size.height)
+            print("levexec \(String(describing: objectToAdd2?.size))")
             level.addChild(objectToAdd2!)
         }
         
         
         // Determine speed of the object
         var actualDuration = random(min: CGFloat(2.0), max: CGFloat(4.0))
-        if (defaultSpeed > 0) {
-//            SORT OF A HACK TO INCORPORATE THE SPEED WHICH IS NOW FROM 0-100 INSTEAD OF 0-2. THE INITIAL SPEED IS 50 ATM, SO /500
-            print("Actual Duration before: ",actualDuration)
-            actualDuration *= CGFloat(defaultSpeed)
-            print("Actual Duration after: ",actualDuration)
-            print("Default Speed: ",defaultSpeed)
-        }
+        print("actual duration: \(actualDuration)")
+        print("default speed: \(queryDefaults(type: DefaultTypes.Speed))")
+        defaultSpeed = queryDefaults(type: DefaultTypes.Speed) / 4
+        actualDuration *= CGFloat(queryDefaults(type: DefaultTypes.Speed))
+        
 
         // Create the actions
         let teeth = level["tooth"]
@@ -269,8 +271,9 @@ class LevelExecution {
         let targetToothIndex = random(min: 0, max: CGFloat(teeth.count))
         let targetTooth = teeth[Int(targetToothIndex)]
 
+        print(actualDuration)
         let actionMove = SKAction.move(to: targetTooth.position, duration: TimeInterval(actualDuration))
-
+    
         objectToAdd?.run(actionMove)
         objectToAdd2?.run(actionMove)
 

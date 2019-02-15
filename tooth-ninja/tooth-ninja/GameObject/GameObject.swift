@@ -27,7 +27,7 @@ struct PhysicsCategory {
 class GameObject: SKSpriteNode {
     let gameObjectType: GameObjectType
     let kind: String?
-    let defaultSize = queryDefaults(type: DefaultTypes.BacteriaSize)
+    let defaultSize = queryDefaults(type: DefaultTypes.BacteriaSize) / 4
 
     /* Initialises the sprite with the properties specified in the properties */
     init (type: GameObjectType, properties p: GameConfigurationDecodable.LevelConfig.GameObjectConfig) {
@@ -35,7 +35,7 @@ class GameObject: SKSpriteNode {
         self.kind = p.kind
         let texture = SKTexture(imageNamed: p.image)
 
-        super.init(texture: texture, color: UIColor.clear, size: CGSize(width: p.size_width, height: p.size_height))
+        super.init(texture: texture, color: UIColor.clear, size: CGSize(width: 80, height: 80))
         name = p.name
         if let x = p.position_x, let y = p.position_y, let screenSize = GameConfiguration.screenSize {
             position.x = screenSize.width * CGFloat(x)
@@ -45,6 +45,7 @@ class GameObject: SKSpriteNode {
             zRotation = CGFloat(Double(rotation).degreesToRadians)
         }
         zPosition = CGFloat(p.position_z)
+        print(self.size)
         setUpPhysics()
     }
 
@@ -64,10 +65,11 @@ class GameObject: SKSpriteNode {
                     collisionBitMask: PhysicsCategory.None)
             case .Other:
                 // This one is meant for bacteria and food
-                if defaultSize > 0 {
+
+                    print("default size is \(defaultSize)")
                     size.width = size.width * CGFloat(defaultSize)
+                    print("\(size)")
                     size.height = size.height * CGFloat(defaultSize)
-                }
                 
                 addCircularPhysicsBody(
                         categoryBitMask: PhysicsCategory.External,
@@ -113,7 +115,7 @@ class GameObject: SKSpriteNode {
         copy.position = position
         copy.zPosition = zPosition
         copy.physicsBody = physicsBody?.copy() as? SKPhysicsBody
-
+        print("copied \(copy.size)")
         return copy
     }
 }

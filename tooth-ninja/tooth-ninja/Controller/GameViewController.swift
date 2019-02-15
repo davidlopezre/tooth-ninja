@@ -8,20 +8,39 @@ import UIKit
 import SpriteKit
 import AVFoundation
 
-protocol Controller {
-    func levelEnd(won: Bool)
-}
-
 /* GameViewController is in charge of managing the game. This includes creating and
  * changing levels, access to main menu, etc.
  */
-class GameViewController: UIViewController, Controller
+class GameViewController: UIViewController
 {
     //health bar for the game
     var currentLevel: Level? = nil
     var config: GameConfiguration?
     var skView: SKView?
     var audioPlayer = AVAudioPlayer()
+    var levelId: Int = 1
+    
+    init() {
+        super.init(nibName: nil, bundle: Bundle.main)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Hide the navigation bar on the this view controller
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        // Show the navigation bar on other view controllers
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
     
     override func viewDidLoad()
     {
@@ -45,7 +64,7 @@ class GameViewController: UIViewController, Controller
         skView = initialiseSKView()
         do
         {
-            config = try GameConfiguration(file: "level_json_sample", size: skView!.bounds.size)
+            config = try GameConfiguration(file: "level_json_sample", size: self.skView!.bounds.size)
         }
         catch let error
         {
@@ -57,19 +76,20 @@ class GameViewController: UIViewController, Controller
 //            audioPlayer.pause()
 //            print("Music Player Paused in GameViewController")
 //        }
+        if skView?.scene == nil {
+            let teethArray = config!.getTeethByLevel(id: levelId)
+            let bacteriaArray = config!.getObjectsByLevel(id: levelId, name: "bacteria")
+            let foodArray = config!.getObjectsByLevel(id: levelId, name: "food")
+            let score = config!.getScoreByLevel(id: levelId)
+            let icon = config!.getToothBrushIconByLevel(id: levelId)
+            // Use the JSON file to open level 1
+            currentLevel = Level(number: levelId, winningScore: score, icon: icon, size: skView!.bounds.size, bgFile: "background2.png",
+                                 teethArray: teethArray, bacteriaArray: bacteriaArray, foodArray: foodArray,  c: self)
 
-        let teethArray = config!.getTeethByLevel(id: 1)
-        let bacteriaArray = config!.getObjectsByLevel(id: 1, name: "bacteria")
-        let foodArray = config!.getObjectsByLevel(id: 1, name: "food")
-        let score = config!.getScoreByLevel(id: 1)
-        let icon = config!.getToothBrushIconByLevel(id: 1)
-        // Use the JSON file to open level 1
-        currentLevel = Level(number: 1, winningScore: score, icon: icon, size: skView!.bounds.size, bgFile: "background2.png",
-                             teethArray: teethArray, bacteriaArray: bacteriaArray, foodArray: foodArray,  c: self)
+            currentLevel?.scaleMode = SKSceneScaleMode.resizeFill
 
-        currentLevel?.scaleMode = SKSceneScaleMode.resizeFill
-
-        skView!.presentScene(currentLevel)
+            skView?.presentScene(presentLevel(level: currentLevel!))
+        }
     }
     
     override var prefersStatusBarHidden: Bool
@@ -90,34 +110,65 @@ class GameViewController: UIViewController, Controller
     /* This method is called by the currentLevel when it is completed */
     func levelEnd(won: Bool) {
         let nextLevelId : Int
-        // TODO (4) : This just loops on level 3 forever
         if (won && currentLevel!.number < 3) {
             nextLevelId = currentLevel!.number + 1
-        }else{
+            setLevelUnlocked(id: nextLevelId)
+        }else if (won && currentLevel!.number == 3) {
+            self.navigationController?.popToRootViewController(animated: true)
+            return
+        } else {
             nextLevelId = currentLevel!.number
         }
-        currentLevel!.removeAllChildren()
-
+        
+        currentLevel?.removeAllChildren()
         let newTeethArray = config!.getTeethByLevel(id: nextLevelId)
         let newBacteriaArray = config!.getObjectsByLevel(id: nextLevelId, name: "bacteria")
         let newFoodArray = config!.getObjectsByLevel(id: nextLevelId, name: "food")
         let score = config!.getScoreByLevel(id: nextLevelId)
         let icon = config!.getToothBrushIconByLevel(id: nextLevelId)
-        currentLevel = Level(number: nextLevelId, winningScore: score, icon: icon, size: currentLevel!.size, bgFile: currentLevel!.backgroundFile!, teethArray: newTeethArray,
+        let nextLevel = Level(number: nextLevelId, winningScore: score, icon: icon, size: currentLevel!.size, bgFile: currentLevel!.backgroundFile!, teethArray: newTeethArray,
                              bacteriaArray: newBacteriaArray, foodArray: newFoodArray, c: self)
-        let reveal = SKTransition.flipHorizontal(withDuration: 0.5)
-        let gameOverScene = GameOverScene(size: currentLevel!.size, won: won, nextScene: currentLevel!)
-        skView?.presentScene(gameOverScene, transition: reveal)
+        currentLevel = nil
+        currentLevel = nextLevel
+        presentGameOverAndRestart(level: currentLevel!, won: won)
     }
 
     @IBOutlet weak var menuButton: UIButton!
     @IBAction func goToStartingScreen(button: UIButton)
     {
-        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let hiddenViewController = storyBoard.instantiateViewController(withIdentifier: "StartingViewController")
-        self.present(hiddenViewController, animated: true, completion: nil)
+        currentLevel = nil
+        self.skView?.presentScene(nil)
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    func presentLevel(level: Level) -> SKScene {
+        let text : String
+        if (level.number == 1) {
+            text = TextConstants.BEGIN_LVL_1
+        } else if (level.number == 2) {
+            text = TextConstants.BEGIN_LVL_2
+        } else {
+            text = TextConstants.BEGIN_LVL_3
+        }
+        let preScene = TextTransitionScene(size: level.size, text: text, nextScene: level)
+        return preScene
+    }
+    
+    func presentGameOverAndRestart(level: Level, won: Bool) {
+        let reveal = SKTransition.flipHorizontal(withDuration: 0.5)
+        let text : String
+        if (won) {
+            text = TextConstants.WON_TEXT
+        } else {
+            text = TextConstants.LOST_TEXT
+        }
+        let gameOverScene = TextTransitionScene(size: level.size, text: text, nextScene: presentLevel(level: level))
+        skView?.presentScene(gameOverScene, transition: reveal)
     }
     
     
+    deinit {
+         print("GameViewController deinited")
+    }
 }
 
