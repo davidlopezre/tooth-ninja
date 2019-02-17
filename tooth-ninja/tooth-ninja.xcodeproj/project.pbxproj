@@ -16,6 +16,8 @@
 		611788DB2078B0B000FC8590 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 611788D92078B0B000FC8590 /* LaunchScreen.storyboard */; };
 		619298C9213BE04300D0C818 /* ConfigurationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619298C8213BE04300D0C818 /* ConfigurationController.swift */; };
 		61FDE6FB213AD7D700177C74 /* StartingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FDE6FA213AD7D700177C74 /* StartingViewController.swift */; };
+		A90E7F712219903E0033A730 /* fighting spirit TBS.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A90E7F6F2219903D0033A730 /* fighting spirit TBS.ttf */; };
+		A90E7F722219903E0033A730 /* fighting spirit TBS_bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A90E7F702219903D0033A730 /* fighting spirit TBS_bold.ttf */; };
 		A951F71B21E0D204006AAEF6 /* LevelSelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A951F71A21E0D204006AAEF6 /* LevelSelectionController.swift */; };
 		A98DA143216B897600475EC8 /* CustomBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98DA142216B897600475EC8 /* CustomBar.swift */; };
 		A9E2989C21F306FD00A65A93 /* TextConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E2989B21F306FD00A65A93 /* TextConstants.swift */; };
@@ -48,6 +50,8 @@
 		611788DC2078B0B000FC8590 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		619298C8213BE04300D0C818 /* ConfigurationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationController.swift; sourceTree = "<group>"; };
 		61FDE6FA213AD7D700177C74 /* StartingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartingViewController.swift; sourceTree = "<group>"; };
+		A90E7F6F2219903D0033A730 /* fighting spirit TBS.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fighting spirit TBS.ttf"; sourceTree = "<group>"; };
+		A90E7F702219903D0033A730 /* fighting spirit TBS_bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fighting spirit TBS_bold.ttf"; sourceTree = "<group>"; };
 		A951F71A21E0D204006AAEF6 /* LevelSelectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelSelectionController.swift; sourceTree = "<group>"; };
 		A98DA142216B897600475EC8 /* CustomBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBar.swift; sourceTree = "<group>"; };
 		A9E2989B21F306FD00A65A93 /* TextConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextConstants.swift; sourceTree = "<group>"; };
@@ -93,6 +97,7 @@
 		611788BE2078B0AF00FC8590 = {
 			isa = PBXGroup;
 			children = (
+				A90E7F6A22198FD40033A730 /* Resources */,
 				611788C92078B0AF00FC8590 /* tooth-ninja */,
 				611788C82078B0AF00FC8590 /* Products */,
 			);
@@ -123,6 +128,15 @@
 				CBC2157E295711A85B6D6428 /* Controller */,
 			);
 			path = "tooth-ninja";
+			sourceTree = "<group>";
+		};
+		A90E7F6A22198FD40033A730 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A90E7F702219903D0033A730 /* fighting spirit TBS_bold.ttf */,
+				A90E7F6F2219903D0033A730 /* fighting spirit TBS.ttf */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		CBC212F36ADE92D58F75D6E6 /* Configuration */ = {
@@ -251,9 +265,11 @@
 				281FD1F62193DAB9006945DA /* swish.mp3 in Resources */,
 				611788D62078B0B000FC8590 /* Main.storyboard in Resources */,
 				611788D82078B0B000FC8590 /* Assets.xcassets in Resources */,
+				A90E7F722219903E0033A730 /* fighting spirit TBS_bold.ttf in Resources */,
 				28A3220721924B6700606013 /* Off Limits.wav in Resources */,
 				611788DB2078B0B000FC8590 /* LaunchScreen.storyboard in Resources */,
 				CBC21DA8B0733628FFC51174 /* level_json_sample.json in Resources */,
+				A90E7F712219903E0033A730 /* fighting spirit TBS.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -427,11 +443,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = R6NNG48UV9;
+				DEVELOPMENT_TEAM = B4L8G3T47Z;
 				INFOPLIST_FILE = "tooth-ninja/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "Tooth-Samurai";
+				PRODUCT_BUNDLE_IDENTIFIER = "Tooth-Samurai1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
@@ -446,11 +462,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = R6NNG48UV9;
+				DEVELOPMENT_TEAM = B4L8G3T47Z;
 				INFOPLIST_FILE = "tooth-ninja/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "Tooth-Samurai";
+				PRODUCT_BUNDLE_IDENTIFIER = "Tooth-Samurai1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;

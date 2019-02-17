@@ -15,7 +15,7 @@ class StartingViewController: UIViewController
         print ("StartingView deinited")
     }
     
-    @IBOutlet weak var toothNinja: UIImageView!
+    @IBOutlet weak var toothNinja: UILabel!
     override func viewDidLoad()
     {
         super.viewDidLoad()
