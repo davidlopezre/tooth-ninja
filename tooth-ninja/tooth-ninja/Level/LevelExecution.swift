@@ -150,6 +150,10 @@ class LevelPhysics {
             audioPlayer.prepareToPlay()
             audioPlayer.play()
             print("Swipe collided with food, audio initiated")
+            if(food.kind == BAD)
+            {
+                level.happiness -= MINUS_HAPPINESS
+            }
         }
         catch
         {
